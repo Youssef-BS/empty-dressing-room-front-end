@@ -15,7 +15,7 @@ function NavbarSet() {
  
     <Navbar bg="light" expand="lg" className='Nav'>
     <Container>
-      <Navbar.Brand href="#home" >Gachar</Navbar.Brand>
+      <Navbar.Brand href="/" >Gachar</Navbar.Brand>
       <Navbar.Toggle aria-controls="responsive-navbar-nav" />
       <Navbar.Collapse id="responsive-navbar-nav">
         <Nav className="me-auto">
@@ -35,7 +35,8 @@ function NavbarSet() {
             style={{ maxHeight: '100px' }}
             navbarScroll
           >
-            <Nav.Link href="#action2">Femmes</Nav.Link>
+            <Nav.Link href="/Femmes">Femmes</Nav.Link>
+            <Nav.Link href="/Hommes">Hommes</Nav.Link>
             <Nav.Link href="#action3" >Enfants </Nav.Link>
             <Nav.Link href="#action4" >Maison </Nav.Link>
             <Nav.Link href="#action5" >Electroniques </Nav.Link>
