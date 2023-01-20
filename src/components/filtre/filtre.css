@@ -1,0 +1,8 @@
+.filter{
+    width: 100%;
+    display: flex;
+}
+
+.element{
+    margin:35px 20px;
+}

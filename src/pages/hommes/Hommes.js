@@ -1,8 +1,11 @@
 import React from 'react'
+import Filtre from '../../components/filtre/Filtre'
 
 const Hommes = () => {
   return (
-    <div>Hommes</div>
+    <div>
+      <Filtre />
+    </div>
   )
 }
 
