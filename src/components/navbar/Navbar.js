@@ -37,10 +37,10 @@ function NavbarSet() {
           >
             <Nav.Link href="/Femmes">Femmes</Nav.Link>
             <Nav.Link href="/Hommes">Hommes</Nav.Link>
-            <Nav.Link href="#action3" >Enfants </Nav.Link>
-            <Nav.Link href="#action4" >Maison </Nav.Link>
-            <Nav.Link href="#action5" >Electroniques </Nav.Link>
-            <Nav.Link href="#action6" >Animaux </Nav.Link>
+            <Nav.Link href="/Enfants" >Enfants </Nav.Link>
+            <Nav.Link href="/Maison" >Maison </Nav.Link>
+            <Nav.Link href="/Electroniques" >Electroniques </Nav.Link>
+            <Nav.Link href="/Animaux" >Animaux </Nav.Link>
           </Nav>
         <Nav >
           <Nav.Link href="#deets">s'authentifier/s'inscri</Nav.Link>

@@ -3,6 +3,9 @@ import NavbarSet from "./components/navbar/Navbar";
 import Home from "./pages/home/Home"
 import Femmes from "./pages/femmes/Femmes"
 import Hommes from './pages/hommes/Hommes';
+import Enfants from './pages/enfants/Enfants';
+import Animaux from './pages/animaux/Animaux';
+import Electroniques from './pages/electroniques/Electroniques';
 import Footer from './components/footer/footer';
 import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
 const Layout = () => {
@@ -31,6 +34,18 @@ const router = createBrowserRouter([
       {
         path: "/Hommes",
         element: <Hommes />,
+      },
+      {
+        path: "/Enfants",
+        element: <Enfants />,
+      },
+      {
+        path: "/Animaux",
+        element: <Animaux />,
+      },
+      {
+        path: "/Electroniques",
+        element: <Electroniques />,
       },
     ],
   },

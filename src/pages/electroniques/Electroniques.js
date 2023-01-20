@@ -1,7 +1,7 @@
 import React from 'react'
 import Filtre from '../../components/filtre/Filtre'
 
-const Hommes = () => {
+const Electroniques = () => {
   return (
     <div>
       <Filtre />
@@ -88,4 +88,4 @@ const Hommes = () => {
   )
 }
 
-export default Hommes
+export default Electroniques
