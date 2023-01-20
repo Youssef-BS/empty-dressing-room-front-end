@@ -31,7 +31,7 @@ function Container() {
     </Carousel>
      <div className='Vente'>
      <h3><span> Si Vouz avez un produit</span><br /><span>plus vous puvez le</span> <br /> <span>vende avec gachar</span> </h3>
-     <Button variant="primary" size="sm">Cluiquer ici pour vente</Button>
+     <span className='btnVente'>Cluiquer ici pour vente</span>
    </div>
    </>
   );

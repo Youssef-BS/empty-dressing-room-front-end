@@ -3,6 +3,7 @@ import NavbarSet from "./components/navbar/Navbar";
 import Home from "./pages/home/Home"
 import Femmes from "./pages/femmes/Femmes"
 import Hommes from './pages/hommes/Hommes';
+import Footer from './components/footer/footer';
 import { Children } from "react";
 import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
 const Layout = () => {
@@ -10,6 +11,7 @@ const Layout = () => {
     <div className="app">
       <NavbarSet />
       <Outlet />
+      <Footer />
     </div>
   );
 };

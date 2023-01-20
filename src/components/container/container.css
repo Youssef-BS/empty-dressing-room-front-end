@@ -19,4 +19,10 @@
     margin-top: 10px;
 }
 
+.btnVente{
+    margin-top: 12px;
+    background-color: aquamarine;
+    padding: 12px;
+    cursor: pointer;
+}
 

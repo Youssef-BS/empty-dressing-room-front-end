@@ -1,20 +1,20 @@
 .Container-lastPage{
     width: 95%;
-    background-color: rgb(251, 251, 251);
+   
     height: 60vh;
     margin:18px auto;
     display: flex;
    
 }
 .trend-product{
-    margin:120px auto;
+    margin:80px auto;
 }
 
 .product{
     width: 300px;
-    height: 400px;
-    background-color: aqua;
+    height: 420px;
     display: inline-block;
+    background-color: rgb(246, 246, 246);
     margin-left: 20px;
 }
 
@@ -22,3 +22,139 @@ h3{
     text-align: center;
     padding: 20px ;
 }
+
+.photo{
+    width: 98%;
+    margin:8px 3px;
+    height: 250px;
+    text-align: center;
+}
+
+.collection{
+    position: relative;
+    height: 65vh;
+    width: 95%;
+    margin: 18px auto;
+}
+
+.femmes{
+    top:4%;
+    position:absolute;
+    left: 3%;
+    height: 45%;
+    width: 23%;
+    background-color: aqua;
+    background-image: url("https://images2.alphacoders.com/702/702389.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+
+}
+
+.enfants{
+    position:absolute;
+    left: 3%;
+    top: 50%;
+    height: 45%;
+    width: 23%;
+    background-color: aqua;
+    background-image: url("https://img.freepik.com/photos-gratuite/sourire-petite-fille-enfant-debout-isole_171337-3388.jpg?w=2000");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    
+}
+
+.hommes{
+    position: absolute;
+    left: 27%;
+    height: 91%;
+    width: 23%;
+    background-color: aqua;
+    top: 4%;
+    background-image: url("https://img.freepik.com/photos-premium/tendance-mode-vetements-confortables-porter-au-quotidien-influenceur-mode-masculine-homme-jeune-mannequin-mode-tenue-style-street-guy-insouciant-capuche-bel-homme-capuche-debout-fond-urbain_474717-16292.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+  
+    
+}
+.animaux{
+    position: absolute;
+    left: 51%;
+    height: 45%;
+    width: 23%;
+    background-color: aqua;
+    top: 4%;
+    background-image: url("https://www.zooplus.be/magazine/wp-content/uploads/2019/11/weihnachtsgeschenke-fuer-hunde-768x512-2.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+  
+}
+
+.electroniques{
+    position: absolute;
+    left: 75%;
+    height: 45%;
+    width: 23%;
+    background-color: aqua;
+    top: 4%;
+    background-image: url("data:image/jpeg;base64,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");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+   
+}
+
+.maison{
+    position: absolute;
+    left: 51%;
+    height: 45%;
+    width: 47%;
+    background-color: aqua;
+    top: 50%;
+    height: 45%;
+    background-image: url("https://img.freepik.com/photos-premium/interieur-salon-luxe-moderne-canape-noir-mur-beton-fonce_33739-387.jpg?w=2000");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+
+    
+}
+
+.btn{
+position: absolute;
+top: 10%;
+left: 50%;
+transform: translate(-50%,-50%);
+transition: 0.3s;
+width: 22%;
+background-color: rgb(193, 253, 255);
+z-index: -1;
+}
+
+.maison:hover > .btn {   top: 50%;
+    z-index: 11; 
+}
+.femmes:hover > .btn {   top: 50%;
+    z-index: 11; 
+}
+.hommes:hover > .btn {   top: 50%;
+    z-index: 11; 
+}
+.enfants:hover > .btn {   top: 50%;
+    z-index: 11; 
+}
+.electroniques:hover > .btn {   top: 50%;
+    z-index: 11; 
+}
+.animaux:hover > .btn {   top: 50%;
+    z-index: 11; 
+}
+
+.btn:hover{
+    background-color: aquamarine;
+}
+   
+
