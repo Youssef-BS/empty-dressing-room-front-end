@@ -119,6 +119,7 @@ h3{
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
+    
 
     
 }
@@ -134,8 +135,16 @@ background-color: rgb(193, 253, 255);
 z-index: -1;
 }
 
+.back{
+    height: 0%;
+    width: 100%;
+    background: linear-gradient(white,rgb(180, 255, 230) );
+    opacity: 0;
+    }
+
 .maison:hover > .btn {   top: 50%;
     z-index: 11; 
+    
 }
 .femmes:hover > .btn {   top: 50%;
     z-index: 11; 
@@ -152,6 +161,35 @@ z-index: -1;
 .animaux:hover > .btn {   top: 50%;
     z-index: 11; 
 }
+.maison:hover > .back {  
+     top: 50%;
+    z-index: 11; 
+    
+}
+.femmes:hover > .back {  
+     top: 50%;
+    opacity: 0.4; 
+}
+.hommes:hover > .back {   top: 50%;
+    opacity: 0.4;  
+}
+.enfants:hover > .back {   top: 50%;
+    opacity: 0.4; 
+}
+.electroniques:hover > .back {   top: 50%;
+    opacity: 0.4; 
+}
+.animaux:hover > .back {   top: 50%;
+    opacity: 0.4; 
+}
+.maison:hover > .back {   top: 50%;
+    opacity: 0.4; 
+    height: 100%;
+}
+
+
+
+
 
 .btn:hover{
     background-color: aquamarine;

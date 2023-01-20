@@ -52,12 +52,12 @@ const Home = () =>{
 
       </div>
       <div className="collection">
-      <div className="femmes"><span className="btn">Voir plus</span></div>
-          <div className="enfants"><span className="btn">Voir plus</span></div>
-        <div className="hommes"><span className="btn">Voir plus</span></div>
-        <div className="electroniques"><span className="btn">Voir plus</span></div>
-        <div className="animaux"><span className="btn">Voir plus</span></div>
-        <div className="maison"><span className="btn">Voir plus</span></div>
+      <div className="femmes"><div className="back"></div><span className="btn">Voir plus</span></div>
+          <div className="enfants"><div className="back"></div><span className="btn">Voir plus</span></div>
+        <div className="hommes"><div className="back"></div><span className="btn">Voir plus</span></div>
+        <div className="electroniques"><div className="back"></div><span className="btn">Voir plus</span></div>
+        <div className="animaux"><div className="back"></div><span className="btn">Voir plus</span></div>
+        <div className="maison"><div className="back"></div><span className="btn">Voir plus</span></div>
       
 
       </div>

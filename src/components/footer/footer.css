@@ -18,14 +18,10 @@
           font-weight: 500;
           color: #555;
         }
-  
-        span{
+    span{
           color: gray;
         }
-      
-    
-  
-    .bottom {
+       .bottom {
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -41,9 +37,7 @@
           font-size: 24px;
         }
   
-      .right 
-  
-        img{
+      .right img{
           height: 50px;
         }
       
