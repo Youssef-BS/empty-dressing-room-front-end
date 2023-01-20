@@ -140,6 +140,7 @@ z-index: -1;
     width: 100%;
     background: linear-gradient(white,rgb(180, 255, 230) );
     opacity: 0;
+    transition: 0.3s;
     }
 
 .maison:hover > .btn {   top: 50%;
@@ -166,21 +167,28 @@ z-index: -1;
     z-index: 11; 
     
 }
+
 .femmes:hover > .back {  
      top: 50%;
-    opacity: 0.4; 
+    opacity: 0.4;
+    height: 100%; 
 }
+
 .hommes:hover > .back {   top: 50%;
-    opacity: 0.4;  
+    opacity: 0.4;
+    height: 100%;  
 }
 .enfants:hover > .back {   top: 50%;
-    opacity: 0.4; 
+    opacity: 0.4;
+    height: 100%; 
 }
 .electroniques:hover > .back {   top: 50%;
-    opacity: 0.4; 
+    opacity: 0.4;
+    height: 100%; 
 }
 .animaux:hover > .back {   top: 50%;
-    opacity: 0.4; 
+    opacity: 0.4;
+    height: 100%; 
 }
 .maison:hover > .back {   top: 50%;
     opacity: 0.4; 
