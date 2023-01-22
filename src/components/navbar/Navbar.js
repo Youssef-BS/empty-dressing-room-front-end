@@ -14,9 +14,23 @@ import "./navbar.css"
 function NavbarSet() {
 
   const [show, setShow] = useState(false);
-
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+
+  const [registerForm,setRegisterForm] = useState(false);
+  const [msg , setMsg] = useState("vous n'avais pas de compte ?");
+
+  function FormRegister(){
+    if(registerForm===false){
+      setRegisterForm(true);
+      setMsg("j'ai un compte")
+    }
+    else{
+      setRegisterForm(false);
+      setMsg("vous n'avais pas de compte ?")
+
+    }
+  }
 
   return (
 <>
@@ -61,9 +75,10 @@ function NavbarSet() {
     
   </Navbar>
   <Modal show={show} onHide={handleClose}>
-        <Modal.Header closeButton>
-          <Modal.Title>login</Modal.Title>
-        </Modal.Header>
+        
+        <h2 closeButton>login</h2><hr />
+        
+        
         <Modal.Body>
         <Form>
       <Form.Group className="mb-3" controlId="formBasicEmail">
@@ -78,23 +93,47 @@ function NavbarSet() {
         <Form.Label>Password</Form.Label>
         <Form.Control type="password" placeholder="Password" />
       </Form.Group>
-      <button variant="primary" type="submit">
+      <button variant="primary" type="submit" className="btnForm">
         login
-      </button>
-      <button variant="primary" type="submit">
-        s'iscrire
-      </button>
+      </button><br />
+      
+      <p onClick={FormRegister} >{msg}</p>
+       
+      
     </Form>
 
+{
+
+registerForm && 
+<Form>
+  <h2>s'inscrire ici</h2><hr/>
+  <Form.Group className='mb-3' controlId='formBasicFile'>
+      <Form.Label>Ajouter votre photo</Form.Label>
+      <Form.Control type='file'></Form.Control> 
+
+     </Form.Group>
+  <Form.Group className='mb-3' controlId='formBasicName'>
+      <Form.Label>Ajouter votre nom et prenom</Form.Label>
+      <Form.Control type='text' placeholder='entrer votre nom et prenom'></Form.Control> 
+
+     </Form.Group>
+      <Form.Group className="mb-3" controlId="formBasicEmail">
+        <Form.Label>Ajouter votre adresse</Form.Label>
+        <Form.Control type="email" placeholder="Entrer votre email" />
+      </Form.Group>
+      
+     <Form.Group className="mb-3" controlId="formBasicPassword">
+        <Form.Label>Ajouter votre mot de passe</Form.Label>
+        <Form.Control type="password" placeholder="Password" />
+      </Form.Group>
+      <button variant="primary" type="submit" className="btnForm">
+       register
+      </button><br />
+    </Form>
+    
+}
+
         </Modal.Body>
-        <Modal.Footer>
-          {/* <Button variant="secondary" onClick={handleClose}>
-            Close
-          </Button>
-          <Button variant="primary" onClick={handleClose}>
-            Save Changes
-          </Button> */}
-        </Modal.Footer>
       </Modal>
 </>
   
