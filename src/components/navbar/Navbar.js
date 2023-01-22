@@ -1,8 +1,10 @@
+import React,{useState} from 'react';
 import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
 import Form from 'react-bootstrap/Form';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
+import Modal from 'react-bootstrap/Modal';
 import { AiOutlineShoppingCart  } from 'react-icons/ai';
 
 
@@ -10,8 +12,14 @@ import { AiOutlineShoppingCart  } from 'react-icons/ai';
 import "./navbar.css"
 
 function NavbarSet() {
-  return (
 
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+
+  return (
+<>
  
     <Navbar bg="light" expand="lg" className='Nav'>
     <Container>
@@ -43,7 +51,7 @@ function NavbarSet() {
             <Nav.Link href="/Animaux" >Animaux </Nav.Link>
           </Nav>
         <Nav >
-          <Nav.Link href="#deets">s'authentifier/s'inscri</Nav.Link>
+          <Nav.Link onClick={handleShow}>s'authentifier/s'inscri</Nav.Link>
           <Nav.Link eventKey={2} href="#memes">
          <AiOutlineShoppingCart  />
           </Nav.Link>
@@ -52,8 +60,43 @@ function NavbarSet() {
     </Container>
     
   </Navbar>
+  <Modal show={show} onHide={handleClose}>
+        <Modal.Header closeButton>
+          <Modal.Title>login</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+        <Form>
+      <Form.Group className="mb-3" controlId="formBasicEmail">
+        <Form.Label>Email address</Form.Label>
+        <Form.Control type="email" placeholder="Enter email" />
+        <Form.Text className="text-muted">
+          We'll never share your email with anyone else.
+        </Form.Text>
+      </Form.Group>
 
+      <Form.Group className="mb-3" controlId="formBasicPassword">
+        <Form.Label>Password</Form.Label>
+        <Form.Control type="password" placeholder="Password" />
+      </Form.Group>
+      <button variant="primary" type="submit">
+        login
+      </button>
+      <button variant="primary" type="submit">
+        s'iscrire
+      </button>
+    </Form>
 
+        </Modal.Body>
+        <Modal.Footer>
+          {/* <Button variant="secondary" onClick={handleClose}>
+            Close
+          </Button>
+          <Button variant="primary" onClick={handleClose}>
+            Save Changes
+          </Button> */}
+        </Modal.Footer>
+      </Modal>
+</>
   
   );
 }

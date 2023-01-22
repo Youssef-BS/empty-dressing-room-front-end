@@ -5,3 +5,12 @@
 .me-2{
     width: 320px;
 }
+
+button{
+    margin-left: 12px;
+    border: none;
+    background-color: aquamarine;
+    width: 25%;
+    height: 4vh;
+    border-radius: 3px;
+}

@@ -1,6 +1,6 @@
 import Container from "../../components/container/Container";
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Button from 'react-bootstrap/Button';
+
 import "./home.css";
 
 const Home = () =>{

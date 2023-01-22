@@ -6,8 +6,10 @@ import Hommes from './pages/hommes/Hommes';
 import Enfants from './pages/enfants/Enfants';
 import Animaux from './pages/animaux/Animaux';
 import Electroniques from './pages/electroniques/Electroniques';
+import Maison from './pages/maison/Maison';
 import Footer from './components/footer/footer';
 import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
+
 const Layout = () => {
   return (
     <div className="app">
@@ -46,6 +48,10 @@ const router = createBrowserRouter([
       {
         path: "/Electroniques",
         element: <Electroniques />,
+      },
+      {
+        path: "/Maison",
+        element: <Maison />,
       },
     ],
   },
