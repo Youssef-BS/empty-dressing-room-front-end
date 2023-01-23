@@ -1,25 +1,26 @@
-import React,{useState} from 'react';
-import Button from 'react-bootstrap/Button';
+import React,{useState,useContext} from 'react';
 import Container from 'react-bootstrap/Container';
 import Form from 'react-bootstrap/Form';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import Modal from 'react-bootstrap/Modal';
 import { AiOutlineShoppingCart  } from 'react-icons/ai';
-
-
-
 import "./navbar.css"
+import axios from 'axios';
+import { AuthContext } from "../../context/authContext";
 
 function NavbarSet() {
 
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-
   const [registerForm,setRegisterForm] = useState(false);
   const [msg , setMsg] = useState("vous n'avais pas de compte ?");
+  const [name , setName] = useState("");
+  const [email , setEmail] = useState("");
+  const [password , setPassword] = useState("");
 
+  const { login } = useContext(AuthContext);
   function FormRegister(){
     if(registerForm===false){
       setRegisterForm(true);
@@ -31,6 +32,26 @@ function NavbarSet() {
 
     }
   }
+
+const handleLogin = async ()=>{
+ await login(email,password);
+}
+
+
+  const register = async()=>{
+ await axios.post("http://localhost:4000/api/users/register", {
+      name,
+      email,
+      password
+      }, {
+        headers: {'Content-Type': 'application/json'}
+      }).then(function(response) {
+        console.log(response);
+      }).catch(function(error) {
+        console.log(error);
+      })
+
+}
 
   return (
 <>
@@ -48,7 +69,7 @@ function NavbarSet() {
               className="me-2"
               aria-label="Search"
             />
-            <Button variant="outline-success">Search</Button>
+            <input type="button" className="btnForm"  value="recherche" />
           </Form>
           
         </Nav>
@@ -83,19 +104,15 @@ function NavbarSet() {
         <Form>
       <Form.Group className="mb-3" controlId="formBasicEmail">
         <Form.Label>Email address</Form.Label>
-        <Form.Control type="email" placeholder="Enter email" />
-        <Form.Text className="text-muted">
-          We'll never share your email with anyone else.
-        </Form.Text>
+        <Form.Control type="email" placeholder="Enter email" name="email" onChange={(e)=> setEmail(e.target.value)}/>
       </Form.Group>
 
       <Form.Group className="mb-3" controlId="formBasicPassword">
         <Form.Label>Password</Form.Label>
-        <Form.Control type="password" placeholder="Password" />
+        <Form.Control type="password" placeholder="Password"  name="password" onChange={(e)=> setPassword(e.target.value)}/>
       </Form.Group>
-      <button variant="primary" type="submit" className="btnForm">
-        login
-      </button><br />
+      <input  type="button" className="btnForm" onClick={handleLogin}  value="login"/>
+  <br />
       
       <p onClick={FormRegister} >{msg}</p>
        
@@ -114,21 +131,20 @@ registerForm &&
      </Form.Group>
   <Form.Group className='mb-3' controlId='formBasicName'>
       <Form.Label>Ajouter votre nom et prenom</Form.Label>
-      <Form.Control type='text' placeholder='entrer votre nom et prenom'></Form.Control> 
+      <Form.Control type='text' placeholder='entrer votre nom et prenom' name="name" onChange={(e)=> setName(e.target.value)}></Form.Control> 
 
      </Form.Group>
       <Form.Group className="mb-3" controlId="formBasicEmail">
         <Form.Label>Ajouter votre adresse</Form.Label>
-        <Form.Control type="email" placeholder="Entrer votre email" />
+        <Form.Control type="email" placeholder="Entrer votre email" name="email"  onChange={(e)=> setEmail(e.target.value)} />
       </Form.Group>
       
      <Form.Group className="mb-3" controlId="formBasicPassword">
         <Form.Label>Ajouter votre mot de passe</Form.Label>
-        <Form.Control type="password" placeholder="Password" />
+        <Form.Control type="password" placeholder="Password" name="password" onChange={(e)=> setPassword(e.target.value)}/>
       </Form.Group>
-      <button variant="primary" type="submit" className="btnForm">
-       register
-      </button><br />
+      <input  type="button" className="btnForm" onClick={register}  value="register"/>
+      <br />
     </Form>
     
 }
