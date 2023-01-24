@@ -1,5 +1,6 @@
 import React,{useState,useContext} from 'react';
 import Container from 'react-bootstrap/Container';
+import NavDropdown from 'react-bootstrap/NavDropdown';
 import Form from 'react-bootstrap/Form';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
@@ -20,7 +21,22 @@ function NavbarSet() {
   const [email , setEmail] = useState("");
   const [password , setPassword] = useState("");
 
+
   const { login } = useContext(AuthContext);
+  const {logout} = useContext(AuthContext);
+  const { currentUser } = useContext(AuthContext);
+
+  const handleLogin = async (event)=>{
+    event.preventDefault();
+    window.location.reload(false);
+    await login(email,password);
+   }
+   const handleLogout = async (event)=>{
+    event.preventDefault();
+    window.location.reload(false);
+    await logout();
+   }
+ 
   function FormRegister(){
     if(registerForm===false){
       setRegisterForm(true);
@@ -33,9 +49,7 @@ function NavbarSet() {
     }
   }
 
-const handleLogin = async ()=>{
- await login(email,password);
-}
+
 
 
   const register = async()=>{
@@ -86,8 +100,25 @@ const handleLogin = async ()=>{
             <Nav.Link href="/Animaux" >Animaux </Nav.Link>
           </Nav>
         <Nav >
-          <Nav.Link onClick={handleShow}>s'authentifier/s'inscri</Nav.Link>
-          <Nav.Link eventKey={2} href="#memes">
+          {
+            currentUser  ? <div style={{display : "flex" , alignItem:"center"}}>
+            <Nav.Link>{currentUser.name}</Nav.Link>
+            <div style={{height : "35px" , width:"35px" , borderRadius : "35%" , backgroundColor : "red"}}></div>
+            <Nav>
+            <NavDropdown
+              id="nav-dropdown-dark-example"
+              title="Dropdown"
+              menuVariant="dark"
+            >
+              <NavDropdown.Item href="#action/3.1">Voir votre Profile</NavDropdown.Item>
+              <NavDropdown.Item onClick={handleLogout}>Deconnection</NavDropdown.Item>
+            </NavDropdown>
+          </Nav>
+            </div> : <Nav.Link onClick={handleShow}>s'authentifier/s'inscri</Nav.Link>
+             }
+            
+          
+          <Nav.Link eventKey={2} href="#memes" style={{marginLeft:"12px"}}>
          <AiOutlineShoppingCart  />
           </Nav.Link>
         </Nav>
@@ -111,7 +142,7 @@ const handleLogin = async ()=>{
         <Form.Label>Password</Form.Label>
         <Form.Control type="password" placeholder="Password"  name="password" onChange={(e)=> setPassword(e.target.value)}/>
       </Form.Group>
-      <input  type="button" className="btnForm" onClick={handleLogin}  value="login"/>
+      <button  className="btnForm" onClick={handleLogin}>s'authentifier</button>
   <br />
       
       <p onClick={FormRegister} >{msg}</p>
@@ -151,6 +182,8 @@ registerForm &&
 
         </Modal.Body>
       </Modal>
+
+      
 </>
   
   );

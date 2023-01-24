@@ -9,6 +9,7 @@ import Electroniques from './pages/electroniques/Electroniques';
 import Maison from './pages/maison/Maison';
 import Footer from './components/footer/footer';
 import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
+import AddProduits from './pages/addProuits/addProduits';
 
 const Layout = () => {
   return (
@@ -53,6 +54,10 @@ const router = createBrowserRouter([
         path: "/Maison",
         element: <Maison />,
       },
+      {
+        path:"/AddProduits",
+        element : <AddProduits />,
+      }
     ],
   },
 ]);
