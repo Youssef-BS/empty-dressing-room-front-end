@@ -1,9 +1,9 @@
 import Carousel from 'react-bootstrap/Carousel';
-import Button from 'react-bootstrap/Button';
+
 import "./container.css"
 import React,{useContext , useState} from 'react';
 import { AuthContext } from '../../context/authContext';
-import { Link } from 'react-router-dom';
+
 import { useNavigate } from "react-router-dom";
 import Modal from 'react-bootstrap/Modal';
 import axios from "axios"
@@ -21,7 +21,7 @@ function Container() {
 
 
   const { login } = useContext(AuthContext);
-  const [logged , isLogged] = useState(true);
+
   const navigate = useNavigate();
   const { currentUser } = useContext(AuthContext);
 
@@ -29,12 +29,9 @@ function Container() {
     navigate("/AddProduits");
   }
   
-  const handleClickV2 = () =>{
-    isLogged(false)
-  }
   const handleLogin = async (event)=>{
     event.preventDefault();
-    window.location.reload(false);
+    // window.location.reload(false);
     await login(email,password);
    }
  
@@ -72,7 +69,7 @@ function Container() {
   return (
     <>
     {
-      logged && (
+      
         <>
          <Modal show={show} onHide={handleClose}>
         
@@ -131,7 +128,7 @@ registerForm &&
         </Modal.Body>
       </Modal>
         </>
-      )
+    
     }
     <Carousel className='containerSet'>
       <Carousel.Item>
@@ -159,7 +156,7 @@ registerForm &&
     </Carousel>
      <div className='Vente'>
      <h3><span> Si Vouz avez un produit</span><br /><span>plus vous puvez le</span> <br /> <span>vende avec gachar</span> </h3>
-     <span className='btnVente' onClick={currentUser ? handleClick : handleClickV2}>Cluiquer ici pour vente</span>
+     <span className='btnVente' onClick={currentUser ? handleClick : handleShow}>Cluiquer ici pour vente</span>
    </div>
    
    </>

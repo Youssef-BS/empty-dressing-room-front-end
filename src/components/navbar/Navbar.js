@@ -28,7 +28,7 @@ function NavbarSet() {
 
   const handleLogin = async (event)=>{
     event.preventDefault();
-    window.location.reload(false);
+    // window.location.reload(false);
     await login(email,password);
    }
    const handleLogout = async (event)=>{
