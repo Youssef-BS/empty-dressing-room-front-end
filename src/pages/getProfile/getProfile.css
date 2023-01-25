@@ -1,0 +1,12 @@
+.containerProfile{
+    background-color: rgb(225, 255, 245);
+    margin:120px auto;
+    width: 20%;
+    height: 400px;
+    border-radius: 20px;
+}
+
+input {
+    display: block;
+    margin:12px auto;
+}

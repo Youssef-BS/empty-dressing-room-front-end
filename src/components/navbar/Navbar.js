@@ -8,6 +8,7 @@ import Modal from 'react-bootstrap/Modal';
 import { AiOutlineShoppingCart  } from 'react-icons/ai';
 import "./navbar.css"
 import axios from 'axios';
+import mime from "mime";
 
 import { AuthContext } from "../../context/authContext";
 
@@ -21,7 +22,7 @@ function NavbarSet() {
   const [name , setName] = useState("");
   const [email , setEmail] = useState("");
   const [password , setPassword] = useState("");
-  const [photoP, setPhotoP]=useState("https://i.seadn.io/gae/AZqAL6ovI8EupZoK1WZdPXtzzriHF3QMP4cqcIJYUzQ0wzgi31AaaU87dbhWO5WVF0I8GuoPZMECD1D6zVVOv5wBPW_BxM_vsNU3Pos?auto=format&w=1000")
+  const [photoP, setPhotoP]=useState({})
 
 
   const { login } = useContext(AuthContext);
@@ -54,19 +55,21 @@ function NavbarSet() {
 
 
 
-  const register = async()=>{
- await axios.post("http://localhost:4000/api/users/register", {
-      name,
-      email,
-      password,
-      photoP,
-      }, {
+
+const register = async()=>{
+const myForm = new FormData();
+myForm.append("name", name);
+myForm.append("email",email);
+myForm.append("password",password);
+myForm.append("photoP", photoP)
+console.log(photoP)
+await axios.post("http://localhost:4000/api/users/register", myForm , {
         headers: {'Content-Type': 'application/json'}
       }).then(function(response) {
         console.log(response);
       }).catch(function(error) {
         console.log(error);
-      })
+      }) 
 
 }
 
@@ -112,10 +115,10 @@ function NavbarSet() {
             <Nav>
             <NavDropdown
               id="nav-dropdown-dark-example"
-              title="Dropdown"
+              title="menu"
               menuVariant="dark"
             >
-              <NavDropdown.Item href="#action/3.1">Voir votre Profile</NavDropdown.Item>
+              <NavDropdown.Item href="/monprofile">Voir Profile</NavDropdown.Item>
               <NavDropdown.Item onClick={handleLogout}>Deconnection</NavDropdown.Item>
             </NavDropdown>
           </Nav>
@@ -162,9 +165,8 @@ registerForm &&
   <h2>s'inscrire ici</h2><hr/>
   <Form.Group className='mb-3' controlId='formBasicFile1'>
       <Form.Label>Ajouter votre photo</Form.Label>
-      <Form.Control type='file'id="img" name="img" ></Form.Control> 
-
-     </Form.Group>
+      <Form.Control type='file'id="img" name="img" onChange={(e) => setPhotoP(e.target.files[0])}></Form.Control> 
+ </Form.Group>
   <Form.Group className='mb-3' controlId='formBasicName1'>
       <Form.Label>Ajouter votre nom et prenom</Form.Label>
       <Form.Control type='text' placeholder='entrer votre nom et prenom' name="name" onChange={(e)=> setName(e.target.value)}></Form.Control> 

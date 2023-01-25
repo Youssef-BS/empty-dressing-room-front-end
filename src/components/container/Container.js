@@ -10,6 +10,7 @@ import axios from "axios"
 import Form from 'react-bootstrap/Form';
 
 function Container() {
+ 
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -18,7 +19,7 @@ function Container() {
   const [name , setName] = useState("");
   const [email , setEmail] = useState("");
   const [password , setPassword] = useState("");
-
+ 
 
   const { login } = useContext(AuthContext);
 

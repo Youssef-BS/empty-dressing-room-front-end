@@ -7,6 +7,7 @@ import Enfants from './pages/enfants/Enfants';
 import Animaux from './pages/animaux/Animaux';
 import Electroniques from './pages/electroniques/Electroniques';
 import Maison from './pages/maison/Maison';
+import Getprofile from './pages/getProfile/Getprofile';
 import Footer from './components/footer/footer';
 import { createBrowserRouter, RouterProvider, Outlet , Navigate  } from "react-router-dom";
 import AddProduits from './pages/addProuits/addProduits';
@@ -67,11 +68,18 @@ const router = createBrowserRouter([
       },
       {
         path:"/AddProduits",
-        element :<ProtectedRoute> 
+        element :(<ProtectedRoute> 
         <AddProduits />
-        </ProtectedRoute>
+        </ProtectedRoute>)
         ,
-      }
+      },
+      {
+        path:"/monprofile",
+        element :(<ProtectedRoute> 
+        <Getprofile />
+        </ProtectedRoute>)
+        ,
+      },
     ],
   },
 ]);
