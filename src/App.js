@@ -8,9 +8,12 @@ import Animaux from './pages/animaux/Animaux';
 import Electroniques from './pages/electroniques/Electroniques';
 import Maison from './pages/maison/Maison';
 import Footer from './components/footer/footer';
-import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
+import { createBrowserRouter, RouterProvider, Outlet , Navigate  } from "react-router-dom";
 import AddProduits from './pages/addProuits/addProduits';
-
+import React,{useContext} from 'react';
+import { AuthContext } from './context/authContext';
+function App() {
+  const { currentUser } = useContext(AuthContext);
 const Layout = () => {
   return (
     <div className="app">
@@ -19,6 +22,14 @@ const Layout = () => {
       <Footer />
     </div>
   );
+};
+
+const ProtectedRoute = ({ children }) => {
+  if (!currentUser) {
+    return <Navigate to="/" />;
+  }
+
+  return children;
 };
 
 const router = createBrowserRouter([
@@ -56,13 +67,16 @@ const router = createBrowserRouter([
       },
       {
         path:"/AddProduits",
-        element : <AddProduits />,
+        element :<ProtectedRoute> 
+        <AddProduits />
+        </ProtectedRoute>
+        ,
       }
     ],
   },
 ]);
 
-function App() {
+
   return (
     <div>
       <RouterProvider router={router} />
