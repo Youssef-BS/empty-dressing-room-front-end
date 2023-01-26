@@ -8,7 +8,6 @@ import Modal from 'react-bootstrap/Modal';
 import { AiOutlineShoppingCart  } from 'react-icons/ai';
 import "./navbar.css"
 import axios from 'axios';
-import mime from "mime";
 
 import { AuthContext } from "../../context/authContext";
 
