@@ -24,6 +24,7 @@ const Footer = () => {
         <div className="item">
           <h1>A propos</h1>
           <span>
+            ili chya9ra code rani nfadlk b fr
            cette application de pfe 2023 en iset kebili se creere par 2 etudiants youssef
            ben said et mohamed harizi en utilisez react node mongodb et autres outiles .
           </span>
