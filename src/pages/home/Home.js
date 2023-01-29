@@ -9,6 +9,7 @@ const Home = () =>{
       <Container />
       <h3>Produits populares</h3>
       <div className="Container-lastPage">
+       <div className="voir"><p ><a href="/tousproduits">Voir plus</a></p></div> 
       <div className="trend-product">
       <div className="product">
        <img className="photo" img src="https://www.cdiscount.com/pdt2/8/9/0/1/700x700/mp07900890/rw/sweat-shirt-a-capuche-coupe-de-lait-noir-blanc.jpg" alt=""/>
