@@ -109,8 +109,8 @@ await axios.post("http://localhost:4000/api/users/register", myForm , {
         <Nav >
           {
             currentUser  ? <div style={{display : "flex" , alignItem:"center"}}>
-            <Nav.Link>{currentUser.name}</Nav.Link>
-            <img src={currentUser.photoP.url} style={{height : "35px" , width:"35px" , borderRadius : "35%" }} alt="" />
+            <Nav.Link>{currentUser.user.name}</Nav.Link>
+            <img src={currentUser.user.photoP.url} style={{height : "35px" , width:"35px" , borderRadius : "35%" }} alt="" />
             <Nav>
             <NavDropdown
               id="nav-dropdown-dark-example"

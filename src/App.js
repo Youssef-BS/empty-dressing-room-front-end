@@ -13,6 +13,7 @@ import { createBrowserRouter, RouterProvider, Outlet , Navigate  } from "react-r
 import AddProduits from './pages/addProuits/addProduits';
 import React,{useContext} from 'react';
 import { AuthContext } from './context/authContext';
+import TousProduits from './pages/tousProduits/TousProduits';
 function App() {
   const { currentUser } = useContext(AuthContext);
 const Layout = () => {
@@ -65,6 +66,10 @@ const router = createBrowserRouter([
       {
         path: "/Maison",
         element: <Maison />,
+      },
+      {
+        path: "/tousproduits",
+        element: <TousProduits />,
       },
       {
         path:"/AddProduits",

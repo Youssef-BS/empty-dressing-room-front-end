@@ -10,3 +10,8 @@ input {
     display: block;
     margin:12px auto;
 }
+
+.produitsUser {
+    display: flex;
+    flex-wrap: wrap;
+}
