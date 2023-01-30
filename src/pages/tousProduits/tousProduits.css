@@ -9,3 +9,7 @@ flex-wrap: wrap;
 .product{
     margin: 8px;
 }
+
+.content span img{
+    width: 100%;
+}
