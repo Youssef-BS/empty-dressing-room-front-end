@@ -25,13 +25,23 @@ const TousProduits = () => {
 // console.log(produits[0].desc)
   return (
     <>
+    <h1  style={{textAlign : "center" , marginTop : "24px" , fontSize:"28px"}}>Derniere Poste</h1>
+    <div className='content'>
+    
+
     {produits.map(item=>(
       
-        <div className='contain' key={item._id}>
-          <p>{item.desc}</p>
-  </div>
+      <div className='product' key={item._id}>
+        <p>{item.desc}</p>
+        <p>{item.categorieItem}</p>
+        <p>{item.categorieItem}</p>
+        <p><b>{item.price} DT</b></p>
+</div>
+
+   
     
     ))}
+        </div>
     </>
   )
 }
