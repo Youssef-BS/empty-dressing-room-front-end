@@ -7,12 +7,12 @@ import axios from "axios";
 
 const Getprofile = () => {
     const { currentUser } = useContext(AuthContext);
-    const [produit , setProduits] = useState("");
+    const [produit , setProduits] = useState([]);
     
 
     useEffect(()=>{
      const fetchData = async ()=>{
-      const res = await axios.get(`http://localhost:4000/api/users/produitsUsers/${currentUser.user._id}`);
+      const res = await axios.get(`http://localhost:4000/api/produits/${currentUser.user._id}`);
       setProduits(res.data);
 }
 fetchData();
@@ -27,9 +27,24 @@ return (
      <p>votre email</p><input type="text" placeholder={currentUser.user.email} />
     <p>mettre à jour ?</p> <input type="button" value="update" className='btnForm' />
    </div>
-  <div className='produitsUser'>
+   <div className='content'>
+    
 
-  </div>
+    {produit.map(item=>(
+      <div className='product' key={item._id}>
+        <img className="photoP" src={currentUser.user.photoP.url} alt="" />
+        <span>{currentUser.user.name}</span>
+        <span><img src={item.photoProduit.url} alt ="" /></span>
+        
+        <p>{item.title}</p>
+        <p>marque : {item.marque}</p>
+        <p><b>prix : {item.price} DT</b></p>
+</div>
+
+   
+    
+    ))}
+        </div>
   </>
   )
 }
