@@ -22,3 +22,29 @@ input {
     margin:3px 7px;
 
 }
+
+.Modification {
+    display: flex;
+   text-align: center;
+}
+
+.Modification span {
+margin:auto;
+}
+
+.edit{
+    background-color: aquamarine;
+    color: black;
+    height: 45px;
+    border-radius: 5px;
+    cursor: pointer;
+    
+}
+
+.delete{
+    background-color: rgb(255, 97, 97);
+    color: black;
+    height: 45px;
+    border-radius: 5px;
+    cursor: pointer;
+}

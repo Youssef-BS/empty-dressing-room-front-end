@@ -39,6 +39,11 @@ return (
         <p>{item.title}</p>
         <p>marque : {item.marque}</p>
         <p><b>prix : {item.price} DT</b></p>
+        <div className='Modification'>
+        <span className='edit'>Modifier</span>
+        <span className='delete'>Supprimer</span>
+        </div>
+        
 </div>
 
    

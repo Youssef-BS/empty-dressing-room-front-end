@@ -1,49 +1,42 @@
-import React,{useState , useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import "./tousProduits.css";
 import axios from "axios";
 
 const TousProduits = () => {
+  const [users, setUsers] = useState([]);
 
-  const [produits , setProoduits] = useState([]);
-
-  useEffect(()=>{
-   
-    const fetchData = async () =>{
-      try{
-       const res = await axios.get("http://localhost:4000/api/produits");
-       setProoduits(res.data)
-      }catch(error){
-        console.log(error)
-      }
-      
-    } 
+  useEffect(() => {
+    const fetchData = async () => {
+      const res = await axios.get("http://localhost:4000/api/produits");
+      setUsers(res.data);
+    };
 
     fetchData();
-   
-  })
-  
+  }, []);
+
+  console.log(users)
 
   return (
     <>
-    <h1  style={{textAlign : "center" , marginTop : "24px" , fontSize:"28px"}}>Derniere Poste</h1>
-    <div className='content'>
-    
-
-    {produits.map(item=>(
-      <div className='product' key={item._id}>
-        <span><img src={item.photoProduit.url} alt ="" /></span>
-        
-        <p>{item.title}</p>
-        <p>marque : {item.marque}</p>
-        <p><b>prix : {item.price} DT</b></p>
-</div>
-
-   
-    
-    ))}
+      <h1 style={{textAlign: "center", marginTop: "24px", fontSize: "28px"}}>Tous Produits</h1>
+<div className='content'>
+  {users.map(user => (
+    <div key={user._id}>
+      {user.produits.map(product => (
+        <div className='product' key={product._id}>
+          <img style={{width : "50px" , borderRadius:"50%"}} src={user.photoP.url} alt="" />
+          <p>{user.name}</p>
+          <img style={{width:"100%"}} src={product.photoProduit.url} alt="" />
+          <p>{product.title}</p>
+          <p>Marque : {product.marque}</p>
+          <p><b>Prix : {product.price} DT</b></p>
         </div>
+      ))}
+    </div>
+  ))}
+</div>
     </>
-  )
-}
+  );
+};
 
-export default TousProduits
+export default TousProduits;
