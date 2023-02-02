@@ -8,6 +8,8 @@ import { useNavigate } from "react-router-dom";
 import Modal from 'react-bootstrap/Modal';
 import axios from "axios"
 import Form from 'react-bootstrap/Form';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function Container() {
  
@@ -19,6 +21,7 @@ function Container() {
   const [name , setName] = useState("");
   const [email , setEmail] = useState("");
   const [password , setPassword] = useState("");
+  const [photoP , setPhotoP] = useState(null)
  
 
   const { login } = useContext(AuthContext);
@@ -52,25 +55,32 @@ function Container() {
 
 
 
-  const register = async()=>{
- await axios.post("http://localhost:4000/api/users/register", {
-      name,
-      email,
-      password
-      }, {
-        headers: {'Content-Type': 'application/json'}
-      }).then(function(response) {
-        console.log(response);
-      }).catch(function(error) {
-        console.log(error);
-      })
-
-}
-
-  return (
-    <>
-    {
-      
+  const register = async(event)=>{
+    event.preventDefault()
+  
+    try {
+      const FormNew = new FormData()
+      FormNew.append('name', name)
+      FormNew.append('email', email)
+      FormNew.append('password', password)
+      FormNew.append('photoP', photoP)
+  
+      await axios.post("http://localhost:4000/api/users/register", FormNew )
+      toast.success('compte creer avec succee')
+    } catch (error) {
+      console.error(error)
+    }
+  
+  }
+  
+  
+  
+    return (
+  <>
+  <ToastContainer
+    position="top-center"
+    reverseOrder={false}
+  />
         <>
          <Modal show={show} onHide={handleClose}>
         
@@ -103,7 +113,7 @@ registerForm &&
   <h2>s'inscrire ici</h2><hr/>
   <Form.Group className='mb-3' controlId='formBasicFile'>
       <Form.Label>Ajouter votre photo</Form.Label>
-      <Form.Control type='file'></Form.Control> 
+      <Form.Control type='file' onChange={(e) => setPhotoP(e.target.files[0])}></Form.Control> 
 
      </Form.Group>
   <Form.Group className='mb-3' controlId='formBasicName'>
@@ -130,7 +140,7 @@ registerForm &&
       </Modal>
         </>
     
-    }
+     
     <Carousel className='containerSet'>
       <Carousel.Item>
         <img style={{"height":"700px"}}
