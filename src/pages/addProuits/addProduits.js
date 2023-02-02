@@ -2,7 +2,8 @@ import React, { useState , useContext } from 'react'
 import axios from 'axios'
 import "./addProduits.css"
 import { AuthContext } from "../../context/authContext";
-
+  import { ToastContainer, toast } from 'react-toastify';
+  import 'react-toastify/dist/ReactToastify.css';
 const AddProduits = () => {
   const [title, setTitle] = useState('')
   const [price, setPrice] = useState(0)
@@ -30,7 +31,7 @@ const AddProduits = () => {
       await axios.post(`http://localhost:4000/api/produits/addproduct/${currentUser.user._id}`, formData)
       
 
-      // Reset form after successful submission
+     
       setTitle('')
       setPrice(0)
       setCategories('')
@@ -39,8 +40,8 @@ const AddProduits = () => {
       setTaille('')
       setMarque('')
 
-      // Show success message
-      alert('Produit ajouté avec succès !')
+      
+      toast.success('Successfully toasted!')
     } catch (error) {
       console.error(error)
     }
@@ -48,6 +49,10 @@ const AddProduits = () => {
 
   return (
     <div className='formProduit'>
+<ToastContainer
+  position="top-center"
+  reverseOrder={false}
+/>
       <h1>Ajouter Produit pour vente</h1>
       <div className='ajouter_produit'>
         <form onSubmit={handleSubmit}>

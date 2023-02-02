@@ -10,6 +10,8 @@ import "./navbar.css"
 import axios from 'axios';
 
 import { AuthContext } from "../../context/authContext";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function NavbarSet() {
 
@@ -21,7 +23,7 @@ function NavbarSet() {
   const [name , setName] = useState("");
   const [email , setEmail] = useState("");
   const [password , setPassword] = useState("");
-  const [photoP, setPhotoP]=useState({})
+  const [photoP, setPhotoP]=useState(null)
 
 
   const { login } = useContext(AuthContext);
@@ -55,20 +57,21 @@ function NavbarSet() {
 
 
 
-const register = async()=>{
-const myForm = new FormData();
-myForm.append("name", name);
-myForm.append("email",email);
-myForm.append("password",password);
-myForm.append("photoP", photoP)
-console.log(photoP)
-await axios.post("http://localhost:4000/api/users/register", myForm , {
-        headers: {'Content-Type': 'application/json'}
-      }).then(function(response) {
-        console.log(response);
-      }).catch(function(error) {
-        console.log(error);
-      }) 
+const register = async(event)=>{
+  event.preventDefault()
+
+  try {
+    const FormNew = new FormData()
+    FormNew.append('name', name)
+    FormNew.append('email', email)
+    FormNew.append('password', password)
+    FormNew.append('photoP', photoP)
+
+    await axios.post("http://localhost:4000/api/users/register", FormNew )
+    toast.success('compte creer avec succee')
+  } catch (error) {
+    console.error(error)
+  }
 
 }
 
@@ -76,7 +79,10 @@ await axios.post("http://localhost:4000/api/users/register", myForm , {
 
   return (
 <>
- 
+<ToastContainer
+  position="top-center"
+  reverseOrder={false}
+/>
     <Navbar bg="light" expand="lg" className='Nav'>
     <Container>
       <Navbar.Brand href="/" >Gachar</Navbar.Brand>
