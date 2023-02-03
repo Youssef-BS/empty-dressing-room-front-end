@@ -1,6 +1,5 @@
 .Container-lastPage{
     width: 95%;
-   
     height: 60vh;
     margin:18px auto;
     display: flex;
@@ -34,7 +33,7 @@ h3{
     position: relative;
     height: 65vh;
     width: 95%;
-    margin: 18px auto;
+    margin: 180px auto;
 }
 
 .femmes{

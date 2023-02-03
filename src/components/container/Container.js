@@ -57,6 +57,7 @@ function Container() {
 
   const register = async(event)=>{
     event.preventDefault()
+    
   
     try {
       const FormNew = new FormData()
