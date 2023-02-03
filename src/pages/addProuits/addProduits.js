@@ -19,6 +19,10 @@ const AddProduits = () => {
     event.preventDefault()
 
     try {
+
+      if(title==="" || price==="" || price===0 || categories==="" || desc==="" || photoProduit==="" || taille==="" || marque===""){
+        toast.error('Choix obligatoire')
+      }
       const formData = new FormData()
       formData.append('title', title)
       formData.append('price', price)
@@ -41,7 +45,7 @@ const AddProduits = () => {
       setMarque('')
 
       
-      toast.success('Successfully toasted!')
+      toast.success('Produit Publier')
     } catch (error) {
       console.error(error)
     }
@@ -63,7 +67,7 @@ const AddProduits = () => {
           photo de produit <input type="file" onChange={event => setPhotoProduit(event.target.files[0])} />
           taille <input type="text" value={taille} onChange={event => setTaille(event.target.value)} />
           marque <input type="text" value={marque} onChange={event => setMarque(event.target.value)} />
-          <input type="submit" value="Ajouter Produit" />
+          <input type="submit" value="Ajouter Produit" className='BtnForm' />
         </form>
       </div>
     </div>
