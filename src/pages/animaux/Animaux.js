@@ -9,7 +9,7 @@ const Hommes = () => {
 useEffect(()=>{
 
   const fetchData= async ()=> {
-  const res = await axios.get("http://localhost:4000/api/produits/kids/clother")
+  const res = await axios.get("http://localhost:4000/api/produits/animaux/accesoire")
   setProduitAnimaux(res.data);
   }
 fetchData()
