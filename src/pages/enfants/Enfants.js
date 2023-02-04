@@ -1,91 +1,39 @@
 import React from 'react'
 import Filtre from '../../components/filtre/Filtre'
+import axios from "axios";
+import {useEffect , useState} from 'react';
 
-const Enfants = () => {
+const Hommes = () => {
+  const [produitKids , setProduitKids] = useState([])
+
+useEffect(()=>{
+
+  const fetchData= async ()=> {
+  const res = await axios.get("http://localhost:4000/api/produits/kids/clother")
+  setProduitKids(res.data);
+  }
+fetchData()
+},[])
+
+console.log(produitKids)
+
   return (
     <div>
       <Filtre />
       <div className="trend-product">
-      <div className="product">
-       <img className="photo" img src="https://www.cdiscount.com/pdt2/8/9/0/1/700x700/mp07900890/rw/sweat-shirt-a-capuche-coupe-de-lait-noir-blanc.jpg" alt=""/>
-        <p>article 1</p>
-        <p>marque</p>
-        <p>taille</p>
-        <p style={{"textAlign":"center"}}>22dt</p>
+      {produitKids.map(product => (
+          <div className='product' key={product.produit._id}>
+            <img style={{width : "50px" , borderRadius:"50%"}} src={product.photoP.url} alt="" />
+            <p>{product.name}</p>
+            <img style={{width:"100%"}} src={product.produit.photoProduit.url} alt="" />
+            <p>{product.produit.title}</p>
+            <p>Marque : {product.produit.marque}</p>
+            <p><b>Prix : {product.produit.price} DT</b></p>
+          </div>
+        ))}
       </div>
-      <div className="product">
-      <img className="photo" img src="https://www.cdiscount.com/pdt2/8/9/0/1/700x700/mp07900890/rw/sweat-shirt-a-capuche-coupe-de-lait-noir-blanc.jpg" alt=""/>
-      <p>article 1</p>
-      <p>marque</p>
-        <p>taille</p>
-        <p style={{"textAlign":"center"}}>22dt</p>
-      </div>
-      <div className="product">
-      <img className="photo" img src="https://www.cdiscount.com/pdt2/8/9/0/1/700x700/mp07900890/rw/sweat-shirt-a-capuche-coupe-de-lait-noir-blanc.jpg" alt=""/>
-      
-      <p>article 1</p>
-      <p>marque</p>
-        <p>taille</p>
-        <p style={{"textAlign":"center"}}>22dt</p>
-      </div>
-      <div className="product">
-      <img className="photo" img src="https://www.cdiscount.com/pdt2/8/9/0/1/700x700/mp07900890/rw/sweat-shirt-a-capuche-coupe-de-lait-noir-blanc.jpg" alt=""/>
-   
-      <p>article 1</p>
-      <p>marque</p>
-        <p>taille</p>
-        <p style={{"textAlign":"center"}}>22dt</p>
-      </div>
-      <div className="product">
-      <img className="photo" img src="https://www.cdiscount.com/pdt2/8/9/0/1/700x700/mp07900890/rw/sweat-shirt-a-capuche-coupe-de-lait-noir-blanc.jpg" alt=""/>
-   
-      <p>article 1</p>
-      <p>marque</p>
-        <p>taille</p>
-        <p style={{"textAlign":"center"}}>22dt</p>
-      </div>
-      <div className="product">
-       <img className="photo" img src="https://www.cdiscount.com/pdt2/8/9/0/1/700x700/mp07900890/rw/sweat-shirt-a-capuche-coupe-de-lait-noir-blanc.jpg" alt=""/>
-        <p>article 1</p>
-        <p>marque</p>
-        <p>taille</p>
-        <p style={{"textAlign":"center"}}>22dt</p>
-      </div>
-      <div className="product">
-      <img className="photo" img src="https://www.cdiscount.com/pdt2/8/9/0/1/700x700/mp07900890/rw/sweat-shirt-a-capuche-coupe-de-lait-noir-blanc.jpg" alt=""/>
-      <p>article 1</p>
-      <p>marque</p>
-        <p>taille</p>
-        <p style={{"textAlign":"center"}}>22dt</p>
-      </div>
-      <div className="product">
-      <img className="photo" img src="https://www.cdiscount.com/pdt2/8/9/0/1/700x700/mp07900890/rw/sweat-shirt-a-capuche-coupe-de-lait-noir-blanc.jpg" alt=""/>
-      
-      <p>article 1</p>
-      <p>marque</p>
-        <p>taille</p>
-        <p style={{"textAlign":"center"}}>22dt</p>
-      </div>
-      <div className="product">
-      <img className="photo" img src="https://www.cdiscount.com/pdt2/8/9/0/1/700x700/mp07900890/rw/sweat-shirt-a-capuche-coupe-de-lait-noir-blanc.jpg" alt=""/>
-   
-      <p>article 1</p>
-      <p>marque</p>
-        <p>taille</p>
-        <p style={{"textAlign":"center"}}>22dt</p>
-      </div>
-      <div className="product">
-      <img className="photo" img src="https://www.cdiscount.com/pdt2/8/9/0/1/700x700/mp07900890/rw/sweat-shirt-a-capuche-coupe-de-lait-noir-blanc.jpg" alt=""/>
-   
-      <p>article 1</p>
-      <p>marque</p>
-        <p>taille</p>
-        <p style={{"textAlign":"center"}}>22dt</p>
-      </div>
-        </div>
-
     </div>
   )
 }
 
-export default Enfants
+export default Hommes
