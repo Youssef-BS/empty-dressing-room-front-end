@@ -14,6 +14,7 @@ import AddProduits from './pages/addProuits/addProduits';
 import React,{useContext} from 'react';
 import { AuthContext } from './context/authContext';
 import TousProduits from './pages/tousProduits/TousProduits';
+import ProduitRegarde from "./pages/produitRegarde/ProduitRegarde";
 function App() {
   const { currentUser } = useContext(AuthContext);
 const Layout = () => {
@@ -58,6 +59,10 @@ const router = createBrowserRouter([
       {
         path: "/Animaux",
         element: <Animaux />,
+      },
+      {
+        path: "/productWatch/:id",
+        element: <ProduitRegarde />,
       },
       {
         path: "/Electroniques",
