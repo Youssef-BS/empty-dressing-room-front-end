@@ -8,7 +8,7 @@ import Animaux from './pages/animaux/Animaux';
 import Electroniques from './pages/electroniques/Electroniques';
 import Maison from './pages/maison/Maison';
 import Getprofile from './pages/monProfile/monProfile';
-import Footer from './components/footer/footer';
+
 import { createBrowserRouter, RouterProvider, Outlet , Navigate  } from "react-router-dom";
 import AddProduits from './pages/addProuits/addProduits';
 import React,{useContext} from 'react';
@@ -22,7 +22,7 @@ const Layout = () => {
     <div className="app">
       <NavbarSet />
       <Outlet />
-      <Footer />
+      
     </div>
   );
 };

@@ -2,6 +2,7 @@ import Container from "../../components/container/Container";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import React,{useEffect,useState} from "react";
 import axios from "axios";
+import Footer from "../../components/footer/footer.js";
 
 import "./home.css";
 
@@ -51,6 +52,7 @@ const Home = () =>{
       
 
       </div>
+      <Footer />
         </>
     )
 }
