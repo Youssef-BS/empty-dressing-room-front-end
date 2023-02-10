@@ -1,6 +1,7 @@
 import React,{useEffect , useState} from "react"
 import axios from 'axios';
 import {useParams} from 'react-router-dom'
+import './produitRegarde.css'
 
 const ProduitRegarde = () =>{
 const params = useParams()
@@ -23,14 +24,20 @@ console.log(productSlect)
 
     return(
         <>
-        <div className="product" key={productSlect.product._id}>
+        
+        {productSlect.product && (
+        <div className="co"  key={productSlect.product._id}>
+         <div className="foto"><img src={productSlect.product.photoProduit.url}  alt="" /></div>
+         <div className="statistic">
         <p>{productSlect.product.title}</p>
         <p>{productSlect.product.taille}</p>
         <p>{productSlect.product.marque}</p>
         <p>{productSlect.product.categorie}</p>
         <p><b>{productSlect.product.price}</b></p>
-        <img src={productSlect.product.photoProduit.url} alt="" />
         </div>
+        </div>
+        )}
+        
         </>
     )
 

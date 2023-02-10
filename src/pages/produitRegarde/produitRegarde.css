@@ -1,0 +1,21 @@
+.co{
+    width: 95%;
+    height: 500px;
+    display: flex;
+    margin: 40px;
+    
+}
+
+.foto{
+width: 40%;
+}
+
+.statistic{
+    width: 40%;
+    margin-top: 150px;
+    background-color: rgb(215, 255, 242);
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 24px;
+    border-radius: 18px;
+    
+}
