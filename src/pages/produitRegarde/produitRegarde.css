@@ -2,12 +2,18 @@
     width: 95%;
     height: 500px;
     display: flex;
-    margin: 40px;
+    margin:40px auto;
     
 }
 
 .foto{
-width: 40%;
+width: 50%;
+border-radius: 12px;
+}
+
+.foto img{
+    width: 80%;
+    border-radius: 12px;
 }
 
 .statistic{
@@ -17,5 +23,13 @@ width: 40%;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     font-size: 24px;
     border-radius: 18px;
+    text-align: center;
+    margin-left: 70px;
     
+}
+
+button{
+    margin-left: 8px;
+    border: none;
+    background-color: aquamarine;
 }
