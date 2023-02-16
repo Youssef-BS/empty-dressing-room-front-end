@@ -8,10 +8,10 @@ import Modal from 'react-bootstrap/Modal';
 import { AiOutlineShoppingCart  } from 'react-icons/ai';
 import "./navbar.css"
 import axios from 'axios';
-
 import { AuthContext } from "../../context/authContext";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+
 
 function NavbarSet() {
 
@@ -77,7 +77,8 @@ const register = async(event)=>{
 
 
 
-  return (
+
+return (
 <>
 <ToastContainer
   position="top-center"
@@ -171,7 +172,7 @@ registerForm &&
   <Form.Group className='mb-3' controlId='formBasicFile1'>
       <Form.Label>Ajouter votre photo</Form.Label>
       <Form.Control type='file'id="img" name="img" onChange={(e) => setPhotoP(e.target.files[0])}></Form.Control> 
- </Form.Group>
+</Form.Group>
   <Form.Group className='mb-3' controlId='formBasicName1'>
       <Form.Label>Ajouter votre nom et prenom</Form.Label>
       <Form.Control type='text' placeholder='entrer votre nom et prenom' name="name" onChange={(e)=> setName(e.target.value)}></Form.Control> 

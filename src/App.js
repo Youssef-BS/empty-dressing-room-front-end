@@ -8,24 +8,24 @@ import Animaux from './pages/animaux/Animaux';
 import Electroniques from './pages/electroniques/Electroniques';
 import Maison from './pages/maison/Maison';
 import Getprofile from './pages/monProfile/monProfile';
-
 import { createBrowserRouter, RouterProvider, Outlet , Navigate  } from "react-router-dom";
 import AddProduits from './pages/addProuits/addProduits';
 import React,{useContext} from 'react';
 import { AuthContext } from './context/authContext';
 import TousProduits from './pages/tousProduits/TousProduits';
 import ProduitRegarde from "./pages/produitRegarde/ProduitRegarde";
+
 function App() {
-  const { currentUser } = useContext(AuthContext);
+const { currentUser } = useContext(AuthContext);
 const Layout = () => {
   return (
     <div className="app">
       <NavbarSet />
       <Outlet />
-      
     </div>
   );
 };
+
 
 const ProtectedRoute = ({ children }) => {
   if (!currentUser) {

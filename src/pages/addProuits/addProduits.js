@@ -4,6 +4,7 @@ import "./addProduits.css"
 import { AuthContext } from "../../context/authContext";
   import { ToastContainer, toast } from 'react-toastify';
   import 'react-toastify/dist/ReactToastify.css';
+
 const AddProduits = () => {
   const [title, setTitle] = useState('')
   const [price, setPrice] = useState(0)

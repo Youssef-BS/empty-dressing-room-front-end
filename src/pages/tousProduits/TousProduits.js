@@ -29,7 +29,7 @@ const TousProduits = () => {
       <div className='content' >
         
         {products.map(product => (
-        <Link to={'/productWatch/' + product.produit._id}>
+        <Link to={'/productWatch/' + product.produit._id} style={{color : "black"}}>
           <div className='product' key={product.produit._id}>
             {/* {setProducts(product.produit._id)} */}
             <img style={{width : "50px" , borderRadius:"50%"}} src={product.photoP.url} alt="" />

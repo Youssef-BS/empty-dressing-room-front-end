@@ -1,20 +1,27 @@
-import React,{useEffect , useState} from "react"
+import React,{useEffect , useState , useContext} from "react"
 import axios from 'axios';
 import {useParams} from 'react-router-dom'
 import './produitRegarde.css'
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
+import { AuthContext } from "../../context/authContext";
+
 
 const ProduitRegarde = () =>{
 const params = useParams()
 const [productSlect , setProductSelect] = useState({})
-
 const [show, setShow] = useState(false);
-
 const handleClose = () => setShow(false);
 const handleShow = () => setShow(true);
+const { currentUser } = useContext(AuthContext);
 
+const [conversation , setConversation] = useState({});
+const [msg , setMsg] = useState('');
+console.log(msg)
+
+
+// pour afficher le poduit
 useEffect(()=>{
 const fetchData =async ()=>{
 
@@ -27,6 +34,41 @@ setProductSelect(res.data)
 fetchData();
 
 },[params.id])
+//
+
+// pour afficher la conversation 
+// useEffect(()=>{
+  
+//   const fetchMsg = async()=>{
+//     const res = await axios.get(`http://localhost:4000/api/msg/msgSend/${currentUser.user._id}/${productSlect.data._id}`)
+//     setConversation(res.data)
+//   }
+//   fetchMsg()
+// })
+
+
+
+//fonction pour envoyer un message
+const sendMessage = async () => {
+  try {
+    const formData = new FormData();
+    formData.append('content', msg);
+await axios.post(
+      `http://localhost:4000/api/msg/msgSend/${currentUser.user._id}/${productSlect.data._id}`,
+      formData, 
+      {
+        headers: {
+          'Content-Type': 'multipart/form-data' 
+        }
+      }
+    );
+    setMsg('')
+    console.log(msg);
+  } catch (error) {
+    console.log(error);
+  }
+};
+//
 
 console.log(productSlect)
 
@@ -60,12 +102,12 @@ console.log(productSlect)
               controlId="exampleForm.ControlTextarea1"
             >
               <Form.Label>Ecrire message ici</Form.Label>
-              <Form.Control as="textarea" rows={1} />
+              <Form.Control as="textarea" rows={1} onChange={(e)=> setMsg(e.target.value)} />
             </Form.Group>
             <button variant="secondary" onClick={handleClose}>
-            Close
+          Fermer
           </button>
-          <input type='button' variant="primary" className="BtnForm"  value="envoyer" />
+          <input type='button' variant="primary" className="BtnForm"  value="envoyer" onClick={sendMessage} />
              
           </Form>
  
