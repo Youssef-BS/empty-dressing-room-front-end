@@ -13,10 +13,9 @@ const ProduitRegarde = () => {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
   const { currentUser } = useContext(AuthContext);
-
   const [conversation, setConversation] = useState([]);
   const [msg, setMsg] = useState("");
-
+  const [itsMe , setItsMe] = useState(false)
   // pour afficher le poduit
   useEffect(() => {
     const fetchData = async () => {
@@ -32,25 +31,32 @@ const ProduitRegarde = () => {
   //
 
   // pour afficher la conversation
-  const fetchMsg = async () => {
+  const fetchMsg = async (e) => {
+
     try {
       const res = await axios.get(
         `http://localhost:4000/api/msg/msgSend/${currentUser.user._id}/${productSlect.data._id}`
       );
       setConversation(res.data);
+      setTimeout(fetchMsg, 1000);
     } catch (error) {
       console.error(error);
       if (error.response.status === 500) {
         alert("Server Error. Please try again later.");
       }
+      setTimeout(fetchMsg, 1000);
     }
   };
-
+  useEffect(() => {
+    fetchMsg();
+  }, []);
   console.log(conversation)
   
 
   //fonction pour envoyer un message
-  const sendMessage = async () => {
+  const sendMessage = async (e) => {
+    e.preventDefault()
+    setItsMe(true)
     try {
       const formData = new FormData();
       formData.append("content", msg);
@@ -101,7 +107,12 @@ const ProduitRegarde = () => {
         </Modal.Header>
         <Modal.Body>
           <Form>
-            <Form.Control as="textarea" rows={7} disabled />
+            
+          {conversation.map((message) => (
+            
+<p style={{ color: currentUser ? "red" : "black" , textAlign : currentUser ? "right" : "left"}}>{message}</p>
+  
+))}
             <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
               <Form.Label>Ecrire message ici</Form.Label>
               <Form.Control as="textarea" rows={1} onChange={(e)=> setMsg(e.target.value)} />

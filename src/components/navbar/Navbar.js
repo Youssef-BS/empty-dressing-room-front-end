@@ -6,6 +6,7 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import Modal from 'react-bootstrap/Modal';
 import { AiOutlineShoppingCart  } from 'react-icons/ai';
+import { BiNotification  } from 'react-icons/bi';
 import "./navbar.css"
 import axios from 'axios';
 import { AuthContext } from "../../context/authContext";
@@ -75,6 +76,31 @@ const register = async(event)=>{
 
 }
 
+function NotificationIcon() {
+  return (
+    <span style={{ position: 'relative', display: 'inline-block' , cursor : 'pointer' }}>
+      <BiNotification />
+      <span
+        style={{
+          position: 'absolute',
+          top: '-8px',
+          right: '-8px',
+          width: '16px',
+          height: '16px',
+          backgroundColor: 'red',
+          borderRadius: '50%',
+          color: 'white',
+          textAlign: 'center',
+          fontSize: '12px',
+          lineHeight: '16px',
+        }}
+      >
+        2
+      </span>
+    </span>
+  );
+}
+
 
 
 
@@ -118,6 +144,7 @@ return (
             currentUser  ? <div style={{display : "flex" , alignItem:"center"}}>
             <Nav.Link>{currentUser.user.name}</Nav.Link>
             <img src={currentUser.user.photoP.url} style={{height : "35px" , width:"35px" , borderRadius : "35%" }} alt="" />
+            {NotificationIcon()}
             <Nav>
             <NavDropdown
               id="nav-dropdown-dark-example"
@@ -127,6 +154,7 @@ return (
               <NavDropdown.Item href="/monprofile">Voir Profile</NavDropdown.Item>
               <NavDropdown.Item onClick={handleLogout}>Deconnection</NavDropdown.Item>
             </NavDropdown>
+           
           </Nav>
             </div> : <Nav.Link onClick={handleShow}>s'authentifier/s'inscri</Nav.Link>
              }
