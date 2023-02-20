@@ -15,7 +15,7 @@ const ProduitRegarde = () => {
   const { currentUser } = useContext(AuthContext);
   const [conversation, setConversation] = useState([]);
   const [msg, setMsg] = useState("");
-  const [itsMe , setItsMe] = useState(false)
+  const [moi , setMoi] = useState('')
   // pour afficher le poduit
   useEffect(() => {
     const fetchData = async () => {
@@ -56,7 +56,6 @@ const ProduitRegarde = () => {
   //fonction pour envoyer un message
   const sendMessage = async (e) => {
     e.preventDefault()
-    setItsMe(true)
     try {
       const formData = new FormData();
       formData.append("content", msg);
@@ -76,7 +75,19 @@ const ProduitRegarde = () => {
   };
   //
 
-  console.log(productSlect);
+  
+    const Me = async()=>{
+     if (currentUser && currentUser.user) {
+       const res = await axios.get(`http://localhost:4000/api/produits/myproduit/test/${currentUser.user._id}/${params.id}`)
+       setMoi(res.data.message)
+     }
+    }
+    Me()
+
+    console.log(moi)
+  
+
+
 
   return (
     <>
@@ -93,10 +104,12 @@ const ProduitRegarde = () => {
             <p>
               <b>Prix : {productSlect.product.price} Dt</b>
             </p>
-            <button>Acheter</button>
-            <button onClick={(event) => { handleShow(); fetchMsg(); }}>
+            <button style={{display : moi ? "none" : "inline-block"}}>Acheter</button>
+            <button onClick={(event) => { handleShow(); fetchMsg(); }} style={{display : moi ? "none" : "inline-block"}}>
               Cantacter le Vendeur
             </button>
+            {moi ? <p style={{color : "green"}}>c'est ton article</p> : "" }
+            
           </div>
         </div>
       )}
