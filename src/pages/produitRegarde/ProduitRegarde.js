@@ -60,7 +60,7 @@ const ProduitRegarde = () => {
       const formData = new FormData();
       formData.append("content", msg);
       await axios.post(
-        `http://localhost:4000/api/msg/msgSend/${currentUser.user._id}/${productSlect.data._id}`,
+        `http://localhost:4000/api/msg/msgSend/${currentUser.user._id}/${productSlect.data._id}/${params.id}`,
         formData,
         {
           headers: {
@@ -72,21 +72,18 @@ const ProduitRegarde = () => {
     } catch (error) {
       console.log(error);
     }
+
   };
   //
-
-  
-    const Me = async()=>{
-     if (currentUser && currentUser.user) {
-       const res = await axios.get(`http://localhost:4000/api/produits/myproduit/test/${currentUser.user._id}/${params.id}`)
-       setMoi(res.data.message)
-     }
+const Me = async()=>{
+    if (currentUser && currentUser.user) {
+      const res = await axios.get(`http://localhost:4000/api/produits/myproduit/test/${currentUser.user._id}/${params.id}`)
+      setMoi(res.data.message)
     }
-    Me()
+   }
+   Me()
 
-    console.log(moi)
-  
-
+   console.log(moi)
 
 
   return (
