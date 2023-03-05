@@ -16,6 +16,12 @@ import 'react-toastify/dist/ReactToastify.css';
 
 function NavbarSet() {
 
+  //Notification Modal 
+  const [showNotification, setShowNotification] = useState(false);
+
+  const handleCloseNotification = () => setShowNotification(false);
+  const handleShowNotification = () => setShowNotification(true);
+
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -79,7 +85,7 @@ const register = async(event)=>{
 function NotificationIcon() {
   return (
     <span style={{ position: 'relative', display: 'inline-block' , cursor : 'pointer' }}>
-      <BiNotification />
+      <BiNotification onClick={handleShowNotification}/>
       <span
         style={{
           position: 'absolute',
@@ -223,7 +229,14 @@ registerForm &&
 
         </Modal.Body>
       </Modal>
-
+{/* Notification */}
+<Modal show={showNotification} onHide={handleCloseNotification}>
+        <Modal.Header closeButton>
+          <Modal.Title>Message</Modal.Title>
+        </Modal.Header>
+        <Modal.Body></Modal.Body>
+  
+      </Modal>
       
 </>
   
