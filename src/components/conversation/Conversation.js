@@ -1,9 +1,10 @@
 import React, { useEffect, useState, useContext } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
-
+import "./conversation.css"
 import Form from "react-bootstrap/Form";
 import { AuthContext } from "../../context/authContext";
+import { BiBorderRadius } from "react-icons/bi";
 
 
 const Conversation = () => {
@@ -76,11 +77,16 @@ const Conversation = () => {
        
   
     
-            <Form>
+            <Form className="conversation">
               
             {conversation.map((message) => (
-              
-  <p style={{ color: currentUser ? "red" : "black" , textAlign : currentUser ? "right" : "left"}}>{message}</p>
+           
+  <p style={{ color: "black" ,
+  borderRadius:"25px",
+
+  }}
+ className = "msgSendd" 
+  ><span>{message}</span></p>
     
   ))}
               <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
@@ -88,7 +94,7 @@ const Conversation = () => {
                 <Form.Control as="textarea" rows={1} onChange={(e)=> setMsg(e.target.value)} />
               </Form.Group>
     
-            <input type='button' variant="primary" className="BtnForm"  value="envoyer" onClick={sendMessage} />
+            <input type='button' variant="primary" className="BtnForm"  value="envoyer" onClick={sendMessage} style={{width : "25%" }} />
                
             </Form>
    

@@ -1,0 +1,19 @@
+.conversation{
+    width: 33%;
+    margin:20px auto;
+    background-color: rgb(223, 255, 244);
+    color: black;
+  
+}
+.msgSendd{
+    text-align: right;
+    width: 100%;
+    color: black;
+}
+
+.conversation span{
+    width: 25%;
+    background-color: rgb(193, 255, 176);
+    border-radius: 12px;
+    
+}

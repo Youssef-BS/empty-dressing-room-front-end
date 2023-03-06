@@ -120,7 +120,7 @@ const Me = async()=>{
             
           {conversation.map((message) => (
             
-<p style={{ color: currentUser ? "red" : "black" , textAlign : currentUser ? "right" : "left"}}>{message}</p>
+<p style={{ color: currentUser ? "black" : "black" , textAlign : currentUser ? "right" : "left"}}>{message}</p>
   
 ))}
             <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
