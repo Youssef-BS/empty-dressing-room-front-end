@@ -36,7 +36,7 @@ function NavbarSet() {
   const { login } = useContext(AuthContext);
   const {logout} = useContext(AuthContext);
   const { currentUser } = useContext(AuthContext);
-const [conversation , setConversation] = useState({})
+const [conversation , setConversation] = useState([])
 
   const handleLogin = async (event)=>{
     event.preventDefault();
@@ -85,15 +85,13 @@ const register = async(event)=>{
 
 useEffect(()=>{
 const MyConversation = async ()=>{
-try{
+
 const res = await axios.get(`http://localhost:4000/api/msg/msgSend/${currentUser.user._id}`)
 setConversation(res.data.myProduct)
-}catch(error){
-  console.log(error)
-}
+
 }
 MyConversation()
-})
+},[])
 
 console.log(conversation)
 
@@ -249,7 +247,20 @@ registerForm &&
         <Modal.Header closeButton>
           <Modal.Title>Message</Modal.Title>
         </Modal.Header>
-        <Modal.Body></Modal.Body>
+        <Modal.Body>
+  {conversation.map((conver,i) => (
+    <div className='product' key={conver.myproduct._id} style={{textAlign : "center" , border:"1px solid"}}> 
+    <h2>Article {i+1}</h2>
+      <img style={{width : "75px" , borderRadius:"50%"}} src={conver.myproduct.photoProduit.url} alt="" />
+      <p>{conver.myproduct.title}</p>
+      <h4>personne que vous contacter a ce produit</h4>
+      {conver.userContact.map(user => (
+        <p key={user._id}>{user.name}</p>
+      ))}
+    </div>
+  ))}
+</Modal.Body>
+
   
       </Modal>
       
