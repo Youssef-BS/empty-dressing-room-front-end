@@ -12,6 +12,7 @@ import axios from 'axios';
 import { AuthContext } from "../../context/authContext";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { Link } from 'react-router-dom';
 
 
 function NavbarSet() {
@@ -255,7 +256,7 @@ registerForm &&
       <p>{conver.myproduct.title}</p>
       <h4>personne que vous contacter a ce produit</h4>
       {conver.userContact.map(user => (
-        <p key={user._id}>{user.name}</p>
+       <Link to={'/getconv/'+ user._id +'/product/'+conver.myproduct._id}><p key={user._id}>{user.name}</p></Link> 
       ))}
     </div>
   ))}

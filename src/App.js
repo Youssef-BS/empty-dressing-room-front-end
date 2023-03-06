@@ -14,6 +14,7 @@ import React,{useContext} from 'react';
 import { AuthContext } from './context/authContext';
 import TousProduits from './pages/tousProduits/TousProduits';
 import ProduitRegarde from "./pages/produitRegarde/ProduitRegarde";
+import Conversation from './components/conversation/Conversation';
 
 function App() {
 const { currentUser } = useContext(AuthContext);
@@ -43,6 +44,10 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <Home />,
+      },
+      {
+        path: "/getconv/:id/product/:idproduct",
+        element : <Conversation />,
       },
       {
         path: "/Femmes",
