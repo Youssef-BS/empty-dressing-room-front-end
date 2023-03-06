@@ -1,4 +1,4 @@
-import React,{useState,useContext} from 'react';
+import React,{useState,useContext, useEffect} from 'react';
 import Container from 'react-bootstrap/Container';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import Form from 'react-bootstrap/Form';
@@ -36,6 +36,7 @@ function NavbarSet() {
   const { login } = useContext(AuthContext);
   const {logout} = useContext(AuthContext);
   const { currentUser } = useContext(AuthContext);
+const [conversation , setConversation] = useState({})
 
   const handleLogin = async (event)=>{
     event.preventDefault();
@@ -81,6 +82,20 @@ const register = async(event)=>{
   }
 
 }
+
+useEffect(()=>{
+const MyConversation = async ()=>{
+try{
+const res = await axios.get(`http://localhost:4000/api/msg/msgSend/${currentUser.user._id}`)
+setConversation(res.data.myProduct)
+}catch(error){
+  console.log(error)
+}
+}
+MyConversation()
+})
+
+console.log(conversation)
 
 function NotificationIcon() {
   return (
