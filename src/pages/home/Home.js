@@ -3,6 +3,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import React,{useEffect,useState} from "react";
 import axios from "axios";
 import Footer from "../../components/footer/footer.js";
+import { Link } from "react-router-dom";
 
 import "./home.css";
 
@@ -30,6 +31,7 @@ const Home = () =>{
       <div className="trend-product">
       {products.map( (product, index) => 
     index < 5 &&  (
+      <Link to={'/productWatch/' + product.produit._id} style={{color : "black"}}>
           <div className='product' key={product.produit._id}>
             <img style={{width : "50px" , borderRadius:"50%"}} src={product.photoP.url} alt="" />
             <p>{product.name}</p>
@@ -38,6 +40,7 @@ const Home = () =>{
             <p>Marque : {product.produit.marque}</p>
             <p><b>Prix : {product.produit.price} DT</b></p>
           </div>
+          </Link>
         ))}
         </div>
 

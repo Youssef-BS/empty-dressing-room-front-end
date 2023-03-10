@@ -47,7 +47,11 @@ const router = createBrowserRouter([
       },
       {
         path: "/getconv/:id/product/:idproduct",
-        element : <Conversation />,
+        element :(
+          <ProtectedRoute>
+            <Conversation />
+          </ProtectedRoute>
+        ) ,
       },
       {
         path: "/Femmes",
