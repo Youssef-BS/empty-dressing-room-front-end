@@ -46,12 +46,12 @@ const Home = () =>{
 
       </div>
       <div className="collection">
-      <div className="femmes"><div className="back"></div><span className="btn">Voir plus</span></div>
-          <div className="enfants"><div className="back"></div><span className="btn">Voir plus</span></div>
-        <div className="hommes"><div className="back"></div><span className="btn">Voir plus</span></div>
-        <div className="electroniques"><div className="back"></div><span className="btn">Voir plus</span></div>
-        <div className="animaux"><div className="back"></div><span className="btn">Voir plus</span></div>
-        <div className="maison"><div className="back"></div><span className="btn">Voir plus</span></div>
+      <div className="femmes"><div className="back"></div><span className="btn"><Link to="/Femmes" style={{color : "black"}}>Voir plus</Link></span></div>
+          <div className="enfants"><div className="back"></div><span className="btn"><Link to="/Enfants" style={{color : "black"}}>Voir plus</Link></span></div>
+        <div className="hommes"><div className="back"></div><span className="btn"><Link to="/Hommes" style={{color : "black"}}>Voir plus</Link></span></div>
+        <div className="electroniques"><div className="back"></div><span className="btn"><Link to="/Electroniques" style={{color : "black"}}>Voir Plus</Link></span></div>
+        <div className="animaux"><div className="back"></div><span className="btn"><Link to="/Animaux" style={{color : "black"}}>Voir Plus</Link></span></div>
+        <div className="maison"><div className="back"></div><span className="btn"><Link to="/Maison" style={{color : "black"}}>Voir Plus</Link></span></div>
       
 
       </div>
