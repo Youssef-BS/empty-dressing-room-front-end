@@ -1,17 +1,20 @@
 import React, { useEffect, useState} from 'react'
 import Filtre from '../../components/filtre/Filtre'
 import axios from "axios";
+import { Spinner } from 'react-bootstrap';
 
 
 const Electroniques = () => {
 
-const [electroniqueProduct  , setElectroniqueProduct ] = useState([]);
+const [electroniqueProduct  , setElectroniqueProduct ] = useState([])
+const [loading , setLoading] = useState(true);
 
 useEffect(()=>{
 
   const fetchData =async ()=>{
 const res = await axios.get("http://localhost:4000/api/produits/electronique/accesoire")
 setElectroniqueProduct(res.data);
+setLoading(false)
   }
 
   fetchData()
@@ -23,6 +26,12 @@ setElectroniqueProduct(res.data);
   return (
     <div>
       <Filtre />
+      { loading ? (
+        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '50vh' }}>
+        <Spinner animation="border" variant="primary" role="status">
+        </Spinner>
+      </div>
+      ):(
       <div className="trend-product">
       {electroniqueProduct.map(product => (
           <div className='product' key={product.produit._id}>
@@ -34,7 +43,7 @@ setElectroniqueProduct(res.data);
             <p><b>Prix : {product.produit.price} DT</b></p>
           </div>
         ))}
-        </div>
+        </div>)}
 
     </div>
   )
