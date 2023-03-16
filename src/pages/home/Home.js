@@ -4,18 +4,20 @@ import React,{useEffect,useState} from "react";
 import axios from "axios";
 import Footer from "../../components/footer/footer.js";
 import { Link } from "react-router-dom";
-
+import { Spinner } from "react-bootstrap";
 import "./home.css";
 
 const Home = () =>{
 
   
     const [products, setProducts] = useState([]);
+    const [loading , setLoading] = useState(true)
   
     useEffect(() => {
       const fetchData = async () => {
         const res = await axios.get("http://localhost:4000/api/produits");
         setProducts(res.data);
+        setLoading(false)
       };
   
       fetchData();
@@ -28,6 +30,12 @@ const Home = () =>{
       <h3>Produits populares</h3>
       <div className="Container-lastPage">
        <div className="voir"><p ><a href="/tousproduits">Voir plus</a></p></div> 
+   { loading ? (
+    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '50vh' }}>
+    <Spinner animation="border" variant="primary" role="status">
+    </Spinner>
+  </div>
+   ) : (
       <div className="trend-product">
       {products.map( (product, index) => 
     index < 5 &&  (
@@ -42,7 +50,7 @@ const Home = () =>{
           </div>
           </Link>
         ))}
-        </div>
+        </div> )}
 
       </div>
       <div className="collection">

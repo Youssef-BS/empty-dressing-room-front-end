@@ -2,18 +2,21 @@ import React,{useContext , useEffect, useState} from 'react'
 import { AuthContext } from '../../context/authContext'
 import "./getProfile.css"
 import axios from "axios";
+import { Spinner } from 'react-bootstrap';
 
 
 
 const Getprofile = () => {
     const { currentUser } = useContext(AuthContext);
     const [produit , setProduits] = useState([]);
+    const [loading , setLoading] = useState(true)
     
 
     useEffect(()=>{
      const fetchData = async ()=>{
       const res = await axios.get(`http://localhost:4000/api/produits/${currentUser.user._id}`);
       setProduits(res.data);
+      setLoading(false)
 }
 fetchData();
 })
@@ -27,6 +30,12 @@ return (
      <p>votre email</p><input type="text" placeholder={currentUser.user.email} />
     <p>mettre à jour ?</p> <input type="button" value="update" className='btnForm' />
    </div>
+   { loading ? (
+    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '50vh' }}>
+    <Spinner animation="border" variant="primary" role="status">
+    </Spinner>
+  </div>
+   ) : (
    <div className='content'>
     
 
@@ -44,12 +53,12 @@ return (
         <span className='delete'>Supprimer</span>
         </div>
         
-</div>
+</div> 
 
    
     
     ))}
-        </div>
+        </div> )}
   </>
   )
 }
