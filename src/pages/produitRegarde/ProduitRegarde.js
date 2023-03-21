@@ -3,6 +3,7 @@ import axios from "axios";
 import { useParams } from "react-router-dom";
 import "./produitRegarde.css";
 import Modal from "react-bootstrap/Modal";
+import Modal1 from "react-bootstrap/Modal"
 import Form from "react-bootstrap/Form";
 import { AuthContext } from "../../context/authContext";
 
@@ -16,6 +17,8 @@ const ProduitRegarde = () => {
   const [conversation, setConversation] = useState([]);
   const [msg, setMsg] = useState("");
   const [moi , setMoi] = useState('')
+  const [fetchAchat , setFetchAchat] = useState(false);
+
   // pour afficher le poduit
   useEffect(() => {
     const fetchData = async () => {
@@ -85,6 +88,19 @@ const Me = async()=>{
 
    console.log(moi)
 
+   //function achat 
+
+   const  modalachet=()=>{
+   
+    if(fetchAchat===false){
+      setFetchAchat(true)
+    }else{
+      setFetchAchat(false)
+    }
+   
+       
+   }
+
 
   return (
     <>
@@ -101,7 +117,7 @@ const Me = async()=>{
             <p>
               <b>Prix : {productSlect.product.price} Dt</b>
             </p>
-            <button style={{display : moi ? "none" : "inline-block"}}>Acheter</button>
+            <button style={{display : moi ? "none" : "inline-block"}}  onClick={modalachet} >Acheter</button>
             <button onClick={(event) => { handleShow(); fetchMsg(); }} style={{display : moi ? "none" : "inline-block"}}>
               Cantacter le Vendeur
             </button>
@@ -137,6 +153,21 @@ const Me = async()=>{
         </Modal.Body>
       
       </Modal>
+
+{
+
+fetchAchat ? <div className="purchase-modal">
+<h2>Confirm Purchase</h2>
+<p>Are you sure you want to purchase this item?</p>
+<div className="modal-buttons">
+  <button>oui</button>
+  <button onClick={modalachet}>Annuler</button>
+</div>
+</div>
+: ""
+
+}
+
          
         </>
     )

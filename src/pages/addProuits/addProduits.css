@@ -1,13 +1,20 @@
+
 .formProduit {
     margin: auto;
     text-align: center;
     width: 100%;
     margin-top: 25px;
-    background-color: rgb(188, 255, 233);
+    background-color: rgb(206, 255, 239);
     width: 30%;
     height: 80vh;
     border-radius: 15px;
+    opacity: 0.7;
+    transition: 0.5s;
     
+}
+
+.formProduit:hover{
+    opacity: 1;
 }
 
 .formProduit input{

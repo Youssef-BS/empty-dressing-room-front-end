@@ -2,8 +2,8 @@ import React, { useState , useContext } from 'react'
 import axios from 'axios'
 import "./addProduits.css"
 import { AuthContext } from "../../context/authContext";
-  import { ToastContainer, toast } from 'react-toastify';
-  import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const AddProduits = () => {
   const [title, setTitle] = useState('')
@@ -14,7 +14,6 @@ const AddProduits = () => {
   const [taille, setTaille] = useState('')
   const [marque, setMarque] = useState('')
   const { currentUser } = useContext(AuthContext);
-  // console.log(currentUser.user._id)
 
   const handleSubmit = async event => {
     event.preventDefault()
@@ -63,7 +62,16 @@ const AddProduits = () => {
         <form onSubmit={handleSubmit}>
           titre <input type="text" value={title} onChange={event => setTitle(event.target.value)} />
           prix <input type="number" value={price} onChange={event => setPrice(event.target.value)} />
-          categorie <input type="text" value={categories} onChange={event => setCategories(event.target.value)} />
+          <p>select categorie</p>
+          <select value={categories} onChange={event => setCategories(event.target.value)}>
+            <option value="sans categories" >Sans categorie</option>
+            <option value="femmes">Femmes</option>
+            <option value="hommes">Hommes</option>
+            <option value="enfants">Enfants</option>
+            <option value="animaux">Animaux</option>
+            <option value="electroniques">Electroniques</option>
+            <option value="maison">Maison</option>
+          </select><br />
           description <input type="text" value={desc} onChange={event => setDesc(event.target.value)} />
           photo de produit <input type="file" onChange={event => setPhotoProduit(event.target.files[0])} />
           taille <input type="text" value={taille} onChange={event => setTaille(event.target.value)} />
