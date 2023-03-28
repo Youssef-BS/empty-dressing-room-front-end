@@ -1,15 +1,22 @@
 import Container from "../../components/container/Container";
 import 'bootstrap/dist/css/bootstrap.min.css';
-import React,{useEffect,useState} from "react";
+import React,{useEffect,useState , useRef} from "react";
 import axios from "axios";
 import Footer from "../../components/footer/footer.js";
 import { Link } from "react-router-dom";
 import { Spinner } from "react-bootstrap";
 import "./home.css";
+import {
+  ArrowBackIosOutlined,
+  ArrowForwardIosOutlined,
+} from "@material-ui/icons";
 
 const Home = () =>{
 
-  
+  const [isMoved, setIsMoved] = useState(false);
+  const [slideNumber, setSlideNumber] = useState(0);
+  const [clickLimit, setClickLimit] = useState(window.innerWidth / 230); 
+
     const [products, setProducts] = useState([]);
     const [loading , setLoading] = useState(true)
   
@@ -23,7 +30,20 @@ const Home = () =>{
       fetchData();
     }, []);
 
-  console.log(products)
+    const listRef = useRef();
+
+    const handleClick = (direction) => {
+      setIsMoved(true);
+      let distance = listRef.current.getBoundingClientRect().x - 50;
+      if (direction === "left" && slideNumber > 0) {
+        setSlideNumber(slideNumber - 1);
+        listRef.current.style.transform = `translateX(${230 + distance}px)`;
+      }
+      if (direction === "right" && slideNumber < 10 - clickLimit) {
+        setSlideNumber(slideNumber + 1);
+        listRef.current.style.transform = `translateX(${-230 + distance}px)`;
+      }
+    };
     return(
         <>
       <Container />
@@ -36,21 +56,36 @@ const Home = () =>{
     </Spinner>
   </div>
    ) : (
-      <div className="trend-product">
-      {products.map( (product, index) => 
-    index < 5 &&  (
+    <>
+      <ArrowBackIosOutlined
+          className="sliderArrow left"
+          onClick={() => handleClick("left")}
+          style={{ display: !isMoved && "none" }}
+        />
+      <div className="trend-product" ref={listRef}>
+      {products.map( (product) => 
+     (
+     
       <Link to={'/productWatch/' + product.produit._id} style={{color : "black"}}>
           <div className='product' key={product.produit._id}>
             <img style={{width : "50px" , borderRadius:"50%"}} src={product.photoP.url} alt="" />
             <p>{product.name}</p>
-            <img style={{width:"100%"}} src={product.produit.photoProduit.url} alt="" />
+            <img style={{width:"250px" , height : "200px"}} src={product.produit.photoProduit.url} alt="" />
             <p>{product.produit.title}</p>
             <p>Marque : {product.produit.marque}</p>
             <p><b>Prix : {product.produit.price} DT</b></p>
           </div>
           </Link>
+          
+    
         ))}
-        </div> )}
+        </div> 
+        <ArrowForwardIosOutlined
+          className="sliderArrow right"
+          onClick={() => handleClick("right")}
+        />
+        </>
+        )}
 
       </div>
       <div className="collection">

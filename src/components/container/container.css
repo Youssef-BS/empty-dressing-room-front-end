@@ -10,6 +10,7 @@
     border-radius: 12px;
     opacity: .9;
     transition: 0.5s;
+    font-family: "Courgette variant0"
 }
 .Vente:hover{
     opacity: 1;

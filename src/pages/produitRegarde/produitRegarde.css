@@ -17,10 +17,10 @@ border-radius: 12px;
 }
 
 .statistic{
-    width: 40%;
+    width: 25%;
     margin-top: 150px;
-    background-color: rgb(215, 255, 242);
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    background-color: rgb(239, 255, 250);
+    font-family: "Courgette variant0";
     font-size: 24px;
     border-radius: 18px;
     text-align: center;
@@ -73,5 +73,10 @@ button{
   
   .modal-buttons button:hover {
     background-color: #27ae60;
+  }
+
+  hr{
+    width: 80%;
+    margin: auto;
   }
   

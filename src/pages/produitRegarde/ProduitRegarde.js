@@ -111,6 +111,7 @@ const Me = async()=>{
           </div>
           <div className="statistic">
             <p>{productSlect.product.title}</p>
+            <hr/>
             <p>{productSlect.product.desc}</p>
             <p>Taille : {productSlect.product.taille}</p>
             <p>Marque : {productSlect.product.marque}</p>
