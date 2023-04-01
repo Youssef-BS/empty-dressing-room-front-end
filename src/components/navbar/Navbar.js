@@ -98,7 +98,7 @@ console.log(conversation)
 
 function NotificationIcon() {
   return (
-    <span style={{ position: 'relative', display: 'inline-block' , cursor : 'pointer' }}>
+    <span style={{ position: 'relative', display: 'inline-block' , cursor : 'pointer' , marginLeft:"8px" }}>
       <BiNotification onClick={handleShowNotification}/>
       <span
         style={{
@@ -135,7 +135,7 @@ return (
       <Navbar.Brand href="/" >Gachar</Navbar.Brand>
       <Navbar.Toggle aria-controls="responsive-navbar-nav" />
       <Navbar.Collapse id="responsive-navbar-nav">
-        <Nav className="me-auto">
+        
         <Form className="d-flex">
             <Form.Control
               type="search"
@@ -145,45 +145,48 @@ return (
             />
             <input type="button" className="btnForm"  value="recherche" />
           </Form>
-          
-        </Nav>
-        <Nav 
-            className="me-auto my-2 my-lg-0"
-            style={{ maxHeight: '100px' }}
-            navbarScroll
-          >
+          <NavDropdown
+              id="nav-dropdown-white-example"
+              title="selection categories"
+              menuVariant="white"
+              style={{marginLeft : "12px"}}
+            >
             <Nav.Link href="/Femmes">Femmes</Nav.Link>
             <Nav.Link href="/Hommes">Hommes</Nav.Link>
             <Nav.Link href="/Enfants" >Enfants </Nav.Link>
             <Nav.Link href="/Maison" >Maison </Nav.Link>
             <Nav.Link href="/Electroniques" >Electroniques </Nav.Link>
             <Nav.Link href="/Animaux" >Animaux </Nav.Link>
-          </Nav>
-        <Nav >
+            </NavDropdown>
+  
+         
+       
           {
-            currentUser  ? <div style={{display : "flex" , alignItem:"center"}}>
-            <Nav.Link>{currentUser.user.name}</Nav.Link>
-            <img src={currentUser.user.photoP.url} style={{height : "35px" , width:"35px" , borderRadius : "35%" }} alt="" />
+            currentUser  ? <div style={{display : "flex" , alignItem:"center" , marginLeft : "180px"}}>
+              <img src={currentUser.user.photoP.url} style={{height : "35px" , width:"35px" , borderRadius : "35%" , marginLeft : "12px"}} alt="" />
+            <Nav.Link style={{marginLeft : "12px"}}>{currentUser.user.name}</Nav.Link>
+            
             {NotificationIcon()}
-            <Nav>
+            
             <NavDropdown
               id="nav-dropdown-dark-example"
               title="menu"
               menuVariant="dark"
+              style={{marginLeft:"70px"}}
             >
               <NavDropdown.Item href="/monprofile">Voir Profile</NavDropdown.Item>
               <NavDropdown.Item onClick={handleLogout}>Deconnection</NavDropdown.Item>
             </NavDropdown>
            
-          </Nav>
-            </div> : <Nav.Link onClick={handleShow}>s'authentifier/s'inscri</Nav.Link>
+         
+            </div> : <Nav.Link onClick={handleShow} style={{marginLeft : "400px"}}>s'authentifier/s'inscri</Nav.Link>
              }
             
           
           <Nav.Link eventKey={2} href="#memes" style={{marginLeft:"12px"}}>
          <AiOutlineShoppingCart  />
           </Nav.Link>
-        </Nav>
+       
       </Navbar.Collapse>
     </Container>
     

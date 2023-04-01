@@ -36,7 +36,7 @@ console.log(produitHommes)
           <div className='product' key={product.produit._id}>
             <img style={{width : "50px" , borderRadius:"50%"}} src={product.photoP.url} alt="" />
             <p>{product.name}</p>
-            <img style={{width:"100%"}} src={product.produit.photoProduit.url} alt="" />
+            <img style={{width:"250px" , height : "200px"}} src={product.produit.photoProduit.url} alt="" />
             <p>{product.produit.title}</p>
             <p>Marque : {product.produit.marque}</p>
             <p><b>Prix : {product.produit.price} DT</b></p>

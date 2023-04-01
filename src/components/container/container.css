@@ -1,14 +1,14 @@
 .Vente{
     position: absolute;
-    top: 17%;
-    left: 12%;
+    top: 22%;
+    left: 14%;
     background-color: white;
     width: 500px;
     height: 300px;
     justify-content: flex-start;
     padding: 20px;
     border-radius: 12px;
-    opacity: .9;
+    opacity: 1;
     transition: 0.5s;
     font-family: "Courgette variant0"
 }
@@ -22,7 +22,8 @@
 
 .btnVente{
     margin-top: 12px;
-    background-color: aquamarine;
+    background-color: #1abc9c;
+    color: white;
     padding: 12px;
     cursor: pointer;
 }

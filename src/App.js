@@ -9,7 +9,7 @@ import Electroniques from './pages/electroniques/Electroniques';
 import Maison from './pages/maison/Maison';
 import Getprofile from './pages/monProfile/monProfile';
 import { createBrowserRouter, RouterProvider, Outlet , Navigate  } from "react-router-dom";
-import AddProduits from './pages/addProuits/addProduits';
+import AddProduits from './pages/ajouterProduit/ajouterProduit';
 import React,{useContext} from 'react';
 import { AuthContext } from './context/authContext';
 import TousProduits from './pages/tousProduits/TousProduits';

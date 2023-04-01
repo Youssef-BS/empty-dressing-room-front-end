@@ -118,7 +118,7 @@ h3{
     left: 51%;
     height: 45%;
     width: 47%;
-    background-color: aqua;
+    background-color: #1abc9c;
     top: 50%;
     height: 45%;
     background-image: url("https://img.freepik.com/photos-premium/interieur-salon-luxe-moderne-canape-noir-mur-beton-fonce_33739-387.jpg?w=2000");
@@ -137,14 +137,15 @@ left: 50%;
 transform: translate(-50%,-50%);
 transition: 0.3s;
 width: 22%;
-background-color: rgb(193, 253, 255);
+background-color: #1abc9c;
 z-index: -1;
+color: #ccc;
 }
 
 .back{
     height: 0%;
     width: 100%;
-    background: linear-gradient(white,rgb(180, 255, 230) );
+    background: linear-gradient(white,  #1abc9c );
     opacity: 0;
     transition: 0.3s;
     }
@@ -201,25 +202,31 @@ z-index: -1;
     height: 100%;
 }
 .btn:hover{
-    background-color: aquamarine;
+    background-color: #1abc9c;
+    color: #ccc;
 }
 
 .voir{
     width: 90px;
-    background-color: aquamarine;
+    background-color: #1abc9c;
     position: absolute;
     right: 200px;
     height: 40px;
     border-radius: 4px;
+    color: white;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
 }
 
-.voir p {
-    margin:4px auto;
-}
 
-.voir p a{
+
+.voir a {
     text-decoration: none;
     color: black;
+    align-items: center;
+    justify-content: center;
+    color: white;
 }
 
   
@@ -263,5 +270,11 @@ z-index: -1;
     color: #ff3d00;
   }
   
+  .title{
+    text-align: center;
+    color:  #1abc9c;
+    font-weight: bold;
+    margin-top: 19px;
+  }
   
   

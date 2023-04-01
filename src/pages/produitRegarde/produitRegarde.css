@@ -19,19 +19,21 @@ border-radius: 12px;
 .statistic{
     width: 25%;
     margin-top: 150px;
-    background-color: rgb(239, 255, 250);
+    background-color: rgba(26, 188, 156, 0.3);
+
     font-family: "Courgette variant0";
     font-size: 24px;
     border-radius: 18px;
     text-align: center;
     margin-left: 70px;
     
+    
 }
 
 button{
     margin-left: 8px;
     border: none;
-    background-color: aquamarine;
+    background-color: #1abc9c;
 }
 
 .purchase-modal {

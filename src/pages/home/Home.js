@@ -15,7 +15,7 @@ const Home = () =>{
 
   const [isMoved, setIsMoved] = useState(false);
   const [slideNumber, setSlideNumber] = useState(0);
-  const [clickLimit, setClickLimit] = useState(window.innerWidth / 230); 
+  const [clickLimit, setClickLimit] = useState(window.innerWidth / 200); 
 
     const [products, setProducts] = useState([]);
     const [loading , setLoading] = useState(true)
@@ -37,11 +37,11 @@ const Home = () =>{
       let distance = listRef.current.getBoundingClientRect().x - 50;
       if (direction === "left" && slideNumber > 0) {
         setSlideNumber(slideNumber - 1);
-        listRef.current.style.transform = `translateX(${230 + distance}px)`;
+        listRef.current.style.transform = `translateX(${150 + distance}px)`;
       }
       if (direction === "right" && slideNumber < 10 - clickLimit) {
         setSlideNumber(slideNumber + 1);
-        listRef.current.style.transform = `translateX(${-230 + distance}px)`;
+        listRef.current.style.transform = `translateX(${-250 + distance}px)`;
       }
     };
     return(
@@ -49,9 +49,9 @@ const Home = () =>{
       <Container />
       <h3>Produits populares</h3>
       <div className="Container-lastPage">
-       <div className="voir"><p ><a href="/tousproduits">Voir plus</a></p></div> 
+       <button className="voir"><a href="/tousproduits">Voir plus</a></button> 
    { loading ? (
-    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '50vh' }}>
+    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '50vh' , margin : "auto" }}>
     <Spinner animation="border" variant="primary" role="status">
     </Spinner>
   </div>
@@ -89,12 +89,12 @@ const Home = () =>{
 
       </div>
       <div className="collection">
-      <div className="femmes"><div className="back"></div><span className="btn"><Link to="/Femmes" style={{color : "black"}}>Voir plus</Link></span></div>
-          <div className="enfants"><div className="back"></div><span className="btn"><Link to="/Enfants" style={{color : "black"}}>Voir plus</Link></span></div>
-        <div className="hommes"><div className="back"></div><span className="btn"><Link to="/Hommes" style={{color : "black"}}>Voir plus</Link></span></div>
-        <div className="electroniques"><div className="back"></div><span className="btn"><Link to="/Electroniques" style={{color : "black"}}>Voir Plus</Link></span></div>
-        <div className="animaux"><div className="back"></div><span className="btn"><Link to="/Animaux" style={{color : "black"}}>Voir Plus</Link></span></div>
-        <div className="maison"><div className="back"></div><span className="btn"><Link to="/Maison" style={{color : "black"}}>Voir Plus</Link></span></div>
+      <div className="femmes"><div className="back"></div><span className="btn"><Link to="/Femmes" style={{color : "white" , textDecoration : "none"}}>Femmes</Link></span></div>
+          <div className="enfants"><div className="back"></div><span className="btn"><Link to="/Enfants" style={{color : "white" , textDecoration : "none"}}>Enfants</Link></span></div>
+        <div className="hommes"><div className="back"></div><span className="btn"><Link to="/Hommes" style={{color : "white" , textDecoration : "none"}}>Hommes</Link></span></div>
+        <div className="electroniques"><div className="back"></div><span className="btn" style={{width : "150px"}}><Link to="/Electroniques" style={{color : "white" , textDecoration : "none" }}>Electroniques</Link></span></div>
+        <div className="animaux"><div className="back"></div><span className="btn"><Link to="/Animaux" style={{color : "white" , textDecoration : "none"}}>Animaux</Link></span></div>
+        <div className="maison"><div className="back"></div><span className="btn"><Link to="/Maison" style={{color : "white" , textDecoration : "none"}}>Maison</Link></span></div>
       
 
       </div>

@@ -1,6 +1,6 @@
 import React, { useState , useContext } from 'react'
 import axios from 'axios'
-import "./addProduits.css"
+import "./ajouterProduit.css"
 import { AuthContext } from "../../context/authContext";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -52,16 +52,22 @@ const AddProduits = () => {
   }
 
   return (
+    <div className='containerAddProduit'>
+      <div className='pub'>
+        <img src="https://i.pinimg.com/564x/dc/ae/66/dcae66764a7bd4d470bd2446f062b1ff.jpg" alt=""/>
+      </div>
     <div className='formProduit'>
 <ToastContainer
   position="top-center"
   reverseOrder={false}
-/>
+/>  
+
+  
       <h1>Ajouter Produit pour vente</h1>
       <div className='ajouter_produit'>
         <form onSubmit={handleSubmit}>
-          titre <input type="text" value={title} onChange={event => setTitle(event.target.value)} />
-          prix <input type="number" value={price} onChange={event => setPrice(event.target.value)} />
+          titre <input type="text" value={title} onChange={event => setTitle(event.target.value)} placeholder="ex : capuche etc" />
+          prix <input type="number" value={price} onChange={event => setPrice(event.target.value)} placeholder="ex : 90 etc"/>
           <p>select categorie</p>
           <select value={categories} onChange={event => setCategories(event.target.value)}>
             <option value="sans categories" >Sans categorie</option>
@@ -72,13 +78,14 @@ const AddProduits = () => {
             <option value="electroniques">Electroniques</option>
             <option value="maison">Maison</option>
           </select><br />
-          description <input type="text" value={desc} onChange={event => setDesc(event.target.value)} />
+          description <input type="text" value={desc} onChange={event => setDesc(event.target.value)} placeholder="ex : capuche rouge taille .. etc" />
           photo de produit <input type="file" onChange={event => setPhotoProduit(event.target.files[0])} />
-          taille <input type="text" value={taille} onChange={event => setTaille(event.target.value)} />
-          marque <input type="text" value={marque} onChange={event => setMarque(event.target.value)} />
+          taille <input type="text" value={taille} onChange={event => setTaille(event.target.value)} placeholder="ex : s ,m ,xl.."/>
+          marque <input type="text" value={marque} onChange={event => setMarque(event.target.value)} placeholder="ex : gucci , lc etc" />
           <input type="submit" value="Ajouter Produit" className='BtnForm' />
         </form>
       </div>
+    </div>
     </div>
   )
 }
