@@ -56,8 +56,15 @@ margin:auto;
     top: 50%;
     left: 50%;
     transform: translate(-50%,-50%);
-    background-color: rgb(155, 255, 222);
+    background-color: #1abc9c;
     width: 25%;
     text-align: center;
     border-radius:12px;
+
   }
+
+  .oui , .nonc  {
+    background-color: #26dbb7;
+    cursor: pointer;
+  }
+  

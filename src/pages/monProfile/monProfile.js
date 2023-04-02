@@ -9,6 +9,7 @@ const Getprofile = () => {
   const [produit, setProduits] = useState([]);
   const [loading, setLoading] = useState(true);
   const [showdelete , setShowDelete] = useState(false);
+  const [idProduct , setIdProduct] = useState("");
 
   useEffect(() => {
     const fetchData = async () => {
@@ -29,7 +30,14 @@ const Getprofile = () => {
     }
   }
 
-  console.log(produit);
+  // console.log(produit);
+
+const deleteMyproduct = async () =>{
+  await axios.delete(`http://localhost:4000/api/produits/deletemyproduct/${currentUser.user._id}/${idProduct}`)
+  window.location.reload(false);
+  // console.log(idProduct)
+}
+
   return (
     <>
       <h3>Votre Profile</h3>
@@ -73,7 +81,7 @@ const Getprofile = () => {
                 </p>
                 <div className="Modification">
                   <button className="edit">Modifier</button>
-                  <button className="delete" onClick={showdeleteC} >Supprimer</button>
+                  <button className="delete" onClick={() => {showdeleteC(); setIdProduct(item?._id)}}>Supprimer</button>
                 </div>
               </div>
             ))
@@ -84,7 +92,7 @@ const Getprofile = () => {
   showdelete ? (
     <div className="formdelete">
     <h3>vous etes sur de suppimer ce produit !</h3>
-    <button className="oui" >oui</button>
+    <button className="oui" onClick={deleteMyproduct} >oui</button>
     <button className="nonc" onClick={showdeleteC}>non</button>
     </div>
   ) : ""
