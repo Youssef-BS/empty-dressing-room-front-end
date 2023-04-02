@@ -8,6 +8,7 @@ const Getprofile = () => {
   const { currentUser } = useContext(AuthContext);
   const [produit, setProduits] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [showdelete , setShowDelete] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -19,6 +20,14 @@ const Getprofile = () => {
     };
     fetchData();
   });
+
+  const showdeleteC = ()=>{
+    if(showdelete===false){
+      setShowDelete(true)
+    }else{
+      setShowDelete(false)
+    }
+  }
 
   console.log(produit);
   return (
@@ -63,14 +72,23 @@ const Getprofile = () => {
                   <b>prix : {item?.price} DT</b>
                 </p>
                 <div className="Modification">
-                  <span className="edit">Modifier</span>
-                  <span className="delete">Supprimer</span>
+                  <button className="edit">Modifier</button>
+                  <button className="delete" onClick={showdeleteC} >Supprimer</button>
                 </div>
               </div>
             ))
           )}
         </div>
       )}
+      {
+  showdelete ? (
+    <div className="formdelete">
+    <h3>vous etes sur de suppimer ce produit !</h3>
+    <button className="oui" >oui</button>
+    <button className="nonc" onClick={showdeleteC}>non</button>
+    </div>
+  ) : ""
+}
     </>
   );
 };

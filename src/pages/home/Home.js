@@ -6,16 +6,12 @@ import Footer from "../../components/footer/footer.js";
 import { Link } from "react-router-dom";
 import { Spinner } from "react-bootstrap";
 import "./home.css";
-import {
-  ArrowBackIosOutlined,
-  ArrowForwardIosOutlined,
-} from "@material-ui/icons";
+import SwiperCore, { Navigation, Pagination, Scrollbar, A11y } from 'swiper';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import 'swiper/swiper-bundle.css';
+SwiperCore.use([Navigation, Pagination, Scrollbar, A11y]);
 
 const Home = () =>{
-
-  const [isMoved, setIsMoved] = useState(false);
-  const [slideNumber, setSlideNumber] = useState(0);
-  const [clickLimit, setClickLimit] = useState(window.innerWidth / 200); 
 
     const [products, setProducts] = useState([]);
     const [loading , setLoading] = useState(true)
@@ -30,22 +26,12 @@ const Home = () =>{
       fetchData();
     }, []);
 
-    const listRef = useRef();
 
-    const handleClick = (direction) => {
-      setIsMoved(true);
-      let distance = listRef.current.getBoundingClientRect().x - 50;
-      if (direction === "left" && slideNumber > 0) {
-        setSlideNumber(slideNumber - 1);
-        listRef.current.style.transform = `translateX(${150 + distance}px)`;
-      }
-      if (direction === "right" && slideNumber < 10 - clickLimit) {
-        setSlideNumber(slideNumber + 1);
-        listRef.current.style.transform = `translateX(${-250 + distance}px)`;
-      }
-    };
     return(
         <>
+      
+     
+   
       <Container />
       <h3>Produits populares</h3>
       <div className="Container-lastPage">
@@ -57,33 +43,33 @@ const Home = () =>{
   </div>
    ) : (
     <>
-      <ArrowBackIosOutlined
-          className="sliderArrow left"
-          onClick={() => handleClick("left")}
-          style={{ display: !isMoved && "none" }}
-        />
-      <div className="trend-product" ref={listRef}>
-      {products.map( (product) => 
-     (
-     
-      <Link to={'/productWatch/' + product.produit._id} style={{color : "black"}}>
-          <div className='product' key={product.produit._id}>
+      <Swiper
+    spaceBetween={50}
+    slidesPerView={5}
+    navigation
+    style={{marginTop : "100px"}}
+  >
+          
+          <div className="trend-product">
+
+    {products.map((product) => (
+      <SwiperSlide key={product.produit._id}>
+        <Link to={`/productWatch/${product.produit._id}`} style={{color : "black"}}>
+          <div className="product">
             <img style={{width : "50px" , borderRadius:"50%"}} src={product.photoP.url} alt="" />
             <p>{product.name}</p>
             <img style={{width:"250px" , height : "200px"}} src={product.produit.photoProduit.url} alt="" />
             <p>{product.produit.title}</p>
             <p>Marque : {product.produit.marque}</p>
-            <p><b>Prix : {product.produit.price} DT</b></p>
+            <p><b style={{color : "#1abc9c"}}>Prix : {product.produit.price} DT</b></p>
           </div>
-          </Link>
-          
-    
-        ))}
-        </div> 
-        <ArrowForwardIosOutlined
-          className="sliderArrow right"
-          onClick={() => handleClick("right")}
-        />
+        </Link>
+      </SwiperSlide>
+    ))}
+  
+</div>
+</Swiper>      
+   
         </>
         )}
 
@@ -95,9 +81,13 @@ const Home = () =>{
         <div className="electroniques"><div className="back"></div><span className="btn" style={{width : "150px"}}><Link to="/Electroniques" style={{color : "white" , textDecoration : "none" }}>Electroniques</Link></span></div>
         <div className="animaux"><div className="back"></div><span className="btn"><Link to="/Animaux" style={{color : "white" , textDecoration : "none"}}>Animaux</Link></span></div>
         <div className="maison"><div className="back"></div><span className="btn"><Link to="/Maison" style={{color : "white" , textDecoration : "none"}}>Maison</Link></span></div>
-      
-
       </div>
+
+    <div className="description">
+    <img src="https://i.pinimg.com/564x/f5/bf/65/f5bf6584544e80e8686a49d8911262ce.jpg" alt=""/>
+    <p>Notre site web est une plateforme en ligne où vous pouvez acheter et vendre une variété de produits et services. Nous offrons une expérience utilisateur facile et pratique, avec des fonctionnalités telles que la recherche de produits, les filtres de recherche avancée, les paniers d'achat, les paiements sécurisés et la livraison à domicile.</p>
+    </div>
+
       <Footer />
         </>
     )

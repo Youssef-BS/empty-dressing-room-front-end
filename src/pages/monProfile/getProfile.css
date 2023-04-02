@@ -26,14 +26,16 @@ input {
 .Modification {
     display: flex;
    text-align: center;
+   justify-content: center;
 }
 
 .Modification span {
 margin:auto;
+
 }
 
 .edit{
-    background-color: aquamarine;
+    background-color:#1abc9c;
     color: black;
     height: 45px;
     border-radius: 5px;
@@ -48,3 +50,14 @@ margin:auto;
     border-radius: 5px;
     cursor: pointer;
 }
+
+.formupdate , .formdelete{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    background-color: rgb(155, 255, 222);
+    width: 25%;
+    text-align: center;
+    border-radius:12px;
+  }

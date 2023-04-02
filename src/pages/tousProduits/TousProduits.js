@@ -46,7 +46,7 @@ const TousProduits = () => {
                 <p>{product.produit.title}</p>
                 <p>Marque : {product.produit.marque}</p>
                 <p>
-                  <b>Prix : {product.produit.price} DT</b>
+                  <b style={{color : "#1abc9c"}}>Prix : {product.produit.price} DT</b>
                 </p>
               </div>
             </Link>

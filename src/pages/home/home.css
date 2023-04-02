@@ -6,7 +6,8 @@
     height: 60vh;
     margin:18px auto;
     display: flex;
-   
+    
+    
 }
 .trend-product{
     margin:80px auto;
@@ -42,6 +43,7 @@ h3{
     width: 95%;
     margin: 180px auto;
 }
+
 
 .femmes{
     top:4%;
@@ -276,5 +278,27 @@ color: #ccc;
     font-weight: bold;
     margin-top: 19px;
   }
+
+  .description{
+    width: 80%;
+    /* height: 500px; */
+    margin: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .description p{
+    margin-left: 40px;
+    color: gray;
+  }
   
+  .description img{
+    border-radius: 12px;
+    width: 60%;
+
+}
   
+.liste{
+    margin-top: 70px;
+}

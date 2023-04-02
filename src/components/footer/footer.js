@@ -24,9 +24,9 @@ const Footer = () => {
         <div className="item">
           <h1>A propos</h1>
           <span>
-            ili chya9ra code rani nfadlk b fr
-           cette application de pfe 2023 en iset kebili se creere par 2 etudiants youssef
-           ben said et mohamed harizi en utilisez react node mongodb et autres outiles .
+          Si vous êtes un acheteur, vous pouvez parcourir notre large sélection de produits, trouver ce que vous cherchez, ajouter des articles à votre panier et passer une commande. Nous offrons également un système de notation et d'avis pour les vendeurs, ce qui vous permet de voir les commentaires des autres acheteurs avant de faire un achat.
+
+Si vous êtes un vendeur, vous pouvez créer votre propre boutique en ligne, ajouter des produits à vendre, gérer vos commandes et vos expéditions. Nous offrons également des fonctionnalités pour promouvoir vos produits, telles que la publicité ciblée et la mise en avant de vos offres.
           </span>
         </div>
         <div className="item">
