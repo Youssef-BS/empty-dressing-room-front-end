@@ -1,7 +1,6 @@
 import React, { useEffect, useState, useContext } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
-import "./produitRegarde.css";
 import Modal from "react-bootstrap/Modal";
 import Modal1 from "react-bootstrap/Modal"
 import Form from "react-bootstrap/Form";

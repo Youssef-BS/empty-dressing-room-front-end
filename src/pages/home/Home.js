@@ -5,7 +5,6 @@ import axios from "axios";
 import Footer from "../../components/footer/footer.js";
 import { Link } from "react-router-dom";
 import { Spinner } from "react-bootstrap";
-import "./home.css";
 import SwiperCore, { Navigation, Pagination, Scrollbar, A11y } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/swiper-bundle.css';

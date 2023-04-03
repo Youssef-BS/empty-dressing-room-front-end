@@ -7,7 +7,6 @@ import Navbar from 'react-bootstrap/Navbar';
 import Modal from 'react-bootstrap/Modal';
 import { AiOutlineShoppingCart  } from 'react-icons/ai';
 import { BiNotification  } from 'react-icons/bi';
-import "./navbar.css"
 import axios from 'axios';
 import { AuthContext } from "../../context/authContext";
 import { ToastContainer, toast } from 'react-toastify';
@@ -132,7 +131,7 @@ return (
 />
     <Navbar bg="light" expand="lg" className='Nav'>
     <Container>
-      <Navbar.Brand href="/" >Gachar</Navbar.Brand>
+      <Navbar.Brand href="/" >YSF's Cyber Mall</Navbar.Brand>
       <Navbar.Toggle aria-controls="responsive-navbar-nav" />
       <Navbar.Collapse id="responsive-navbar-nav">
         

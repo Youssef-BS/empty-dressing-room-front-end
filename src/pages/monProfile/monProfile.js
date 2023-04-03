@@ -1,6 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../context/authContext";
-import "./getProfile.css";
 import axios from "axios";
 import { Spinner } from "react-bootstrap";
 

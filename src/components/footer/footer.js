@@ -1,5 +1,5 @@
 import React from "react";
-import "./footer.css";
+
 
 const Footer = () => {
   return (
@@ -40,7 +40,7 @@ Si vous êtes un vendeur, vous pouvez créer votre propre boutique en ligne, ajo
       </div>
       <div className="bottom">
         <div className="left">
-          <span className="logo">Gachar</span>
+          <span className="logo">YSF's Cyber Mall</span>
         </div>
         <div className="right">
           <img src="/img/payment.png" alt="" />

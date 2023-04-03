@@ -1,5 +1,4 @@
 import React from 'react'
-import './filtre.css'
 import Form from 'react-bootstrap/Form';
 
 const Filtre = () => {

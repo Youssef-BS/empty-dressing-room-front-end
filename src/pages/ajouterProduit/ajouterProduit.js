@@ -1,6 +1,5 @@
 import React, { useState , useContext } from 'react'
 import axios from 'axios'
-import "./ajouterProduit.css"
 import { AuthContext } from "../../context/authContext";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -55,6 +54,7 @@ const AddProduits = () => {
     <div className='containerAddProduit'>
       <div className='pub'>
         <img src="https://i.pinimg.com/564x/dc/ae/66/dcae66764a7bd4d470bd2446f062b1ff.jpg" alt=""/>
+        <p className='desc'> Si vous êtes un vendeur, vous pouvez créer votre propre boutique en ligne, ajouter des produits à vendre, gérer vos commandes et vos expéditions. Nous offrons également des fonctionnalités pour promouvoir vos produits, telles que la publicité ciblée et la mise en avant de vos offres.</p>
       </div>
     <div className='formProduit'>
 <ToastContainer

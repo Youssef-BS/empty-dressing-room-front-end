@@ -15,6 +15,7 @@ import { AuthContext } from './context/authContext';
 import TousProduits from './pages/tousProduits/TousProduits';
 import ProduitRegarde from "./pages/produitRegarde/ProduitRegarde";
 import Conversation from './components/conversation/Conversation';
+import "./app.css";
 
 function App() {
 const { currentUser } = useContext(AuthContext);
