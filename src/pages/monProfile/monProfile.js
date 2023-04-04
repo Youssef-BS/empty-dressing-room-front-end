@@ -26,7 +26,8 @@ const Getprofile = () => {
       setLoading(false);
     };
     fetchData();
-  });
+  }, [currentUser.user._id]);
+ 
 
   const showdeleteC = ()=>{
     if(showdelete===false){
@@ -38,6 +39,13 @@ const Getprofile = () => {
 
 const deleteMyproduct = async () =>{
   await axios.delete(`http://localhost:4000/api/produits/deletemyproduct/${currentUser.user._id}/${idProduct}`)
+  window.location.reload(false);
+}
+
+const updateMyProduct = async () =>{
+  const updatedProduct = { title, price, categorie ,taille, marque , desc};
+  await axios.put(`http://localhost:4000/api/produits/updatemyproduct/${currentUser.user._id}/${idProduct}` ,updatedProduct)
+
   window.location.reload(false);
 }
 
@@ -56,8 +64,8 @@ const showupdate = ()=>{
     (
 <div className="formupdate">
       <h2>modifier ce produit</h2>
-      <input type="text" placeholder="modifier titre" value={title} onChange={(e) => setTitle(e.target.value)} />
-      <input type="text" placeholder="modifier price" value={price} onChange={(e) => setPrice(e.target.value)} />
+      <input type="text" placeholder="modifier titre" value={title} onChange={(e) => setTitle(e.target.value)} name="TI"/>
+      <input type="number" placeholder="modifier price" value={price} onChange={(e) => setPrice(e.target.value)} name="PR"/>
       <select value={categorie} onChange={(e) => setCategory(e.target.value)}>
         <option value="sans categories">Sans categorie</option>
         <option value="femmes">Femmes</option>
@@ -73,7 +81,7 @@ const showupdate = ()=>{
       <input type="text" placeholder="modifier marque" value={marque} onChange={(e) => setBrand(e.target.value)} />
       <input type="text" placeholder="modifier description" value={desc} onChange={(e) => setDesc(e.target.value)} />
       <div className="update-no">
-        <button className="oui">modifier</button>
+        <button className="oui" onClick={updateMyProduct}>modifier</button>
         <button onClick={showupdate} className="nonc">annuler</button>
       </div>
     </div>
@@ -119,7 +127,7 @@ const showupdate = ()=>{
                   <b>prix : {item?.price} DT</b>
                 </p>
                 <div className="Modification">
-                  <button className="edit" onClick={showupdate}>Modifier</button>
+                  <button className="edit" onClick={() =>{showupdate() ;  setIdProduct(item?._id)}}>Modifier</button>
                   <button className="delete" onClick={() => {showdeleteC(); setIdProduct(item?._id)}}>Supprimer</button>
                 </div>
               </div>
