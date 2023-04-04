@@ -16,6 +16,7 @@ const Getprofile = () => {
   const [taille, setSize] = useState("");
   const [marque, setBrand] = useState("");
   const [desc , setDesc]=useState("");
+  const [showFormUpdateProfile , setShowFormUpdateProfile] = useState(false)
 
   useEffect(() => {
     const fetchData = async () => {
@@ -58,14 +59,26 @@ const showupdate = ()=>{
   }
   
 }
+
+
+const updateInformation = () =>{
+ if(showFormUpdateProfile === false){
+  setShowFormUpdate(true);
+ }else{
+  setShowFormUpdate(false)
+ }
+}
+
   return (
     <>
+    <p style={{padding : "25px" , fontSize : "18px" , cursor : "pointer"}} onClick={updateInformation}><b>modifier les information personelle</b></p>
+    <div style={updateInformation ? {display : "block"} : {display : "none"}}>testtt</div>
     { showFormUpdate ? 
     (
 <div className="formupdate">
       <h2>modifier ce produit</h2>
-      <input type="text" placeholder="modifier titre" value={title} onChange={(e) => setTitle(e.target.value)} name="TI"/>
-      <input type="number" placeholder="modifier price" value={price} onChange={(e) => setPrice(e.target.value)} name="PR"/>
+      <input type="text" placeholder="modifier titre" value={title} onChange={(e) =>  setTitle(e.target.value)} />
+      <input type="number" placeholder="modifier price" value={price} onChange={(e) => setPrice(e.target.value)} />
       <select value={categorie} onChange={(e) => setCategory(e.target.value)}>
         <option value="sans categories">Sans categorie</option>
         <option value="femmes">Femmes</option>
@@ -87,7 +100,7 @@ const showupdate = ()=>{
     </div>
     ) : ""
 }
-      <h3>Votre Profile</h3>
+      <h3>Votre Produits</h3>
 
       {loading ? (
         <div
