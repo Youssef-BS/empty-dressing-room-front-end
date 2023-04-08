@@ -14,6 +14,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { Link } from 'react-router-dom';
 
 
+
 function NavbarSet() {
 
   //Notification Modal 
@@ -30,7 +31,9 @@ function NavbarSet() {
   const [name , setName] = useState("");
   const [email , setEmail] = useState("");
   const [password , setPassword] = useState("");
-  const [photoP, setPhotoP]=useState(null)
+  const [photoP, setPhotoP]=useState(null);
+  const [firstCapital,setFirstCapital] = useState("")
+  const [secondCapital,setSecondCapital] = useState("")
 
 
   const { login } = useContext(AuthContext);
@@ -93,7 +96,14 @@ setConversation(res.data.myProduct)
 MyConversation()
 },[])
 
-console.log(conversation)
+// console.log(conversation)
+
+useEffect(()=>{
+  const chr = currentUser.user.name.split(" ")
+  setFirstCapital(chr[0])
+  setSecondCapital(chr[1])
+})
+
 
 function NotificationIcon() {
   return (
@@ -141,8 +151,9 @@ return (
               placeholder="Search"
               className="me-2"
               aria-label="Search"
+              style={{width : "350px"}}
             />
-            <input type="button" className="btnForm"  value="recherche" />
+            <input type="button" className="btnForm"  value="recherche"/>
           </Form>
           <NavDropdown
               id="nav-dropdown-white-example"
@@ -163,7 +174,7 @@ return (
           {
             currentUser  ? <div style={{display : "flex" , alignItem:"center" , marginLeft : "180px"}}>
               <img src={currentUser.user.photoP.url} style={{height : "35px" , width:"35px" , borderRadius : "35%" , marginLeft : "12px"}} alt="" />
-            <Nav.Link style={{marginLeft : "12px"}}>{currentUser.user.name}</Nav.Link>
+            <Nav.Link style={{marginLeft : "12px"}}>{firstCapital[0] +"."+ secondCapital[0]}</Nav.Link>
             
             {NotificationIcon()}
             
