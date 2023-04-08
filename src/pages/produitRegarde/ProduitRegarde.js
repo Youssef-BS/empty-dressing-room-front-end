@@ -17,6 +17,7 @@ const ProduitRegarde = () => {
   const [msg, setMsg] = useState("");
   const [moi , setMoi] = useState('')
   const [fetchAchat , setFetchAchat] = useState(false);
+  const [moyenPayement , SetMoyenPayement]= useState("")
 
   // pour afficher le poduit
   useEffect(() => {
@@ -100,6 +101,8 @@ const Me = async()=>{
        
    }
 
+  
+
 
   return (
     <>
@@ -116,6 +119,12 @@ const Me = async()=>{
             <p>Marque : {productSlect.product.marque}</p>
             <p>
               <b>Prix : {productSlect.product.price} Dt</b>
+            </p>
+            <p>
+              Moyen de payment : {productSlect.product.typeP === "1" ? "maina main" : 
+               productSlect.product.typeP === "2" ? "avec D17 et livraison" :
+               productSlect.product.typeP === "3" ? "Livraison et payment jusqu'a larrivage" :
+               productSlect.product.typeP === "4" ? "Avec Des points et livraison" :""}
             </p>
             <button style={{display : moi ? "none" : "inline-block"}}  onClick={modalachet} >Acheter</button>
             <button onClick={(event) => { handleShow(); fetchMsg(); }} style={{display : moi ? "none" : "inline-block"}}>
