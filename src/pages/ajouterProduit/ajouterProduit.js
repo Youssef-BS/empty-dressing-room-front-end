@@ -1,4 +1,4 @@
-import React, { useState , useContext } from 'react'
+import React, { useState , useContext, useEffect } from 'react'
 import axios from 'axios'
 import { AuthContext } from "../../context/authContext";
 import { ToastContainer, toast } from 'react-toastify';
@@ -12,6 +12,9 @@ const AddProduits = () => {
   const [photoProduit, setPhotoProduit] = useState(null)
   const [taille, setTaille] = useState('')
   const [marque, setMarque] = useState('')
+  const [typeP , setTypeP] = useState('');
+  const [msg , setMsg] = useState('');
+  const [styleInput , setStyleInput]=useState('')
   const { currentUser } = useContext(AuthContext);
 
   const handleSubmit = async event => {
@@ -30,6 +33,7 @@ const AddProduits = () => {
       formData.append('photoProduit', photoProduit)
       formData.append('taille', taille)
       formData.append('marque', marque)
+      formData.append('typeP' , typeP)
 
       await axios.post(`http://localhost:4000/api/produits/addproduct/${currentUser.user._id}`, formData)
       
@@ -42,13 +46,32 @@ const AddProduits = () => {
       setPhotoProduit(null)
       setTaille('')
       setMarque('')
+      setTypeP('')
 
       
-      toast.success('Produit Publier')
+      toast.success('Produit Publier avec succes')
     } catch (error) {
       console.error(error)
     }
   }
+
+  useEffect(()=>{
+  if(typeP === "0"){
+    setStyleInput("none");
+    setMsg("")
+  }
+  else if(typeP>"0" && typeP<"4"){
+    setMsg("saisir votre prix");
+    setStyleInput("block")
+  } else if(typeP==="4"){
+    setMsg("saisir votre points")
+    setStyleInput("block")
+  } else{
+    setStyleInput("none");
+    setMsg("")
+  }
+  },[typeP])
+  // console.log(typeP)
 
   return (
     <div className='containerAddProduit'>
@@ -67,7 +90,15 @@ const AddProduits = () => {
       <div className='ajouter_produit'>
         <form onSubmit={handleSubmit}>
           titre <input type="text" value={title} onChange={event => setTitle(event.target.value)} placeholder="ex : capuche etc" />
-          prix <input type="number" value={price} onChange={event => setPrice(event.target.value)} placeholder="ex : 90 etc"/>
+          selection type payment 
+          <select value={typeP} onChange={event => setTypeP(event.target.value)}>
+           <option value="0">select type payment</option>
+           <option value="1">main à main</option>
+           <option value="2">avec D17 et Livraison</option>
+           <option value="3">Livraison et payment jusqu'a arrive</option>
+           <option value="4">Avec Des Points et Livraison</option>
+          </select>
+          <p>{msg}</p><input type="number" value={price} onChange={event => setPrice(event.target.value)} placeholder="ex : 90 etc" style={{display : `${styleInput}`}}/>
           <p>select categorie</p>
           <select value={categories} onChange={event => setCategories(event.target.value)}>
             <option value="sans categories" >Sans categorie</option>

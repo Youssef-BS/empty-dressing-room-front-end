@@ -63,9 +63,9 @@ const showupdate = ()=>{
 
 const updateInformation = () =>{
  if(showFormUpdateProfile === false){
-  setShowFormUpdate(true);
+  setShowFormUpdateProfile(true);
  }else{
-  setShowFormUpdate(false)
+  setShowFormUpdateProfile(false)
  }
 }
 
