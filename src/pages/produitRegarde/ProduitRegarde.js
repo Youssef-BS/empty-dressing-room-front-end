@@ -2,9 +2,14 @@ import React, { useEffect, useState, useContext } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 import Modal from "react-bootstrap/Modal";
-import Modal1 from "react-bootstrap/Modal"
+import Modal1 from "react-bootstrap/Modal";
 import Form from "react-bootstrap/Form";
 import { AuthContext } from "../../context/authContext";
+import GoogleMapReact from 'google-map-react';
+import Button from "react-bootstrap/Form"
+import { TbMapSearch } from "react-icons/tb";
+import { AiOutlineCloseCircle } from "react-icons/ai";
+
 
 const ProduitRegarde = () => {
   const params = useParams();
@@ -16,8 +21,29 @@ const ProduitRegarde = () => {
   const [conversation, setConversation] = useState([]);
   const [msg, setMsg] = useState("");
   const [moi , setMoi] = useState('')
-  const [fetchAchat , setFetchAchat] = useState(false);
-  const [moyenPayement , SetMoyenPayement]= useState("")
+  const [mapShowed , setMapShowed] = useState(false);
+
+  // const [showPayement, setShowPayement] = useState(false);
+  const [showP, setShowP] = useState(false);
+  // const handleCloseP = () => setShowP(false);
+  const handleCloseP = () => setShowP(false);
+  const handleShowP = () => setShowP(true);
+
+
+  // type Payment 
+const [main , setMain] = useState(false);  
+const [poste , setPoste]= useState(false);
+const [livraison , setLivraison] = useState(false);
+const [points , setPoints] = useState(false);
+
+
+const defaultProps = {
+  center: {
+    lat: 10.99835602,
+    lng: 77.01502627
+  },
+  zoom: 11
+};
 
   // pour afficher le poduit
   useEffect(() => {
@@ -88,26 +114,61 @@ const Me = async()=>{
 
    console.log(moi)
 
-   //function achat 
+//show map 
 
-   const  modalachet=()=>{
-   
-    if(fetchAchat===false){
-      setFetchAchat(true)
-    }else{
-      setFetchAchat(false)
-    }
-   
-       
-   }
 
+const showMap = ()=>{
+  if(mapShowed === false){
+    setMapShowed(true)
+  }
+  else {
+    setMapShowed(false);
+  }
   
+} 
+
+
+
+const showTypePayement = () => {
+
+  if(productSlect.product.typeP === "1"){
+  setMain(true);
+  setPoints(false);
+  setPoste(false);
+  setLivraison(false);
+  }
+  else if (productSlect.product.typeP=== "2"){
+    setMain(false);
+    setPoints(true);
+    setPoste(false);
+    setLivraison(false);
+  }
+  else if (productSlect.product.typeP=== "3"){
+    setMain(false);
+    setPoints(false);
+    setPoste(true);
+    setLivraison(false);
+  }
+  else if (productSlect.product.typeP=== "4"){
+    setMain(false);
+    setPoints(false);
+    setPoste(false);
+    setLivraison(true);
+  }
+  else {
+    setMain(false);
+    setPoints(false);
+    setPoste(false);
+    setLivraison(false);
+  }
+
+}
 
 
   return (
     <>
       {productSlect.product && (
-        <div className="co" key={productSlect.product._id}>
+        <div className="co" key={productSlect.product?._id}>
           <div className="foto">
             <img src={productSlect.product.photoProduit.url} alt="" />
           </div>
@@ -120,13 +181,14 @@ const Me = async()=>{
             <p>
               <b>Prix : {productSlect.product.price} Dt</b>
             </p>
-            <p>
+            <p className="moyenPayment" >
               Moyen de payment : {productSlect.product.typeP === "1" ? "maina main" : 
                productSlect.product.typeP === "2" ? "avec D17 et livraison" :
                productSlect.product.typeP === "3" ? "Livraison et payment jusqu'a larrivage" :
-               productSlect.product.typeP === "4" ? "Avec Des points et livraison" :""}
+               productSlect.product.typeP === "4" ? "Avec Des points et livraison" :""
+               }
             </p>
-            <button style={{display : moi ? "none" : "inline-block"}}  onClick={modalachet} >Acheter</button>
+            <button style={{display : moi ? "none" : "inline-block"}}  onClick={handleShowP} >Acheter</button>
             <button onClick={(event) => { handleShow(); fetchMsg(); }} style={{display : moi ? "none" : "inline-block"}}>
               Cantacter le Vendeur
             </button>
@@ -162,21 +224,49 @@ const Me = async()=>{
         </Modal.Body>
       
       </Modal>
+{ mapShowed && (
 
-{
-
-fetchAchat ? <div className="purchase-modal">
-<h2>Confirm Purchase</h2>
-<p>Are you sure you want to purchase this item?</p>
-<div className="modal-buttons">
-  <button>oui</button>
-  <button onClick={modalachet}>Annuler</button>
-</div>
-</div>
-: ""
-
+      <div className="mapshow">
+        <AiOutlineCloseCircle onClick={showMap}  style={{cursor : "pointer" , width :"35px" , height :"35px"}}/>
+      <GoogleMapReact
+        bootstrapURLKeys={{ key: "" }}
+        defaultCenter={defaultProps.center}
+        defaultZoom={defaultProps.zoom}
+      >
+     </GoogleMapReact>
+  </div>
+)
 }
-
+  <Modal1 show={showP} onHide={handleCloseP}>
+        <Modal.Header closeButton>
+          <Modal.Title>Completer pour acheter</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+        saisir votre ville
+        <Form.Control type="ville" placeholder="Saisir votre ville" />
+        saisir num et nom de votre rue
+        <Form.Control type="ville" placeholder="N° et nom de rue" />
+        saisir votre adresse ligne 2
+        <Form.Control type="ville" placeholder="Adresse ligne 2 (facultatif)" />
+        saisir votre code postale
+        <Form.Control type="ville" placeholder="code postal" />
+        <div className="map" onClick={showMap}> 
+        
+        <TbMapSearch 
+        style={{height : "35px" , width : "50px"}}
+        />
+        <p>saisir votre place</p>
+          </div>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleCloseP}>
+            Close
+          </Button>
+          <Button variant="primary" onClick={handleCloseP}>
+            Save Changes
+          </Button>
+        </Modal.Footer>
+      </Modal1>
          
         </>
     )
