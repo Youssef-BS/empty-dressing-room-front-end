@@ -98,11 +98,11 @@ MyConversation()
 
 // console.log(conversation)
 
-useEffect(()=>{
-  const chr = currentUser.user.name.split(" ")
-  setFirstCapital(chr[0])
-  setSecondCapital(chr[1])
-})
+// useEffect(()=>{
+//   const chr = currentUser.user.name.split(" ")
+//   setFirstCapital(chr[0])
+//   setSecondCapital(chr[1])
+// })
 
 
 function NotificationIcon() {

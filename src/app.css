@@ -377,7 +377,7 @@ color: #ccc;
     color: gray;
   }
   
-  .description img{
+  .description video{
     border-radius: 12px;
     width: 60%;
 
@@ -392,7 +392,7 @@ color: #ccc;
 
 .co{
     width: 95%;
-    height: 530px;
+    height: 550px;
     display: flex;
     margin:40px auto;
     
@@ -729,10 +729,25 @@ button{
 }
 
 .mapshow{
-  height: 550px;
-  width: 550px;
-  position: relative;
-  top: 50%;
-  left: 50%;
+  height: 500px;
+  width: 700px;
+  /* /* position: relative; */
+  top: 0;
+  left: 60%;
   transform: translate(-50%,-50%);
+}
+
+/* edit form payment */
+
+.formPayment{
+  font-size: 16px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-items: center;
+  align-items: center;
+}
+
+.formPayment .ver1,.ver2{
+  width: 43%;
+  margin: auto;
 }

@@ -83,7 +83,11 @@ const Home = () =>{
       </div>
 
     <div className="description">
-    <img src="https://i.pinimg.com/564x/f5/bf/65/f5bf6584544e80e8686a49d8911262ce.jpg" alt=""/>
+    <video controls autoPlay loop>
+  <source src="https://v1.pinimg.com/videos/mc/720p/af/75/09/af7509e2ac84eac08b059f3798fcf63f.mp4" type="video/mp4" />
+  {/* <source src="my-video.webm" type="video/webm" /> */}
+  Your browser does not support the video tag.
+</video>
     <p>Notre site web est une plateforme en ligne où vous pouvez acheter et vendre une variété de produits et services. Nous offrons une expérience utilisateur facile et pratique, avec des fonctionnalités telles que la recherche de produits, les filtres de recherche avancée, les paniers d'achat, les paiements sécurisés et la livraison à domicile.</p>
     </div>
 

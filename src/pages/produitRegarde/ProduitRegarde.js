@@ -2,11 +2,11 @@ import React, { useEffect, useState, useContext } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 import Modal from "react-bootstrap/Modal";
-import Modal1 from "react-bootstrap/Modal";
+
 import Form from "react-bootstrap/Form";
 import { AuthContext } from "../../context/authContext";
 import GoogleMapReact from 'google-map-react';
-import Button from "react-bootstrap/Form"
+
 import { TbMapSearch } from "react-icons/tb";
 import { AiOutlineCloseCircle } from "react-icons/ai";
 
@@ -23,11 +23,12 @@ const ProduitRegarde = () => {
   const [moi , setMoi] = useState('')
   const [mapShowed , setMapShowed] = useState(false);
 
-  // const [showPayement, setShowPayement] = useState(false);
-  const [showP, setShowP] = useState(false);
-  // const handleCloseP = () => setShowP(false);
-  const handleCloseP = () => setShowP(false);
-  const handleShowP = () => setShowP(true);
+  const [payment , setPayment] = useState(false);
+  
+  
+  
+  
+  
 
 
   // type Payment 
@@ -44,6 +45,14 @@ const defaultProps = {
   },
   zoom: 11
 };
+
+const affichePS = () =>{
+if(payment === false) {
+  setPayment(true)
+} else {
+  setPayment(false)
+}
+}
 
   // pour afficher le poduit
   useEffect(() => {
@@ -167,12 +176,55 @@ const showTypePayement = () => {
 
   return (
     <>
+   
       {productSlect.product && (
         <div className="co" key={productSlect.product?._id}>
           <div className="foto">
             <img src={productSlect.product.photoProduit.url} alt="" />
           </div>
           <div className="statistic">
+          {payment ? (
+          <>
+      <div className="formPayment">
+        <div className="ver1">
+        saisir votre ville que vous etes habite
+        <Form.Control type="ville" placeholder="Saisir votre ville" />
+        saisir num et nom de votre rue
+        <Form.Control type="ville" placeholder="N° et nom de rue" />
+        </div>
+        <div className="ver2">
+        saisir votre adresse ligne 2 que vous etes habites
+        <Form.Control type="ville" placeholder="Adresse ligne 2 (facultatif)" />
+        saisir votre code postale que vous etes habite
+        <Form.Control type="ville" placeholder="code postal" />
+        </div>
+        <div className="map" onClick={showMap}> 
+        
+        <TbMapSearch 
+        style={{height : "35px" , width : "50px"}}
+        />
+        <p>saisir votre place</p>
+        { mapShowed && (
+
+<div className="mapshow">
+  <AiOutlineCloseCircle onClick={showMap}  style={{cursor : "pointer" , width :"35px" , height :"35px"}}/>
+<GoogleMapReact
+  bootstrapURLKeys={{ key: "" }}
+  defaultCenter={defaultProps.center}
+  defaultZoom={defaultProps.zoom}
+>
+</GoogleMapReact>
+</div>
+)
+}
+          </div>
+        
+ </div>
+ <p>confirmer</p>
+ <p onClick={affichePS}>annuler</p>
+    
+    </>):<>
+    <div>
             <p>{productSlect.product.title}</p>
             <hr/>
             <p>{productSlect.product.desc}</p>
@@ -188,12 +240,16 @@ const showTypePayement = () => {
                productSlect.product.typeP === "4" ? "Avec Des points et livraison" :""
                }
             </p>
-            <button style={{display : moi ? "none" : "inline-block"}}  onClick={handleShowP} >Acheter</button>
+            <button style={{display : moi ? "none" : "inline-block"}} onClick={affichePS} >Acheter</button>
             <button onClick={(event) => { handleShow(); fetchMsg(); }} style={{display : moi ? "none" : "inline-block"}}>
               Cantacter le Vendeur
             </button>
             {moi ? <p style={{color : "green"}}>c'est ton article</p> : "" }
+           
+            </div>
             
+    </>}
+         
           </div>
         </div>
       )}
@@ -224,51 +280,8 @@ const showTypePayement = () => {
         </Modal.Body>
       
       </Modal>
-{ mapShowed && (
-
-      <div className="mapshow">
-        <AiOutlineCloseCircle onClick={showMap}  style={{cursor : "pointer" , width :"35px" , height :"35px"}}/>
-      <GoogleMapReact
-        bootstrapURLKeys={{ key: "" }}
-        defaultCenter={defaultProps.center}
-        defaultZoom={defaultProps.zoom}
-      >
-     </GoogleMapReact>
-  </div>
-)
-}
-  <Modal1 show={showP} onHide={handleCloseP}>
-        <Modal.Header closeButton>
-          <Modal.Title>Completer pour acheter</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-        saisir votre ville
-        <Form.Control type="ville" placeholder="Saisir votre ville" />
-        saisir num et nom de votre rue
-        <Form.Control type="ville" placeholder="N° et nom de rue" />
-        saisir votre adresse ligne 2
-        <Form.Control type="ville" placeholder="Adresse ligne 2 (facultatif)" />
-        saisir votre code postale
-        <Form.Control type="ville" placeholder="code postal" />
-        <div className="map" onClick={showMap}> 
-        
-        <TbMapSearch 
-        style={{height : "35px" , width : "50px"}}
-        />
-        <p>saisir votre place</p>
-          </div>
-        </Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={handleCloseP}>
-            Close
-          </Button>
-          <Button variant="primary" onClick={handleCloseP}>
-            Save Changes
-          </Button>
-        </Modal.Footer>
-      </Modal1>
          
-        </>
+   </>
     )
 
 
