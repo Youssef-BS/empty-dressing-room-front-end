@@ -182,46 +182,38 @@ const showTypePayement = () => {
           <div className="foto">
             <img src={productSlect.product.photoProduit.url} alt="" />
           </div>
-          <div className="statistic">
+          <div className="statistic" style={{backgroundColor:payment ? `transparent`:"",
+          marginBottom:payment ? `150px` : ""
+        }}>
           {payment ? (
           <>
+          <h4>Completet Pour Acheter</h4>
       <div className="formPayment">
-        <div className="ver1">
         saisir votre ville que vous etes habite
         <Form.Control type="ville" placeholder="Saisir votre ville" />
         saisir num et nom de votre rue
         <Form.Control type="ville" placeholder="N° et nom de rue" />
-        </div>
-        <div className="ver2">
+       
         saisir votre adresse ligne 2 que vous etes habites
         <Form.Control type="ville" placeholder="Adresse ligne 2 (facultatif)" />
         saisir votre code postale que vous etes habite
         <Form.Control type="ville" placeholder="code postal" />
-        </div>
+       
         <div className="map" onClick={showMap}> 
         
         <TbMapSearch 
         style={{height : "35px" , width : "50px"}}
         />
         <p>saisir votre place</p>
-        { mapShowed && (
-
-<div className="mapshow">
-  <AiOutlineCloseCircle onClick={showMap}  style={{cursor : "pointer" , width :"35px" , height :"35px"}}/>
-<GoogleMapReact
-  bootstrapURLKeys={{ key: "" }}
-  defaultCenter={defaultProps.center}
-  defaultZoom={defaultProps.zoom}
->
-</GoogleMapReact>
-</div>
-)
-}
+ 
           </div>
         
  </div>
+ <span className="btn-form-payment">
  <p>confirmer</p>
  <p onClick={affichePS}>annuler</p>
+ </span>
+ 
     
     </>):<>
     <div>
@@ -280,7 +272,20 @@ const showTypePayement = () => {
         </Modal.Body>
       
       </Modal>
-         
+    {/* show map in payment mode */}
+      { mapShowed && (
+
+<div className="mapshow">
+  <AiOutlineCloseCircle onClick={showMap}  style={{cursor : "pointer" , width :"35px" , height :"35px"}}/>
+<GoogleMapReact
+  bootstrapURLKeys={{ key: "" }}
+  defaultCenter={defaultProps.center}
+  defaultZoom={defaultProps.zoom}
+>
+</GoogleMapReact>
+</div>
+)
+}
    </>
     )
 

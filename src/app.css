@@ -731,9 +731,9 @@ button{
 .mapshow{
   height: 500px;
   width: 700px;
-  /* /* position: relative; */
-  top: 0;
-  left: 60%;
+   position: relative;
+  top: 50%;
+  left: 50%;
   transform: translate(-50%,-50%);
 }
 
@@ -747,7 +747,32 @@ button{
   align-items: center;
 }
 
-.formPayment .ver1,.ver2{
-  width: 43%;
-  margin: auto;
+.formPayment {
+  font-size: 18px;
+}
+
+.formPayment input{
+
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    border: none;
+    background-color: #f7f7f7;
+    font-size: 16px;
+    margin-bottom: 20px;
+    box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.1);
+
+}
+
+.btn-form-payment{
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  width: 100%;
+}
+
+.btn-form-payment p{
+  text-align: center;
+  margin:14px 12px; 
+  cursor: pointer;
 }
