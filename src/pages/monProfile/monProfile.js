@@ -120,29 +120,30 @@ const updateInformation = () =>{
           ) : (
             produit.map((item) => (
               <div className="product" key={item?._id}>
-                <img
-                  className="photoP"
-                  src={currentUser.user.photoP.url}
-                  alt=""
-                />
-                <span>{currentUser.user.name}</span>
+               {item.isFetch===false ? <p style={{color : "yellow"}}>Etat en attente</p>:<p style={{color : "green"}}>Etat accepter</p>}
                 <span>
+                
                   <img
                     src={item?.photoProduit.url}
                     alt=""
                     style={{ width: "200px", height: "150px" }}
                   />
                 </span>
-
-                <p>{item?.title}</p>
+               
+                  
+                  <p>{item?.title}</p>
                 <p>marque : {item?.marque}</p>
                 <p>
                   <b>prix : {item?.price} DT</b>
                 </p>
+                  
+                
+                
                 <div className="Modification">
                   <button className="edit" onClick={() =>{showupdate() ;  setIdProduct(item?._id)}}>Modifier</button>
                   <button className="delete" onClick={() => {showdeleteC(); setIdProduct(item?._id)}}>Supprimer</button>
                 </div>
+                
               </div>
             ))
           )}

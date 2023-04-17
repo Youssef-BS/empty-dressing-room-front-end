@@ -32,8 +32,7 @@ function NavbarSet() {
   const [email , setEmail] = useState("");
   const [password , setPassword] = useState("");
   const [photoP, setPhotoP]=useState(null);
-  const [firstCapital,setFirstCapital] = useState("")
-  const [secondCapital,setSecondCapital] = useState("")
+  
 
 
   const { login } = useContext(AuthContext);
@@ -96,13 +95,7 @@ setConversation(res.data.myProduct)
 MyConversation()
 },[])
 
-// console.log(conversation)
 
-// useEffect(()=>{
-//   const chr = currentUser.user.name.split(" ")
-//   setFirstCapital(chr[0])
-//   setSecondCapital(chr[1])
-// })
 
 
 function NotificationIcon() {
@@ -174,7 +167,7 @@ return (
           {
             currentUser  ? <div style={{display : "flex" , alignItem:"center" , marginLeft : "180px"}}>
               <img src={currentUser.user.photoP.url} style={{height : "35px" , width:"35px" , borderRadius : "35%" , marginLeft : "12px"}} alt="" />
-            <Nav.Link style={{marginLeft : "12px"}}>{firstCapital[0] +"."+ secondCapital[0]}</Nav.Link>
+            <Nav.Link style={{marginLeft : "12px"}}>{currentUser.user.name[0]}</Nav.Link>
             
             {NotificationIcon()}
             

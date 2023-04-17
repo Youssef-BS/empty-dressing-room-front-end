@@ -25,19 +25,6 @@ const ProduitRegarde = () => {
 
   const [payment , setPayment] = useState(false);
   
-  
-  
-  
-  
-
-
-  // type Payment 
-const [main , setMain] = useState(false);  
-const [poste , setPoste]= useState(false);
-const [livraison , setLivraison] = useState(false);
-const [points , setPoints] = useState(false);
-
-
 const defaultProps = {
   center: {
     lat: 10.99835602,
@@ -79,9 +66,9 @@ if(payment === false) {
       setTimeout(fetchMsg, 1000);
     } catch (error) {
       console.error(error);
-      if (error.response.status === 500) {
-        alert("Server Error. Please try again later.");
-      }
+      // if (error.response.status === 500) {
+      //   alert("Server Error. Please try again later.");
+      // }
       setTimeout(fetchMsg, 1000);
     }
   };
@@ -123,6 +110,15 @@ const Me = async()=>{
 
    console.log(moi)
 
+   // function for tel api for payment with points
+
+const paymentPoints = async ()=>{
+
+ await axios.post(`http://localhost:4000/api/payment/ajoutercommande/${currentUser.user._id}/${productSlect.data._id}/${params.id}`)
+
+}
+
+
 //show map 
 
 
@@ -138,44 +134,8 @@ const showMap = ()=>{
 
 
 
-const showTypePayement = () => {
-
-  if(productSlect.product.typeP === "1"){
-  setMain(true);
-  setPoints(false);
-  setPoste(false);
-  setLivraison(false);
-  }
-  else if (productSlect.product.typeP=== "2"){
-    setMain(false);
-    setPoints(true);
-    setPoste(false);
-    setLivraison(false);
-  }
-  else if (productSlect.product.typeP=== "3"){
-    setMain(false);
-    setPoints(false);
-    setPoste(true);
-    setLivraison(false);
-  }
-  else if (productSlect.product.typeP=== "4"){
-    setMain(false);
-    setPoints(false);
-    setPoste(false);
-    setLivraison(true);
-  }
-  else {
-    setMain(false);
-    setPoints(false);
-    setPoste(false);
-    setLivraison(false);
-  }
-
-}
-
-
-  return (
-    <>
+    return (
+       <>
    
       {productSlect.product && (
         <div className="co" key={productSlect.product?._id}>
@@ -210,7 +170,7 @@ const showTypePayement = () => {
         
  </div>
  <span className="btn-form-payment">
- <p>confirmer</p>
+ <p onClick={paymentPoints}>confirmer</p>
  <p onClick={affichePS}>annuler</p>
  </span>
  
@@ -223,10 +183,10 @@ const showTypePayement = () => {
             <p>Taille : {productSlect.product.taille}</p>
             <p>Marque : {productSlect.product.marque}</p>
             <p>
-              <b>Prix : {productSlect.product.price} Dt</b>
+              <b>Prix : {productSlect.product.price}{productSlect.product.typeP === "4" ? "Points" : "DT"}</b>
             </p>
             <p className="moyenPayment" >
-              Moyen de payment : {productSlect.product.typeP === "1" ? "maina main" : 
+              Moyen de payment : {productSlect.product.typeP === "1" ? "main a main" : 
                productSlect.product.typeP === "2" ? "avec D17 et livraison" :
                productSlect.product.typeP === "3" ? "Livraison et payment jusqu'a larrivage" :
                productSlect.product.typeP === "4" ? "Avec Des points et livraison" :""
