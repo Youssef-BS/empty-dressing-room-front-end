@@ -2,11 +2,11 @@ import React, { useEffect, useState, useContext } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 import Modal from "react-bootstrap/Modal";
-
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import Form from "react-bootstrap/Form";
 import { AuthContext } from "../../context/authContext";
 import GoogleMapReact from 'google-map-react';
-
 import { TbMapSearch } from "react-icons/tb";
 import { AiOutlineCloseCircle } from "react-icons/ai";
 
@@ -129,6 +129,7 @@ const paymentPoints = async ()=>{
   window.location.reload(false);
 }, 3000);
 
+toast.success('Vous avez payer ce produit')
 
 }
 
@@ -208,8 +209,8 @@ const showMap = ()=>{
             </p>
             {
 
-              productSlect.product.vende ? "produit vendu" :
-              (<>            
+              productSlect.product.vende ? <p style={{color : "green"}}>produit vendu</p>
+             : (<>            
             <button style={{display : moi ? "none" : "inline-block"}} onClick={affichePS} >Acheter</button>
             <button onClick={(event) => { handleShow(); fetchMsg(); }} style={{display : moi ? "none" : "inline-block"}}>
               Cantacter le Vendeur

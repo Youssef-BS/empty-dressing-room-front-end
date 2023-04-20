@@ -409,6 +409,7 @@ border-radius: 12px;
 }
 
 .statistic{
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
     width: 25%;
     margin-top: 150px;
     background-color: rgba(26, 188, 156, 0.3);
