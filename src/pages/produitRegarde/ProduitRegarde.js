@@ -24,6 +24,11 @@ const ProduitRegarde = () => {
   const [mapShowed , setMapShowed] = useState(false);
 
   const [payment , setPayment] = useState(false);
+
+  const[ville , setVille] = useState("");
+  const [numRue , setNumRue] = useState("");
+  const [adresseLigne2,setAdresseLigne2] = useState("");
+  const [codePoastal , setCodePoastal] = useState("");
   
 const defaultProps = {
   center: {
@@ -114,7 +119,16 @@ const Me = async()=>{
 
 const paymentPoints = async ()=>{
 
- await axios.post(`http://localhost:4000/api/payment/ajoutercommande/${currentUser.user._id}/${productSlect.data._id}/${params.id}`)
+ await axios.post(`http://localhost:4000/api/payment/ajoutercommande/${currentUser.user._id}/${productSlect.data._id}/${params.id}`,{
+  ville,
+  numRue,
+  adresseLigne2,
+  codePoastal
+ })
+ setTimeout(() => {
+  window.location.reload(false);
+}, 3000);
+
 
 }
 
@@ -150,14 +164,14 @@ const showMap = ()=>{
           <h4>Completet Pour Acheter</h4>
       <div className="formPayment">
         saisir votre ville que vous etes habite
-        <Form.Control type="ville" placeholder="Saisir votre ville" />
+        <Form.Control type="text" placeholder="Saisir votre ville" onChange={(e)=>setVille(e.target.value)} />
         saisir num et nom de votre rue
-        <Form.Control type="ville" placeholder="N° et nom de rue" />
+        <Form.Control type="text" placeholder="N° et nom de rue" onChange={(e)=>setNumRue(e.target.value)}/>
        
         saisir votre adresse ligne 2 que vous etes habites
-        <Form.Control type="ville" placeholder="Adresse ligne 2 (facultatif)" />
+        <Form.Control type="text" placeholder="Adresse ligne 2 (facultatif)" onChange={(e)=>setAdresseLigne2(e.target.value)} />
         saisir votre code postale que vous etes habite
-        <Form.Control type="ville" placeholder="code postal" />
+        <Form.Control type="text" placeholder="code postal" onChange={(e)=>setCodePoastal(e.target.value)}/>
        
         <div className="map" onClick={showMap}> 
         
@@ -192,12 +206,19 @@ const showMap = ()=>{
                productSlect.product.typeP === "4" ? "Avec Des points et livraison" :""
                }
             </p>
+            {
+
+              productSlect.product.vende ? "produit vendu" :
+              (<>            
             <button style={{display : moi ? "none" : "inline-block"}} onClick={affichePS} >Acheter</button>
             <button onClick={(event) => { handleShow(); fetchMsg(); }} style={{display : moi ? "none" : "inline-block"}}>
               Cantacter le Vendeur
             </button>
             {moi ? <p style={{color : "green"}}>c'est ton article</p> : "" }
+          </>
+          )
            
+            }
             </div>
             
     </>}
