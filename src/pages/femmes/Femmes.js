@@ -37,7 +37,12 @@ console.log(produitFemmes)
             <img style={{width:"250px" , height : "200px"}} src={product.produit.photoProduit.url} alt="" />
             <p>{product.produit.title}</p>
             <p>Marque : {product.produit.marque}</p>
-            <p><b>Prix : {product.produit.price} DT</b></p>
+            { 
+            product.produit.vende ? <p style={{color : "#1abc9c"}}>produit vendu</p> :
+           
+           <p><b style={{color : "#1abc9c"}}>Prix : {product.produit.price} DT</b></p>
+            
+            }
           </div>
         ))}
       </div>)}
