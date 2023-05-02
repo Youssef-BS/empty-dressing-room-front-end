@@ -12,6 +12,8 @@ import { AuthContext } from "../../context/authContext";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { Link } from 'react-router-dom';
+import Button from 'react-bootstrap/Button';
+import Offcanvas from 'react-bootstrap/Offcanvas';
 
 
 
@@ -32,8 +34,14 @@ function NavbarSet() {
   const [email , setEmail] = useState("");
   const [password , setPassword] = useState("");
   const [photoP, setPhotoP]=useState(null);
-  
+  const [commandes , setCommandes] = useState([]);
 
+  //side bar
+  const [showSB, setShowSB] = useState(false);
+
+  const handleCloseSB = () => setShowSB(false);
+  const handleShowSB = () => setShowSB(true);  
+//----------------------------------------------------------------
 
   const { login } = useContext(AuthContext);
   const {logout} = useContext(AuthContext);
@@ -93,7 +101,18 @@ setConversation(res.data.myProduct)
 
 }
 MyConversation()
-},[])
+},[]);
+
+useEffect(()=>{
+  const getCommandes = async  ()=>{
+    const res = await axios.get(`http://localhost:4000/api/payment/getmycommande/${currentUser.user._id}`)
+    setCommandes(res.data)
+  }
+  getCommandes()
+});
+
+
+console.log(commandes)
 
 
 
@@ -122,6 +141,33 @@ function NotificationIcon() {
     </span>
   );
 }
+
+function Panier() {
+  return (
+    <span style={{ position: 'relative', display: 'inline-block' , cursor : 'pointer' , marginLeft:"8px" }}>
+      <AiOutlineShoppingCart onClick={handleShowSB}/>
+      <span
+        style={{
+          position: 'absolute',
+          top: '-8px',
+          right: '-8px',
+          width: '16px',
+          height: '16px',
+          backgroundColor: 'red',
+          borderRadius: '50%',
+          color: 'white',
+          textAlign: 'center',
+          fontSize: '12px',
+          lineHeight: '16px',
+        }}
+      >
+        {commandes.s}
+      </span>
+    </span>
+  );
+}
+
+
 
 
 
@@ -167,7 +213,7 @@ return (
           {
             currentUser  ? <div style={{display : "flex" , alignItem:"center" , marginLeft : "180px"}}>
               <img src={currentUser.user.photoP.url} style={{height : "35px" , width:"35px" , borderRadius : "35%" , marginLeft : "12px"}} alt="" />
-            <Nav.Link style={{marginLeft : "12px"}}>{currentUser.user.name[0]}</Nav.Link>
+            <Nav.Link style={{marginLeft : "12px"}}>{currentUser.user.name}</Nav.Link>
             
             {NotificationIcon()}
             
@@ -186,9 +232,7 @@ return (
              }
             
           
-          <Nav.Link eventKey={2} href="#memes" style={{marginLeft:"12px"}}>
-         <AiOutlineShoppingCart  />
-          </Nav.Link>
+          {Panier()}
        
       </Navbar.Collapse>
     </Container>
@@ -256,21 +300,45 @@ registerForm &&
         </Modal.Header>
         <Modal.Body>
   {conversation.map((conver,i) => (
-    <div className='product' key={conver.myproduct._id} style={{textAlign : "center" , border:"1px solid"}}> 
-    <h2>Article {i+1}</h2>
-      <img style={{width : "75px" , borderRadius:"50%"}} src={conver.myproduct.photoProduit.url} alt="" />
-      <p>{conver.myproduct.title}</p>
-      <h4>personne que vous contacter a ce produit</h4>
+    i<1 && (
+    <div  key={conver.myproduct._id} > 
+
       {conver.userContact.map(user => (
+        <div className='notification'>
+          <img style={{width:"50px"}} src={user.photoP.url} alt=""/>
        <Link to={'/getconv/'+ user._id +'/product/'+conver.myproduct._id}><p key={user._id}>{user.name}</p></Link> 
+       </div>
       ))}
-    </div>
-  ))}
+     </div>
+  )))}
 </Modal.Body>
 
   
       </Modal>
       
+
+      
+
+      <Offcanvas show={showSB} onHide={handleCloseSB}>
+        <Offcanvas.Header closeButton>
+          <Offcanvas.Title>Panier</Offcanvas.Title>
+        </Offcanvas.Header>
+        <Offcanvas.Body>
+        {
+  commandes && commandes.produits && commandes.produits.map((produit ,i) => (
+    <div key={produit._id} className='panier'>
+     <p style={{marginRigth : "8px"}}>CN°{i+1}</p>
+     <img src={produit.photoProduit.url} alt="" />
+      <p>{produit.title}</p>
+      <p>{produit.price}</p>
+      <p>{produit.taille}</p>
+      <p>{produit.marque}</p>
+      <p style={{color : "orange"}}>commandes arrive pendants 48h</p>
+    </div>
+  ))
+}
+        </Offcanvas.Body>
+      </Offcanvas>
 </>
   
   );

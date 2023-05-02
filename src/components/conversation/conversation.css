@@ -1,20 +1,75 @@
-.conversation{
-    width: 33%;
-    margin:20px auto;
-    background-color: rgb(223, 255, 244);
-    color: black;
-    font-family: "Courgette variant0"
+.conversation {
+    width: 60%;
+    margin: 20px auto;
+    background-color: #fff;
+    color: #333;
+    font-family: "Helvetica Neue", sans-serif;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 3px 6px #00000029;
+  }
   
-}
-.msgSendd{
+  .conversation .msgSendd {
     text-align: right;
-    width: 100%;
-    color: black;
-}
+    margin: 10px 0;
+  }
+  
+  .conversation .msgReceive {
+    text-align: left;
+    margin: 10px 0;
+  }
+  
+  .conversation .message-container {
+    display: flex;
+    flex-direction: column;
+    overflow-y: scroll;
+    height: 300px;
+    margin-bottom: 20px;
+  }
+  
+  .conversation .message {
+    max-width: 70%;
+    padding: 10px;
+    border-radius: 20px;
+    margin-bottom: 10px;
+  }
+  
+  .conversation .message-send {
+    background-color: #2ecc71;
+    color: #fff;
+    align-self: flex-end;
+  }
+  
+  .conversation .message-receive {
+    background-color: #ecf0f1;
+    color: #333;
+    align-self: flex-start;
+  }
+  
+  .conversation .form-container {
+    display: flex;
+    align-items: center;
+  }
+  
+  .conversation .form-control {
+    width: 70%;
+    margin-right: 10px;
+  }
+  
+  .conversation .btn-send {
+    background-color: #3498db;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .conversation .btn-send:hover {
+    background-color: #2980b9;
+  }
 
-.conversation span{
-    width: 25%;
-    background-color: rgb(193, 255, 176);
-    border-radius: 12px;
-    
-}
+  .BtnForm{
+    background-color: #2ecc71;
+    border: none;
+  }

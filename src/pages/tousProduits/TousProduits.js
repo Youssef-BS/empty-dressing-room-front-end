@@ -46,7 +46,7 @@ const TousProduits = () => {
           <Spinner animation="border" variant="primary" role="status">
           </Spinner>
         </div>
-      ) : (
+        ) : (
         <div className='content'>
           {currentProducts.map((product) => (
             <Link to={'/productWatch/' + product.produit._id} style={{ color: 'black' }}>

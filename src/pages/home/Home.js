@@ -46,7 +46,8 @@ const Home = () =>{
     spaceBetween={50}
     slidesPerView={5}
     navigation
-    style={{marginTop : "100px"}}
+    scrollbar={true}
+    style={{marginTop : "80px"}}
   >
           
           <div className="trend-product">
@@ -78,13 +79,24 @@ const Home = () =>{
         )}
 
       </div>
-      <div className="collection">
+      {/* <div className="collection">
       <div className="femmes"><div className="back"></div><span className="btn"><Link to="/Femmes" style={{color : "white" , textDecoration : "none"}}>Femmes</Link></span></div>
           <div className="enfants"><div className="back"></div><span className="btn"><Link to="/Enfants" style={{color : "white" , textDecoration : "none"}}>Enfants</Link></span></div>
         <div className="hommes"><div className="back"></div><span className="btn"><Link to="/Hommes" style={{color : "white" , textDecoration : "none"}}>Hommes</Link></span></div>
         <div className="electroniques"><div className="back"></div><span className="btn" style={{width : "150px"}}><Link to="/Electroniques" style={{color : "white" , textDecoration : "none" }}>Electroniques</Link></span></div>
         <div className="animaux"><div className="back"></div><span className="btn"><Link to="/Animaux" style={{color : "white" , textDecoration : "none"}}>Animaux</Link></span></div>
         <div className="maison"><div className="back"></div><span className="btn"><Link to="/Maison" style={{color : "white" , textDecoration : "none"}}>Maison</Link></span></div>
+      </div> */}
+      <div className="catégoriesvedettes">
+        <h3 className="titre">catégories vedettes</h3>
+        <div className="collection-dispo">
+        <div className="H"><div className="objet"><b>Hommes</b><p>article pour hommes<br /> <Link to="/hommes" style={{color : "black" , fontSize:"18px"}}>voir plus</Link></p></div></div>
+        <div className="F"><div className="objet"><b>Femmes</b><p>article pour femmes<br /><Link to="/femmes" style={{color : "black" , fontSize:"18px"}}>voir plus</Link> </p></div></div>
+        <div className="EL"><div className="objet"><b>Electronique</b><p>article pour electroniques<br /> <Link to="/electroniques" style={{color : "black" , fontSize:"18px"}}>voir plus</Link></p></div></div>
+        <div className="A"><div className="objet"><b>Animaux</b><p>article pour animaux<br /> <Link to="/animaux" style={{color : "black" , fontSize:"18px"}}>voir plus</Link></p></div></div>
+        <div className="E"><div className="objet"><b>Enfants</b><p>article pour enfants<br /><Link to="/enfants" style={{color : "black" , fontSize:"18px"}}>voir plus</Link> </p></div></div>
+        <div className="M"><div className="objet"><b>Maison</b><p>article pour maison<br /><Link to="/maison" style={{color : "black" , fontSize:"18px"}}>voir plus</Link> </p></div></div>
+        </div>
       </div>
 
     <div className="description">

@@ -3,7 +3,9 @@
 margin-top: 24px;
 display: flex;
 flex-wrap: wrap;
-font-family: "Courgette variant0"
+font-family: "Courgette variant0";
+align-items: center;
+justify-content: space-around;
 
 }
 
