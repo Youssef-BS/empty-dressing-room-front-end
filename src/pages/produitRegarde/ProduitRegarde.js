@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useContext } from "react";
 import axios from "axios";
-import { useParams } from "react-router-dom";
+import { useParams , Route } from "react-router-dom";
 import Modal from "react-bootstrap/Modal";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -157,8 +157,9 @@ const showMap = ()=>{
           <div className="foto">
             <img src={productSlect.product.photoProduit.url} alt="" />
           </div>
-          <div className="statistic" style={{backgroundColor:payment ? `transparent`:"",
-          marginBottom:payment ? `150px` : ""
+          <div className="statistic" style={{background:payment ? `transparent`:"",
+          marginBottom:payment ? `150px` : "",
+          boxShadow : payment ? "none":""
         }}>
           {payment ? (
           <>
@@ -237,7 +238,7 @@ const showMap = ()=>{
             
           {conversation.map((message) => (
             
-<p style={{ color: currentUser ? "black" : "black" , textAlign : currentUser ? "right" : "left"}}>{message}</p>
+<p style={{ color: currentUser ? "black" : "black" , textAlign : currentUser ? "right" : "left"}}>{message.content}</p>
   
 ))}
             <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">

@@ -11,9 +11,10 @@ import axios from 'axios';
 import { AuthContext } from "../../context/authContext";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
 import Offcanvas from 'react-bootstrap/Offcanvas';
+
 
 
 
@@ -46,7 +47,8 @@ function NavbarSet() {
   const { login } = useContext(AuthContext);
   const {logout} = useContext(AuthContext);
   const { currentUser } = useContext(AuthContext);
-const [conversation , setConversation] = useState([])
+  const [conversation , setConversation] = useState([])
+  const {id} = useParams();
 
   const handleLogin = async (event)=>{
     event.preventDefault();
@@ -223,7 +225,7 @@ return (
               menuVariant="dark"
               style={{marginLeft:"70px"}}
             >
-              <NavDropdown.Item href="/monprofile">Voir Profile</NavDropdown.Item>
+              <NavDropdown.Item><Link to={"/monprofile/"+currentUser.user._id}>mon profile</Link></NavDropdown.Item>
               <NavDropdown.Item onClick={handleLogout}>Deconnection</NavDropdown.Item>
             </NavDropdown>
            
@@ -315,10 +317,6 @@ registerForm &&
 
   
       </Modal>
-      
-
-      
-
       <Offcanvas show={showSB} onHide={handleCloseSB}>
         <Offcanvas.Header closeButton>
           <Offcanvas.Title>Panier</Offcanvas.Title>

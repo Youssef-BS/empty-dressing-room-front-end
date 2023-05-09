@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../context/authContext";
 import axios from "axios";
 import { Spinner } from "react-bootstrap";
+import { useParams } from "react-router-dom";
 
 const Getprofile = () => {
   const { currentUser } = useContext(AuthContext);
@@ -18,16 +19,18 @@ const Getprofile = () => {
   const [desc , setDesc]=useState("");
   const [showFormUpdateProfile , setShowFormUpdateProfile] = useState(false)
 
+const params = useParams();
+
   useEffect(() => {
     const fetchData = async () => {
       const res = await axios.get(
-        `http://localhost:4000/api/produits/${currentUser.user._id}`
+        `http://localhost:4000/api/produits/${params.iduser}`
       );
       setProduits(res.data);
       setLoading(false);
     };
     fetchData();
-  }, [currentUser.user._id]);
+  }, [params.iduser]);
  
 
   const showdeleteC = ()=>{
@@ -61,13 +64,13 @@ const showupdate = ()=>{
 }
 
 
-const updateInformation = () =>{
- if(showFormUpdateProfile === false){
-  setShowFormUpdateProfile(true);
- }else{
-  setShowFormUpdateProfile(false)
- }
-}
+  function updateInformation() {
+    if (showFormUpdateProfile === false) {
+      setShowFormUpdateProfile(true);
+    } else {
+      setShowFormUpdateProfile(false);
+    }
+  }
 
   return (
     <>

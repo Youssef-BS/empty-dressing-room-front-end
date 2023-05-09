@@ -36,6 +36,8 @@ const Conversation = () => {
       fetchMsg();
     }, []);
     
+console.log(conversation)
+
     // myconv
     useEffect(()=>{
       const MyConversation = async ()=>{
@@ -74,10 +76,7 @@ const Conversation = () => {
   
     return (
       <>
-       
-  
-    
-            <Form className="conversation">
+      <Form className="conversation">
               
             {conversation.map((message) => (
            
@@ -86,7 +85,15 @@ const Conversation = () => {
 
   }}
  className = "msgSendd" 
-  ><span>{message}</span></p>
+  >
+    
+    <p style={{width : "100%" , marginTop :"3px" , textAlign : message.Me ? "right" : "left" , paddingTop :"5px"}}><span style={{color: message.Me ? 'white' : 'black' ,
+     backgroundColor : message.Me ? "gray" : "none" , borderRadius : "12px" , 
+     padding :"12px" , margin:"8px" , textAlign :"left"}}>
+      {message.conversation.content}
+      </span>
+    </p>
+    </p>
     
   ))}
               <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">

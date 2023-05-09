@@ -94,7 +94,7 @@ const router = createBrowserRouter([
         ,
       },
       {
-        path:"/monprofile",
+        path:"/monprofile/:iduser",
         element :(<ProtectedRoute> 
         <Getprofile />
         </ProtectedRoute>)
