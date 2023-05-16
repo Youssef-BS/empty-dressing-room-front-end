@@ -1,6 +1,6 @@
 import Container from "../../components/container/Container";
 import 'bootstrap/dist/css/bootstrap.min.css';
-import React,{useEffect,useState , useRef} from "react";
+import React,{useEffect,useState} from "react";
 import axios from "axios";
 import Footer from "../../components/footer/footer.js";
 import { Link } from "react-router-dom";
@@ -8,7 +8,9 @@ import { Spinner } from "react-bootstrap";
 import SwiperCore, { Navigation, Pagination, Scrollbar, A11y } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/swiper-bundle.css';
+import Spline from '@splinetool/react-spline';
 SwiperCore.use([Navigation, Pagination, Scrollbar, A11y]);
+
 
 const Home = () =>{
 
@@ -24,14 +26,11 @@ const Home = () =>{
   
       fetchData();
     }, []);
-
+ 
 
     return(
         <>
-      
-     
-   
-      <Container />
+  <Container />
       <h3>Produits populares</h3>
       <div className="Container-lastPage">
        <button className="voir"><a href="/tousproduits">Voir plus</a></button> 
@@ -77,16 +76,11 @@ const Home = () =>{
    
         </>
         )}
-
+ 
       </div>
-      {/* <div className="collection">
-      <div className="femmes"><div className="back"></div><span className="btn"><Link to="/Femmes" style={{color : "white" , textDecoration : "none"}}>Femmes</Link></span></div>
-          <div className="enfants"><div className="back"></div><span className="btn"><Link to="/Enfants" style={{color : "white" , textDecoration : "none"}}>Enfants</Link></span></div>
-        <div className="hommes"><div className="back"></div><span className="btn"><Link to="/Hommes" style={{color : "white" , textDecoration : "none"}}>Hommes</Link></span></div>
-        <div className="electroniques"><div className="back"></div><span className="btn" style={{width : "150px"}}><Link to="/Electroniques" style={{color : "white" , textDecoration : "none" }}>Electroniques</Link></span></div>
-        <div className="animaux"><div className="back"></div><span className="btn"><Link to="/Animaux" style={{color : "white" , textDecoration : "none"}}>Animaux</Link></span></div>
-        <div className="maison"><div className="back"></div><span className="btn"><Link to="/Maison" style={{color : "white" , textDecoration : "none"}}>Maison</Link></span></div>
-      </div> */}
+      <div className="logothreed" >
+      <Spline scene="https://prod.spline.design/9EXfLykCGsRHTJvR/scene.splinecode" style={{ width: "300px", height: "150px" , margin :"auto"}}/>
+      </div>
       <div className="catégoriesvedettes">
         <h3 className="titre">catégories vedettes</h3>
         <div className="collection-dispo">
@@ -98,17 +92,17 @@ const Home = () =>{
         <div className="M"><div className="objet"><b>Maison</b><p>article pour maison<br /><Link to="/maison" style={{color : "black" , fontSize:"18px"}}>voir plus</Link> </p></div></div>
         </div>
       </div>
-
+      
     <div className="description">
     <video controls autoPlay loop>
   <source src="https://v1.pinimg.com/videos/mc/720p/af/75/09/af7509e2ac84eac08b059f3798fcf63f.mp4" type="video/mp4" />
-  {/* <source src="my-video.webm" type="video/webm" /> */}
   Your browser does not support the video tag.
 </video>
     <p>Notre site web est une plateforme en ligne où vous pouvez acheter et vendre une variété de produits et services. Nous offrons une expérience utilisateur facile et pratique, avec des fonctionnalités telles que la recherche de produits, les filtres de recherche avancée, les paniers d'achat, les paiements sécurisés et la livraison à domicile.</p>
     </div>
-
+    
       <Footer />
+     
         </>
     )
 }

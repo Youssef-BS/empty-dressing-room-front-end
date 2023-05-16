@@ -36,6 +36,8 @@ function NavbarSet() {
   const [password , setPassword] = useState("");
   const [photoP, setPhotoP]=useState(null);
   const [commandes , setCommandes] = useState([]);
+  const [isScrolled, setIsScrolled] = useState(false);
+
 
   //side bar
   const [showSB, setShowSB] = useState(false);
@@ -163,7 +165,7 @@ function Panier() {
           lineHeight: '16px',
         }}
       >
-        {commandes.s}
+        {commandes.s > 0 ? commandes.s : 0}
       </span>
     </span>
   );
@@ -171,7 +173,10 @@ function Panier() {
 
 
 
-
+window.onscroll = () => {
+  setIsScrolled(window.pageYOffset === 0 ? false : true);
+  return () => (window.onscroll = null);
+};
 
 
 return (
@@ -180,7 +185,8 @@ return (
   position="top-center"
   reverseOrder={false}
 />
-    <Navbar bg="light" expand="lg" className='Nav'>
+{/* <div className={isScrolled ? "navbar scrolled" : "navbar"}> */}
+    <Navbar bg="light" expand="lg" className={isScrolled ? "Nav scrolled" :"Nav"} >
     <Container>
       <Navbar.Brand href="/" >YSF's Cyber Mall</Navbar.Brand>
       <Navbar.Toggle aria-controls="responsive-navbar-nav" />
@@ -225,21 +231,22 @@ return (
               menuVariant="dark"
               style={{marginLeft:"70px"}}
             >
-              <NavDropdown.Item><Link to={"/monprofile/"+currentUser.user._id}>mon profile</Link></NavDropdown.Item>
+              <NavDropdown.Item><Link to={"/monprofile/"+currentUser.user._id} style={{color : "white" , textDecoration : "none"}}>mon profile</Link></NavDropdown.Item>
               <NavDropdown.Item onClick={handleLogout}>Deconnection</NavDropdown.Item>
             </NavDropdown>
-           
+            {Panier()}
          
             </div> : <Nav.Link onClick={handleShow} style={{marginLeft : "400px"}}>s'authentifier/s'inscri</Nav.Link>
              }
             
           
-          {Panier()}
+          
        
       </Navbar.Collapse>
     </Container>
     
   </Navbar>
+
   <Modal show={show} onHide={handleClose}>
         
         <h2 closeButton>login</h2><hr />
@@ -322,19 +329,31 @@ registerForm &&
           <Offcanvas.Title>Panier</Offcanvas.Title>
         </Offcanvas.Header>
         <Offcanvas.Body>
-        {
-  commandes && commandes.produits && commandes.produits.map((produit ,i) => (
-    <div key={produit._id} className='panier'>
-     <p style={{marginRigth : "8px"}}>CN°{i+1}</p>
-     <img src={produit.photoProduit.url} alt="" />
-      <p>{produit.title}</p>
-      <p>{produit.price}</p>
-      <p>{produit.taille}</p>
-      <p>{produit.marque}</p>
-      <p style={{color : "orange"}}>commandes arrive pendants 48h</p>
-    </div>
-  ))
-}
+        
+  {commandes &&
+    commandes.allMyCommands &&
+    commandes.allMyCommands.map((commande, i) => {
+      const produit = commandes.produits[i];
+      return (
+        <div key={i} className="panier" >
+          <p style={{ marginRight: "8px" }}>CN°{i + 1}</p>
+          <img src={produit?.photoProduit.url} alt="" />
+          <p>{produit?.title}</p>
+          <p>{produit?.price}</p>
+          <p>{produit?.taille}</p>
+          <p>{produit?.marque}</p>
+          <div className="etat">
+            {commande.isST ? (
+              <p style={{ color: "green" }}>produit déjà arrivé</p>
+            ) : (
+              <p style={{ color: "orange" }}>produit arrive dans 48 h</p>
+            )}
+          </div>
+        </div>
+      );
+    })}
+
+
         </Offcanvas.Body>
       </Offcanvas>
 </>

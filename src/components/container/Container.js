@@ -1,7 +1,6 @@
 import Carousel from 'react-bootstrap/Carousel';
 import React,{useContext , useState} from 'react';
 import { AuthContext } from '../../context/authContext';
-
 import { useNavigate } from "react-router-dom";
 import Modal from 'react-bootstrap/Modal';
 import axios from "axios"
@@ -151,14 +150,28 @@ registerForm &&
       <Carousel.Item>
         <img style={{"height":"700px"}}
           className="d-block w-100"
-          src="https://cdn.shopify.com/s/files/1/0038/5807/1622/files/vintage-shopping_600x600@2x.jpg?v=1614303612"
+          src="https://img.freepik.com/photos-gratuite/jeune-homme-chemise-choisir-vetements-dans-centre-commercial-magasin-vetements_23-2148175648.jpg?w=996&t=st=1684162674~exp=1684163274~hmac=c19580ca25f62fb53c9b6d032e16c0e43488b3af54c11c6225b04a73a189ef33"
           alt="Second slide"
         />
   </Carousel.Item>
       <Carousel.Item>
         <img style={{"height":"700px"}}
           className="d-block w-100"
-          src="https://www.10wallpaper.com/wallpaper/3840x2160/1804/Hanger_clothing_fashion_market_4K_HD_3840x2160.jpg"
+          src="https://img.freepik.com/photos-gratuite/portrait-haute-couture-jeune-femme-blonde-elegante-au-chapeau-laine-noire-portant-poncho-franges-blanches-surdimensionne-longue-robe-grise_273443-3799.jpg?w=996&t=st=1684162623~exp=1684163223~hmac=135acd3edb12961fa529f9682c397ae06c6d69949b3dd9068e716315daa8b1df"
+          alt="Third slide"
+        />
+      </Carousel.Item>
+      <Carousel.Item>
+        <img style={{"height":"700px"}}
+          className="d-block w-100"
+          src="https://img.freepik.com/photos-gratuite/enfants-elegants-mignons_155003-8330.jpg?w=996&t=st=1684162719~exp=1684163319~hmac=15f435db10626ba5ead2fcf837e9fed5d51bc3643eacf31d8502803ba3c3ea51"
+          alt="Third slide"
+        />
+      </Carousel.Item>
+      <Carousel.Item>
+        <img style={{"height":"700px"}}
+          className="d-block w-100"
+          src="https://img.freepik.com/photos-gratuite/jeune-jolie-femme-choisissant-essayant-chaussures-modele-au-magasin_155003-2198.jpg?w=996&t=st=1684162855~exp=1684163455~hmac=3cbb87db63477ceae01d332ab9793662d0d5cb9eef60d629ffbe1234f8056f25"
           alt="Third slide"
         />
       </Carousel.Item>

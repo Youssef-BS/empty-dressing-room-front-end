@@ -18,6 +18,7 @@ const Getprofile = () => {
   const [marque, setBrand] = useState("");
   const [desc , setDesc]=useState("");
   const [showFormUpdateProfile , setShowFormUpdateProfile] = useState(false)
+  const [profile, setProfile] = useState([]);
 
 const params = useParams();
 
@@ -72,10 +73,26 @@ const showupdate = ()=>{
     }
   }
 
+//get my profile
+
+useEffect(()=>{
+  const fetchProfile = async()=>{
+   const res = await axios.get(`http://localhost:4000/api/users/${params.iduser}`);
+   setProfile(res.data);
+  }
+  fetchProfile();
+},[params.iduser])
+
+
   return (
     <>
-    <p style={{padding : "25px" , fontSize : "18px" , cursor : "pointer"}} onClick={updateInformation}><b>modifier les information personelle</b></p>
+    <div className="mini-nav">
+    <p className="points"><b>{profile.points}</b> points</p>
+    <p className="name">{profile.name}</p>
+    <p className="email">{profile.email}</p>
+    <p onClick={updateInformation} className="edit">modifier les information personelle</p>
     <div style={updateInformation ? {display : "block"} : {display : "none"}}>testtt</div>
+    </div>
     { showFormUpdate ? 
     (
 <div className="formupdate">

@@ -23,7 +23,7 @@ const Layout = () => {
   return (
     <div className="app">
       <NavbarSet />
-      <Outlet />
+      <Outlet/>
     </div>
   );
 };

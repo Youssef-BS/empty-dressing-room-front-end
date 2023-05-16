@@ -1,4 +1,5 @@
 /* style for folder monProfile */
+
 .containerProfile{
     background-color: rgb(225, 255, 245);
     margin:120px auto;
@@ -79,11 +80,31 @@ margin:auto;
     .oui:hover, .nonc:hover {
     background-color: #138a6e;
     }
+
+    .mini-nav{
+      display: flex;
+      margin-top: 12px;
+      justify-content: center;
+    }
+
+    .mini-nav p{
+      margin-left: 18px;
+      font-size: 18px;
+    }
+
+    .points{
+      color: #138a6e;
+    }
+    
+    .edit{
+      font-weight: 500;
+    }
+    
   
 /* style for folder Home */
 
 *{
-    font-family: "Courgette variant0"
+  font-family: 'Trebuchet MS', sans-serif;
 }
 .Container-lastPage{
     width: 95%;
@@ -125,7 +146,7 @@ h3{
 
 .catégoriesvedettes{
   width: 80%;
-  margin: 100px auto;
+  margin: 10px auto 120px;
 }
 
 .catégoriesvedettes .titre{
@@ -528,11 +549,22 @@ button{
   
 
 /* style for navbar */
-
+.scrolled{
+  background-color:#f0f0f0;
+}
 .Nav {
-    background-color: #fff;
-    box-shadow: 0 2px 4px rgb(0 0 0 / 10%);
+  width: 100%;
+  color: white;
+  font-size: 16px;
+  position: fixed;
+  z-index: 999;
+  top: 0;
+  background: linear-gradient(to top, transparent 0%, rgb(0, 0, 0, 0.3) 50%);
   }
+
+  
+
+
   
   .Nav .navbar-brand {
     font-size: 24px;
@@ -584,6 +616,7 @@ button{
 /* style for footer */
 
 .footer {
+  padding: 24px;
     margin: 150px 0 0 0;
     font-family: "Courgette variant0";
     background-color: #f0f0f0;
@@ -788,3 +821,6 @@ button{
 .notification img{
   border-radius: 50%;
 }
+
+
+
