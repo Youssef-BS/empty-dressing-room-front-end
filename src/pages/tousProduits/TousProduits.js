@@ -10,7 +10,7 @@ const TousProduits = () => {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
-  const [productsPerPage, setProductsPerPage] = useState(20); // Set the number of products to display per page
+  const [productsPerPage, setProductsPerPage] = useState(20); 
   const location = useLocation();
   const [searchResults, setSearchResults] = useState([]);
 
@@ -47,7 +47,6 @@ const TousProduits = () => {
     handleSearch();
   }, [location.search]);
 
-  // Get the current products to display based on the current page number
   const indexOfLastProduct = currentPage * productsPerPage;
   const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
   const currentProducts = products.slice(indexOfFirstProduct, indexOfLastProduct);
@@ -65,40 +64,26 @@ const TousProduits = () => {
         </div>
       ) : (
         <>
-          {/* {searchResults.length > 0 && (
-            <div className='product'>
-              <h2 className='searchR-title'>Search Results</h2>
-              {searchResults.map((result) => (
-                <div key={result?._id} className='searchR-item'>
-                  <img className='searchR-image' src={result.photoProduit.url} alt=""/>
-                  <div className='searchR-details'>
-                    <h3 className='searchR-item-title'>{result.title}</h3>
-                    <p className='searchR-item-desc'>{result.desc}</p>
-                    <p className='searchR-item-price'>{result.price} dt</p>
-                  </div>
-                </div>
-              ))}
-            </div>
-          )} */}
-
-          <div className='content'>
-            {searchResults.map((product) => (
-              <Link to={'/productWatch/' + product._id} style={{ color: 'black' }} key={product._id}>
+<div className='content'>
+            {searchResults.map((item) => (
+              <Link to={'/productWatch/' + item.produit._id} style={{ color: 'black' }} key={item.produit._id}>
                 <div className='product'>
-                  <img style={{ width: '250px', height: '200px' }} src={product.photoProduit.url} alt='' />
-                  <p>{product.title}</p>
-                  <p>Marque: {product.marque}</p>
-                  {product.vende ? (
+                <img style={{width : "50px" , borderRadius:"50%"}} src={item.user.photoP.url} alt="" />
+            <p>{item.user.name}</p>
+                  <img style={{ width: '250px', height: '200px' }} src={item.produit.photoProduit.url} alt='' />
+                  <p>{item.produit.title}</p>
+                  <p>Marque: {item.produit.marque}</p>
+                  {item.produit.vende ? (
                     <p style={{ color: '#1abc9c' }}>Produit vendu</p>
                   ) : (
                     <p>
-                      <b style={{ color: '#1abc9c' }}>Prix: {product.price} DT</b>
+                      <b style={{ color: '#1abc9c' }}>Prix: {item.produit.price} DT</b>
                     </p>
                   )}
                 </div>
               </Link>
             ))}
-          </div>
+            </div>
         </>
       )}
 
