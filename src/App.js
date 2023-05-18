@@ -10,7 +10,7 @@ import Maison from './pages/maison/Maison';
 import Getprofile from './pages/monProfile/monProfile';
 import { createBrowserRouter, RouterProvider, Outlet , Navigate  } from "react-router-dom";
 import AddProduits from './pages/ajouterProduit/ajouterProduit';
-import React,{useContext} from 'react';
+import React,{useContext , useState} from 'react';
 import { AuthContext } from './context/authContext';
 import TousProduits from './pages/tousProduits/TousProduits';
 import ProduitRegarde from "./pages/produitRegarde/ProduitRegarde";
@@ -18,7 +18,8 @@ import Conversation from './components/conversation/Conversation';
 import "./app.css";
 
 function App() {
-const { currentUser } = useContext(AuthContext);
+const { currentUser } = useContext(AuthContext)
+const [name , setName] = useState("?")
 const Layout = () => {
   return (
     <div className="app">
@@ -83,7 +84,7 @@ const router = createBrowserRouter([
         element: <Maison />,
       },
       {
-        path: "/tousproduits",
+        path: `/tousproduits/:${name}`,
         element: <TousProduits />,
       },
       {

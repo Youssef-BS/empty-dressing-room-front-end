@@ -11,9 +11,12 @@ import axios from 'axios';
 import { AuthContext } from "../../context/authContext";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useParams , useNavigate } from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
 import Offcanvas from 'react-bootstrap/Offcanvas';
+
+// import { Button, Form } from 'react-bootstrap';
+
 
 
 
@@ -37,7 +40,8 @@ function NavbarSet() {
   const [photoP, setPhotoP]=useState(null);
   const [commandes , setCommandes] = useState([]);
   const [isScrolled, setIsScrolled] = useState(false);
-
+  
+  const navigate = useNavigate();
 
   //side bar
   const [showSB, setShowSB] = useState(false);
@@ -50,7 +54,10 @@ function NavbarSet() {
   const {logout} = useContext(AuthContext);
   const { currentUser } = useContext(AuthContext);
   const [conversation , setConversation] = useState([])
-  const {id} = useParams();
+  const [query , setQuery] = useState("")
+
+  const [searchQuery, setSearchQuery] = useState("");
+  const [searchResults, setSearchResults] = useState([]);
 
   const handleLogin = async (event)=>{
     event.preventDefault();
@@ -179,6 +186,13 @@ window.onscroll = () => {
 };
 
 
+
+const changePage = ()=>{
+
+navigate(`/tousproduits/?q=${searchQuery}`)
+
+}
+
 return (
 <>
 <ToastContainer
@@ -192,16 +206,22 @@ return (
       <Navbar.Toggle aria-controls="responsive-navbar-nav" />
       <Navbar.Collapse id="responsive-navbar-nav">
         
-        <Form className="d-flex">
-            <Form.Control
-              type="search"
-              placeholder="Search"
-              className="me-2"
-              aria-label="Search"
-              style={{width : "350px"}}
-            />
-            <input type="button" className="btnForm"  value="recherche"/>
-          </Form>
+  <div>
+  <Form className="d-flex" >
+    <Form.Control
+      type="search"
+      placeholder="Recherche"
+      className="me-2"
+      aria-label="Search"
+      style={{ width: "350px" }}
+      value={searchQuery}
+      onChange={(e) => setSearchQuery(e.target.value)}
+    />
+    <input type="button" className="btnForm"  value="recherche" onClick={changePage}/>
+  </Form>
+
+
+</div>
           <NavDropdown
               id="nav-dropdown-white-example"
               title="selection categories"
@@ -220,8 +240,8 @@ return (
        
           {
             currentUser  ? <div style={{display : "flex" , alignItem:"center" , marginLeft : "180px"}}>
-              <img src={currentUser.user.photoP.url} style={{height : "35px" , width:"35px" , borderRadius : "35%" , marginLeft : "12px"}} alt="" />
-            <Nav.Link style={{marginLeft : "12px"}}>{currentUser.user.name}</Nav.Link>
+              <img src={currentUser.user?.photoP.url} style={{height : "35px" , width:"35px" , borderRadius : "35%" , marginLeft : "12px"}} alt="" />
+            <Nav.Link style={{marginLeft : "12px"}}>{currentUser.user?.name}</Nav.Link>
             
             {NotificationIcon()}
             
@@ -231,7 +251,7 @@ return (
               menuVariant="dark"
               style={{marginLeft:"70px"}}
             >
-              <NavDropdown.Item><Link to={"/monprofile/"+currentUser.user._id} style={{color : "white" , textDecoration : "none"}}>mon profile</Link></NavDropdown.Item>
+              <NavDropdown.Item><Link to={"/monprofile/"+currentUser.user?._id} style={{color : "white" , textDecoration : "none"}}>mon profile</Link></NavDropdown.Item>
               <NavDropdown.Item onClick={handleLogout}>Deconnection</NavDropdown.Item>
             </NavDropdown>
             {Panier()}
@@ -356,6 +376,7 @@ registerForm &&
 
         </Offcanvas.Body>
       </Offcanvas>
+
 </>
   
   );

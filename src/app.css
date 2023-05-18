@@ -821,6 +821,57 @@ button{
 .notification img{
   border-radius: 50%;
 }
+/* result for search in navbar */
+.searchR {
+  width: 80%;
+  position: absolute;
+  top: 10%;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  z-index: 2000;
+  left: 10%;
+}
+
+.searchR-title {
+  color: #0052cc;
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.searchR-item {
+  display: flex;
+  margin-bottom: 20px;
+}
+
+.searchR-image {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 4px;
+  margin-right: 10px;
+}
+
+.searchR-details {
+  flex: 1;
+}
+
+.searchR-item-title {
+  color: #008000;
+  font-size: 18px;
+  margin-bottom: 5px;
+}
+
+.searchR-item-desc {
+  color: #000;
+  font-size: 14px;
+}
+
+.searchR-item-price {
+  color: #000;
+  font-size: 16px;
+}
 
 
 
