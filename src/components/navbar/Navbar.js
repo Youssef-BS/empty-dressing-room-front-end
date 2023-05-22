@@ -228,12 +228,12 @@ return (
               menuVariant="white"
               style={{marginLeft : "12px"}}
             >
-            <Nav.Link href="/Femmes">Femmes</Nav.Link>
-            <Nav.Link href="/Hommes">Hommes</Nav.Link>
-            <Nav.Link href="/Enfants" >Enfants </Nav.Link>
-            <Nav.Link href="/Maison" >Maison </Nav.Link>
-            <Nav.Link href="/Electroniques" >Electroniques </Nav.Link>
-            <Nav.Link href="/Animaux" >Animaux </Nav.Link>
+            <Nav.Link href="/toustypeproduit/?categorie=femmes">Femmes</Nav.Link>
+            <Nav.Link href="/toustypeproduit/?categorie=hommes">Hommes</Nav.Link>
+            <Nav.Link href="/toustypeproduit/?categorie=enfants">Enfants </Nav.Link>
+            <Nav.Link href="/toustypeproduit/?categorie=maison">Maison </Nav.Link>
+            <Nav.Link href="/toustypeproduit/?categorie=electronique">Electroniques</Nav.Link>
+            <Nav.Link href="/toustypeproduit/?categorie=hommes">Animaux </Nav.Link>
             </NavDropdown>
   
          

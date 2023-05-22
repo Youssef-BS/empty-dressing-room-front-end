@@ -1,12 +1,6 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import NavbarSet from "./components/navbar/Navbar";
 import Home from "./pages/home/Home"
-import Femmes from "./pages/femmes/Femmes"
-import Hommes from './pages/hommes/Hommes';
-import Enfants from './pages/enfants/Enfants';
-import Animaux from './pages/animaux/Animaux';
-import Electroniques from './pages/electroniques/Electroniques';
-import Maison from './pages/maison/Maison';
 import Getprofile from './pages/monProfile/monProfile';
 import { createBrowserRouter, RouterProvider, Outlet , Navigate  } from "react-router-dom";
 import AddProduits from './pages/ajouterProduit/ajouterProduit';
@@ -57,32 +51,8 @@ const router = createBrowserRouter([
         ) ,
       },
       {
-        path: "/Femmes",
-        element: <Femmes />,
-      },
-      {
-        path: "/Hommes",
-        element: <Hommes />,
-      },
-      {
-        path: "/Enfants",
-        element: <Enfants />,
-      },
-      {
-        path: "/Animaux",
-        element: <Animaux />,
-      },
-      {
         path: "/productWatch/:id",
         element: <ProduitRegarde />,
-      },
-      {
-        path: "/Electroniques",
-        element: <Electroniques />,
-      },
-      {
-        path: "/Maison",
-        element: <Maison />,
       },
       {
         path: `/tousproduits/:${name}`,

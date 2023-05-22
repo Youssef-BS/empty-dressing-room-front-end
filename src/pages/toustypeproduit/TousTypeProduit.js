@@ -11,6 +11,19 @@ const TousTypeProduit = () => {
   const [size, setSize] = useState('');
   const [marque, setMarque] = useState('');
   const [categorie, setCategorie] = useState('');
+  
+
+  useEffect(() => {
+    const fetchCategorie = async () => {
+      const urlParams = new URLSearchParams(window.location.search);
+      const categorieParam = urlParams.get('categorie');
+      if (categorieParam) {
+        setCategorie(categorieParam);
+      }
+    };
+
+    fetchCategorie();
+  }, []);
 
   useEffect(() => {
     fetchProducts();
@@ -44,15 +57,15 @@ const TousTypeProduit = () => {
   const handleMarqueChange = (event) => {
     setMarque(event.target.value);
   };
+
   const handlePriceChange = (event) => {
     setPrice(event.target.value);
   };
 
-
   return (
     <>
-      <div className='filter'>
-        <div className='element'>
+      <div className="filter">
+        <div className="element">
           <Form.Select aria-label="Default select example" onChange={handleSizeChange}>
             <option value="">taille</option>
             <option value="xs">XS</option>
@@ -63,18 +76,18 @@ const TousTypeProduit = () => {
             <option value="xxl">XXL</option>
           </Form.Select>
         </div>
-        <div className='element'>
-          <Form.Select aria-label="Default select example" onChange={handleCategorieChange}>
+        <div className="element">
+          <Form.Select aria-label="Default select example" value={categorie} onChange={handleCategorieChange}>
             <option value="">Categorie</option>
             <option value="hommes">Hommes</option>
-            <option value="femmmes">Femmes</option>
+            <option value="femmes">Femmes</option>
             <option value="enfants">Enfants</option>
             <option value="maison">maison</option>
             <option value="animaux">Animaux</option>
-            <option value="5">Electronique</option>
+            <option value="electroniques">Electronique</option>
           </Form.Select>
         </div>
-        <div className='element'>
+        <div className="element">
           <Form.Select aria-label="Default select example" onChange={handleMarqueChange}>
             <option value="">marque</option>
             <option value="adidas">Adidas</option>
@@ -84,19 +97,19 @@ const TousTypeProduit = () => {
             <option value="zara">Zara</option>
             <option value="bershka">Bershka</option>
             <option value="h&m">H&M</option>
-            <option value="calvin clein">Calvin Clein</option>
+            <option value="calvin klein">Calvin Klein</option>
             <option value="gucci">Gucci</option>
           </Form.Select>
         </div>
-        <div className='element'>
+        <div className="element">
           <Form.Select aria-label="Default select example" onChange={handlePriceChange}>
             <option value="">prix</option>
             <option value="1-100">1 to 100</option>
-  <option value="101-200">101 to 200</option>
+            <option value="101-200">101 to 200</option>
           </Form.Select>
         </div>
       </div>
-      <hr style={{ "width": "40%" }} />
+      <hr style={{ width: '40%' }} />
       <h1 style={{ textAlign: 'center', marginTop: '24px', fontSize: '28px' }}>Tous Produits</h1>
 
       {loading ? (

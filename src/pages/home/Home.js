@@ -33,7 +33,7 @@ const Home = () =>{
   <Container />
       <h3>Produits populares</h3>
       <div className="Container-lastPage">
-       <button className="voir"><a href="/tousproduits">Voir plus</a></button> 
+       <button className="voir"><a href="/toustypeproduit">Voir plus</a></button> 
    { loading ? (
     <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '50vh' , margin : "auto" }}>
     <Spinner animation="border" variant="primary" role="status">
@@ -84,12 +84,12 @@ const Home = () =>{
       <div className="catégoriesvedettes">
         <h3 className="titre">catégories vedettes</h3>
         <div className="collection-dispo">
-        <div className="H"><div className="objet"><b>Hommes</b><p>article pour hommes<br /> <Link to="/hommes" style={{color : "black" , fontSize:"18px"}}>voir plus</Link></p></div></div>
-        <div className="F"><div className="objet"><b>Femmes</b><p>article pour femmes<br /><Link to="/femmes" style={{color : "black" , fontSize:"18px"}}>voir plus</Link> </p></div></div>
-        <div className="EL"><div className="objet"><b>Electronique</b><p>article pour electroniques<br /> <Link to="/electroniques" style={{color : "black" , fontSize:"18px"}}>voir plus</Link></p></div></div>
-        <div className="A"><div className="objet"><b>Animaux</b><p>article pour animaux<br /> <Link to="/animaux" style={{color : "black" , fontSize:"18px"}}>voir plus</Link></p></div></div>
-        <div className="E"><div className="objet"><b>Enfants</b><p>article pour enfants<br /><Link to="/enfants" style={{color : "black" , fontSize:"18px"}}>voir plus</Link> </p></div></div>
-        <div className="M"><div className="objet"><b>Maison</b><p>article pour maison<br /><Link to="/maison" style={{color : "black" , fontSize:"18px"}}>voir plus</Link> </p></div></div>
+        <div className="H"><div className="objet"><b>Hommes</b><p>article pour hommes<br /> <Link to="/toustypeproduit/?categorie=hommes" style={{color : "black" , fontSize:"18px"}}>voir plus</Link></p></div></div>
+        <div className="F"><div className="objet"><b>Femmes</b><p>article pour femmes<br /><Link to="/toustypeproduit/?categorie=femmes" style={{color : "black" , fontSize:"18px"}}>voir plus</Link> </p></div></div>
+        <div className="EL"><div className="objet"><b>Electronique</b><p>article pour electroniques<br /> <Link to="/toustypeproduit/?categorie=electroniques" style={{color : "black" , fontSize:"18px"}}>voir plus</Link></p></div></div>
+        <div className="A"><div className="objet"><b>Animaux</b><p>article pour animaux<br /> <Link to="/toustypeproduit/?categorie=animaux" style={{color : "black" , fontSize:"18px"}}>voir plus</Link></p></div></div>
+        <div className="E"><div className="objet"><b>Enfants</b><p>article pour enfants<br /><Link to="/toustypeproduit/?categorie=enfants" style={{color : "black" , fontSize:"18px"}}>voir plus</Link> </p></div></div>
+        <div className="M"><div className="objet"><b>Maison</b><p>article pour maison<br /><Link to="/toustypeproduit/?categorie=maison" style={{color : "black" , fontSize:"18px"}}>voir plus</Link> </p></div></div>
         </div>
       </div>
       

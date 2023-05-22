@@ -2,32 +2,14 @@ import React, { useState, useEffect } from 'react';
 import './tousProduits.css';
 import axios from 'axios';
 import { Link, useLocation } from 'react-router-dom';
-import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { Spinner } from 'react-bootstrap';
 
 const TousProduits = () => {
-  const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [currentPage, setCurrentPage] = useState(1);
-  const [productsPerPage, setProductsPerPage] = useState(20); 
   const location = useLocation();
   const [searchResults, setSearchResults] = useState([]);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const res = await axios.get('http://localhost:4000/api/produits');
-        setProducts(res.data);
-      } catch (error) {
-        toast.error('Error fetching products');
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchData();
-  }, []);
 
   useEffect(() => {
     const handleSearch = async () => {
@@ -37,22 +19,17 @@ const TousProduits = () => {
         const response = await axios.get(
           `http://localhost:4000/api/produits/rechercherproduit/trouve?q=${searchQuery}`
         );
-    
-        setSearchResults(response.data);
+       setSearchResults(response.data);
       } catch (error) {
         console.error(error);
+      } finally {
+        setLoading(false);
       }
     };
   
     handleSearch();
   }, [location.search]);
 
-  const indexOfLastProduct = currentPage * productsPerPage;
-  const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
-  const currentProducts = products.slice(indexOfFirstProduct, indexOfLastProduct);
-
-  // Change page
-  const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   return (
     <>
@@ -86,23 +63,6 @@ const TousProduits = () => {
             </div>
         </>
       )}
-
-      {/* Pagination */}
-      <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', marginTop: '20px' }}>
-        {productsPerPage <= products.length && (
-          <>
-            {[...Array(Math.ceil(products.length / productsPerPage))].map((_, index) => (
-              <button
-                key={index}
-                onClick={() => paginate(index + 1)}
-                style={{ margin: '5px', backgroundColor: currentPage === index + 1 ? '#1abc9c' : 'white' }}
-              >
-                {index + 1}
-              </button>
-            ))}
-          </>
-        )}
-      </div>
     </>
   );
 };
