@@ -86,13 +86,13 @@ const AddProduits = () => {
 />  
 
   
-      <h1>Ajouter Produit pour vente</h1>
+      <h1>publier un produit</h1>
       <div className='ajouter_produit'>
         <form onSubmit={handleSubmit}>
           titre <input type="text" value={title} onChange={event => setTitle(event.target.value)} placeholder="ex : capuche etc" />
           selection type payment 
           <select value={typeP} onChange={event => setTypeP(event.target.value)}>
-           <option value="0">select type payment</option>
+           <option value="0">selectionner type transaction</option>
            <option value="1">main à main</option>
            <option value="2">avec D17 et Livraison</option>
            <option value="3">Livraison et payment jusqu'a arrive</option>

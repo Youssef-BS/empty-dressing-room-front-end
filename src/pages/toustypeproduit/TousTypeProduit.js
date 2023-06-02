@@ -4,6 +4,7 @@ import { Spinner } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import Form from 'react-bootstrap/Form';
 
+
 const TousTypeProduit = () => {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);

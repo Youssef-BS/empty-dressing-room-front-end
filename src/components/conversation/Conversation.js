@@ -5,6 +5,7 @@ import "./conversation.css"
 import Form from "react-bootstrap/Form";
 import { AuthContext } from "../../context/authContext";
 import { BiBorderRadius } from "react-icons/bi";
+import { Spinner } from "react-bootstrap";
 
 
 const Conversation = () => {
@@ -13,6 +14,7 @@ const Conversation = () => {
     const { currentUser } = useContext(AuthContext);
     const [conversation, setConversation] = useState([]);
     const [msg, setMsg] = useState("");
+    const [loading , setLoading] = useState(true);
 
   
     // pour afficher la conversation
@@ -23,17 +25,18 @@ const Conversation = () => {
           `http://localhost:4000/api/msg/msgSend/${currentUser.user._id}/${params.id}`
         );
         setConversation(res.data);
-        setTimeout(fetchMsg, 1000);
+        setTimeout(fetchMsg, 500);
       } catch (error) {
         console.error(error);
         if (error.response.status === 500) {
           alert("Server Error. Please try again later.");
         }
-        setTimeout(fetchMsg, 1000);
+        setTimeout(fetchMsg, 500);
       }
     };
     useEffect(() => {
       fetchMsg();
+      // setLoading(false);
     }, []);
     
 console.log(conversation)
@@ -44,7 +47,7 @@ console.log(conversation)
       
       const res = await axios.get(`http://localhost:4000/api/msg/msgSend/${currentUser.user._id}`)
       setMyConversation(res.data.myProduct)
-      
+      setLoading(false)
       }
       MyConversation()
       },[])
@@ -58,7 +61,7 @@ console.log(conversation)
         const formData = new FormData();
         formData.append("content", msg);
         await axios.post(
-          `http://localhost:4000/api/msg/msgSend/${currentUser.user._id}/${params.id}/${params.idproduct}`,
+          `http://localhost:4000/api/msg/msgSend/${currentUser.user._id}/${params.id}/`,
           formData,
           {
             headers: {
@@ -76,6 +79,9 @@ console.log(conversation)
   
     return (
       <>
+      {loading ? (
+        <Spinner style={{margin : "10% 48%" , color : "blue"}}></Spinner> 
+      ):(
       <Form className="conversation">
               
             {conversation.map((message) => (
@@ -106,7 +112,7 @@ console.log(conversation)
             </Form>
    
     
-        
+)}
         
            
           </>

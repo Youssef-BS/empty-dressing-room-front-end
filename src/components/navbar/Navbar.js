@@ -40,6 +40,7 @@ function NavbarSet() {
   const [photoP, setPhotoP]=useState(null);
   const [commandes , setCommandes] = useState([]);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [two , setTwo] = useState([]);
   
   const navigate = useNavigate();
 
@@ -86,6 +87,7 @@ function NavbarSet() {
 
 
 
+
 const register = async(event)=>{
   event.preventDefault()
 
@@ -114,6 +116,7 @@ setConversation(res.data.myProduct)
 MyConversation()
 },[]);
 
+
 useEffect(()=>{
   const getCommandes = async  ()=>{
     const res = await axios.get(`http://localhost:4000/api/payment/getmycommande/${currentUser.user._id}`)
@@ -123,7 +126,25 @@ useEffect(()=>{
 });
 
 
-console.log(commandes)
+useEffect(() => {
+  const getTwo = async () => {
+    try {
+      if (currentUser && currentUser.user) {
+        const res = await axios.get(
+          `http://localhost:4000/api/msg/get/gettwo/${currentUser.user._id}`
+        );
+        setTwo(res.data);
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  getTwo();
+}, [currentUser]);
+
+console.log(two)
+
 
 
 
@@ -240,7 +261,7 @@ return (
        
           {
             currentUser  ? <div style={{display : "flex" , alignItem:"center" , marginLeft : "180px"}}>
-              <img src={currentUser.user?.photoP.url} style={{height : "35px" , width:"35px" , borderRadius : "35%" , marginLeft : "12px"}} alt="" />
+              <img src={currentUser.user?.photoP?.url} style={{height : "35px" , width:"35px" , borderRadius : "35%" , marginLeft : "12px"}} alt="" />
             <Nav.Link style={{marginLeft : "12px"}}>{currentUser.user?.name}</Nav.Link>
             
             {NotificationIcon()}
@@ -269,19 +290,19 @@ return (
 
   <Modal show={show} onHide={handleClose}>
         
-        <h2 closeButton>login</h2><hr />
+        <h2 closeButton>s'authentifier</h2><hr />
         
         
         <Modal.Body>
         <Form>
       <Form.Group className="mb-3" controlId="formBasicEmail">
-        <Form.Label>Email address</Form.Label>
-        <Form.Control type="email" placeholder="Enter email" name="email" onChange={(e)=> setEmail(e.target.value)}/>
+        <Form.Label>adresse mail</Form.Label>
+        <Form.Control type="email" placeholder="entrer votre adresse mail" name="email" onChange={(e)=> setEmail(e.target.value)}/>
       </Form.Group>
 
       <Form.Group className="mb-3" controlId="formBasicPassword">
-        <Form.Label>Password</Form.Label>
-        <Form.Control type="password" placeholder="Password"  name="password" onChange={(e)=> setPassword(e.target.value)}/>
+        <Form.Label>mot de passe</Form.Label>
+        <Form.Control type="password" placeholder="entrer votre mot de passe"  name="password" onChange={(e)=> setPassword(e.target.value)}/>
       </Form.Group>
       <button  className="btnForm" onClick={handleLogin}>s'authentifier</button>
   <br />
@@ -312,9 +333,9 @@ registerForm &&
       
      <Form.Group className="mb-3" controlId="formBasicPassword1">
         <Form.Label>Ajouter votre mot de passe</Form.Label>
-        <Form.Control type="password" placeholder="Password" name="password" onChange={(e)=> setPassword(e.target.value)}/>
+        <Form.Control type="password" placeholder="entrer votre mot de passe" name="password" onChange={(e)=> setPassword(e.target.value)}/>
       </Form.Group>
-      <input  type="button" className="btnForm" onClick={register}  value="register"/>
+      <input  type="button" className="btnForm" onClick={register}  value="s'inscrire"/>
       <br />
     </Form>
     
@@ -328,18 +349,14 @@ registerForm &&
           <Modal.Title>Message</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-  {conversation.map((conver,i) => (
-    i<1 && (
-    <div  key={conver.myproduct._id} > 
-
-      {conver.userContact.map(user => (
-        <div className='notification'>
+   {two.map(user => (
+        <div className='notification' style={{width : "400px"}}>
           <img style={{width:"50px"}} src={user.photoP.url} alt=""/>
-       <Link to={'/getconv/'+ user._id +'/product/'+conver.myproduct._id}><p key={user._id}>{user.name}</p></Link> 
+          <p>{user.name}</p>
+       <Link to={'/getconv/'+ user._id}><p key={user._id} style={{textDecoration : "none" , color : "black"}}>voir les message</p></Link> 
        </div>
       ))}
-     </div>
-  )))}
+    
 </Modal.Body>
 
   

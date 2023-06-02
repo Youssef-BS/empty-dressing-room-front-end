@@ -10,6 +10,7 @@ import TousProduits from './pages/tousProduits/TousProduits';
 import ProduitRegarde from "./pages/produitRegarde/ProduitRegarde";
 import Conversation from './components/conversation/Conversation';
 import TousTypeProduit from './pages/toustypeproduit/TousTypeProduit';
+import ProfileUser from './pages/profileUser/ProfileUser';
 import "./app.css";
 
 function App() {
@@ -43,7 +44,11 @@ const router = createBrowserRouter([
         element: <Home />,
       },
       {
-        path: "/getconv/:id/product/:idproduct",
+        path: "/profileuser/:id",
+        element: <ProfileUser />,
+      },
+      {
+        path: "/getconv/:id",
         element :(
           <ProtectedRoute>
             <Conversation />

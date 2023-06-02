@@ -178,8 +178,8 @@ registerForm &&
      
     </Carousel>
      <div className='Vente'>
-     <h3><span> Si Vouz avez un produit</span><br /><span>plus vous puvez le</span> <br /> <span>vende avec gachar</span> </h3>
-     <span className='btnVente' onClick={currentUser ? handleClick : handleShow}>Cluiquer ici pour vente</span>
+     <h3><span> prét à faire </span><br /><span>du tri de votre </span> <br /> <span>placard ?</span> </h3>
+     <span className='btnVente' onClick={currentUser ? handleClick : handleShow}>vends maintenant</span>
    </div>
    
    </>

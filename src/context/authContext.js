@@ -12,7 +12,7 @@ export const AuthContextProvider = ({ children }) => {
   const login = async (email , password) => {
     const res = await axios.post("http://localhost:4000/api/users/login", {
         email , password
-    }, 
+    },
     {
       withCredentials: false,
     },
@@ -22,6 +22,7 @@ export const AuthContextProvider = ({ children }) => {
     
     );
 
+  
     setCurrentUser(res.data)
     console.log(res.data)
   };

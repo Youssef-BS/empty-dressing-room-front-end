@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useContext } from "react";
 import axios from "axios";
-import { useParams , Route } from "react-router-dom";
+import { useParams , Route , Link} from "react-router-dom";
 import Modal from "react-bootstrap/Modal";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -18,8 +18,8 @@ const ProduitRegarde = () => {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
   const { currentUser } = useContext(AuthContext);
-  const [conversation, setConversation] = useState([]);
-  const [msg, setMsg] = useState("");
+  // const [conversation, setConversation] = useState([]);
+  // const [msg, setMsg] = useState("");
   const [moi , setMoi] = useState('')
   const [mapShowed , setMapShowed] = useState(false);
 
@@ -61,49 +61,49 @@ if(payment === false) {
   //
 
   // pour afficher la conversation
-  const fetchMsg = async (e) => {
+  // const fetchMsg = async (e) => {
 
-    try {
-      const res = await axios.get(
-        `http://localhost:4000/api/msg/msgSend/${currentUser.user._id}/${productSlect.data._id}`
-      );
-      setConversation(res.data);
-      setTimeout(fetchMsg, 1000);
-    } catch (error) {
-      console.error(error);
-      // if (error.response.status === 500) {
-      //   alert("Server Error. Please try again later.");
-      // }
-      setTimeout(fetchMsg, 1000);
-    }
-  };
-  useEffect(() => {
-    fetchMsg();
-  }, []);
-  console.log(conversation)
+  //   try {
+  //     const res = await axios.get(
+  //       `http://localhost:4000/api/msg/msgSend/${currentUser.user._id}/${productSlect.data._id}`
+  //     );
+  //     setConversation(res.data);
+  //     setTimeout(fetchMsg, 1000);
+  //   } catch (error) {
+  //     console.error(error);
+  //     // if (error.response.status === 500) {
+  //     //   alert("Server Error. Please try again later.");
+  //     // }
+  //     setTimeout(fetchMsg, 1000);
+  //   }
+  // };
+  // useEffect(() => {
+  //   fetchMsg();
+  // }, []);
+  // console.log(conversation)
   
 
   //fonction pour envoyer un message
-  const sendMessage = async (e) => {
-    e.preventDefault()
-    try {
-      const formData = new FormData();
-      formData.append("content", msg);
-      await axios.post(
-        `http://localhost:4000/api/msg/msgSend/${currentUser.user._id}/${productSlect.data._id}/${params.id}`,
-        formData,
-        {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-        }
-      );
-      setMsg("");
-    } catch (error) {
-      console.log(error);
-    }
+  // const sendMessage = async (e) => {
+  //   e.preventDefault()
+  //   try {
+  //     const formData = new FormData();
+  //     formData.append("content", msg);
+  //     await axios.post(
+  //       `http://localhost:4000/api/msg/msgSend/${currentUser.user._id}/${productSlect.data._id}`,
+  //       formData,
+  //       {
+  //         headers: {
+  //           "Content-Type": "multipart/form-data",
+  //         },
+  //       }
+  //     );
+  //     setMsg("");
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
 
-  };
+  // };
   //
 const Me = async()=>{
     if (currentUser && currentUser.user) {
@@ -149,6 +149,7 @@ const showMap = ()=>{
 
 
 
+
     return (
        <>
    
@@ -163,65 +164,69 @@ const showMap = ()=>{
         }}>
           {payment ? (
           <>
-          <h4>Completet Pour Acheter</h4>
-      <div className="formPayment">
-        saisir votre ville que vous etes habite
-        <Form.Control type="text" placeholder="Saisir votre ville" onChange={(e)=>setVille(e.target.value)} />
-        saisir num et nom de votre rue
-        <Form.Control type="text" placeholder="N° et nom de rue" onChange={(e)=>setNumRue(e.target.value)}/>
-       
-        saisir votre adresse ligne 2 que vous etes habites
-        <Form.Control type="text" placeholder="Adresse ligne 2 (facultatif)" onChange={(e)=>setAdresseLigne2(e.target.value)} />
-        saisir votre code postale que vous etes habite
-        <Form.Control type="text" placeholder="code postal" onChange={(e)=>setCodePoastal(e.target.value)}/>
-       
-        <div className="map" onClick={showMap}> 
-        
-        <TbMapSearch 
-        style={{height : "35px" , width : "50px"}}
-        />
-        <p>saisir votre place</p>
- 
-          </div>
-        
- </div>
- <span className="btn-form-payment">
- <p onClick={paymentPoints}>confirmer</p>
- <p onClick={affichePS}>annuler</p>
- </span>
+     <h4 className="payment-header">Compléter pour acheter</h4>
+  <div className="form-payment">
+    <label>Saisir votre ville :</label>
+    <input type="text" placeholder="Saisir votre ville" onChange={(e) => setVille(e.target.value)} />
+
+    <label>Saisir numéro et nom de votre rue :</label>
+    <input type="text" placeholder="N° et nom de rue" onChange={(e) => setNumRue(e.target.value)} />
+
+    <label>Saisir votre adresse ligne 2 que vous habitez :</label>
+    <input type="text" placeholder="Adresse ligne 2 (facultatif)" onChange={(e) => setAdresseLigne2(e.target.value)} />
+
+    <label>Saisir votre code postal :</label>
+    <input type="text" placeholder="Code postal" onChange={(e) => setCodePoastal(e.target.value)} />
+
+    <div className="map" onClick={showMap}>
+      <TbMapSearch style={{ height: "35px", width: "50px" }} />
+      <p>Saisir votre place</p>
+    </div>
+  </div>
+  <div className="btn-form-payment">
+    <p className="confirm-button" onClick={paymentPoints}>Confirmer</p>
+    <p className="cancel-button" onClick={affichePS}>Annuler</p>
+  </div>
  
     
     </>):<>
-    <div>
-            <p>{productSlect.product.title}</p>
-            <hr/>
-            <p>{productSlect.product.desc}</p>
-            <p>Taille : {productSlect.product.taille}</p>
-            <p>Marque : {productSlect.product.marque}</p>
-            <p>
-              <b>Prix : {productSlect.product.price}{productSlect.product.typeP === "4" ? "Points" : "DT"}</b>
-            </p>
-            <p className="moyenPayment" >
-              Moyen de payment : {productSlect.product.typeP === "1" ? "main a main" : 
-               productSlect.product.typeP === "2" ? "avec D17 et livraison" :
-               productSlect.product.typeP === "3" ? "Livraison et payment jusqu'a larrivage" :
-               productSlect.product.typeP === "4" ? "Avec Des points et livraison" :""
-               }
-            </p>
-            {
+    <div className="product-details">
+  <p className="product-title">{productSlect.product.title}</p>
+  <hr />
+  <p className="product-description">{productSlect.product.desc}</p>
+  <p className="product-info">Taille: {productSlect.product.taille}</p>
+  <p className="product-info">Marque: {productSlect.product.marque}</p>
+  <p className="product-price">
+    Prix: {productSlect.product.price}
+    {productSlect.product.typeP === "4" ? "Points" : "DT"}
+  </p>
+  <p className="payment-method">
+    Moyen de paiement:{" "}
+    {productSlect.product.typeP === "1"
+      ? "Main à main"
+      : productSlect.product.typeP === "2"
+      ? "Avec D17 et livraison"
+      : productSlect.product.typeP === "3"
+      ? "Livraison et paiement jusqu'à l'arrivage"
+      : productSlect.product.typeP === "4"
+      ? "Avec des points et livraison"
+      : ""}
+  </p>
+  {productSlect.product.vende ? (
+    <p className="product-status">Produit vendu</p>
+  ) : (
+    <>
+      <button className="buy-button" style={{ display: moi ? "none" : "inline-block" }} onClick={affichePS}>
+        Acheter
+      </button>
+      <button className="contact-button"  style={{ display: moi ? "none" : "inline-block" }}>
+        <Link to={'/getconv/'+ productSlect.data._id }>Contacter le vendeur</Link>
+      </button>
+      {moi ? <p className="product-status" style={{ color: "green" }}>C'est ton article</p> : ""}
+    </>
+  )}
+</div>
 
-              productSlect.product.vende ? <p style={{color : "green"}}>produit vendu</p>
-             : (<>            
-            <button style={{display : moi ? "none" : "inline-block"}} onClick={affichePS} >Acheter</button>
-            <button onClick={(event) => { handleShow(); fetchMsg(); }} style={{display : moi ? "none" : "inline-block"}}>
-              Cantacter le Vendeur
-            </button>
-            {moi ? <p style={{color : "green"}}>c'est ton article</p> : "" }
-          </>
-          )
-           
-            }
-            </div>
             
     </>}
          
@@ -234,7 +239,7 @@ const showMap = ()=>{
           <Modal.Title>Messagerie</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <Form>
+          {/* <Form>
             
           {conversation.map((message) => (
             
@@ -250,7 +255,7 @@ const showMap = ()=>{
           </button>
           <input type='button' variant="primary" className="BtnForm"  value="envoyer" onClick={sendMessage} />
              
-          </Form>
+          </Form> */}
  
         </Modal.Body>
       

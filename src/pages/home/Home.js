@@ -9,13 +9,24 @@ import SwiperCore, { Navigation, Pagination, Scrollbar, A11y } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/swiper-bundle.css';
 import Spline from '@splinetool/react-spline';
+import { Rating } from '@material-ui/lab';
+import { makeStyles } from '@material-ui/core/styles';
 SwiperCore.use([Navigation, Pagination, Scrollbar, A11y]);
+
+const useStyles = makeStyles({
+  iconFilled: {
+    color: 'gold',
+  },
+});
 
 
 const Home = () =>{
 
     const [products, setProducts] = useState([]);
-    const [loading , setLoading] = useState(true)
+    const [loading , setLoading] = useState(true);
+    const [profileProduct, setProfileProduct] = useState([]);
+    const [value, setValue] = useState(3.5);
+    const classes = useStyles(); 
   
     useEffect(() => {
       const fetchData = async () => {
@@ -26,12 +37,31 @@ const Home = () =>{
   
       fetchData();
     }, []);
+
+    useEffect(() => {
+      const fetchDataProfile = async () => {
+        try {
+          const response = await axios.get("http://localhost:4000/api/users/getprofileproduct/products");
+          const filteredData = response.data.filter((product) => product.products.length >= 3);
+          const limitedData = filteredData.map((product) => ({
+            user: product.user,
+            products: product.products.slice(0, 4)
+          }));
+          setProfileProduct(limitedData);
+          setLoading(false);
+        } catch (error) {
+          console.error("Error fetching data:", error);
+        }
+      };
+  
+      fetchDataProfile();
+    }, []); 
  
 
     return(
         <>
   <Container />
-      <h3>Produits populares</h3>
+      <h3>Produits populaires</h3>
       <div className="Container-lastPage">
        <button className="voir"><a href="/toustypeproduit">Voir plus</a></button> 
    { loading ? (
@@ -79,7 +109,7 @@ const Home = () =>{
  
       </div>
       <div className="logothreed" >
-      <Spline scene="https://prod.spline.design/9EXfLykCGsRHTJvR/scene.splinecode" style={{ width: "300px", height: "150px" , margin :"auto"}}/>
+      <Spline scene="https://prod.spline.design/9EXfLykCGsRHTJvR/scene.splinecode" style={{ width: "130px", height: "170px" , margin :"auto"}}/>
       </div>
       <div className="catégoriesvedettes">
         <h3 className="titre">catégories vedettes</h3>
@@ -92,6 +122,56 @@ const Home = () =>{
         <div className="M"><div className="objet"><b>Maison</b><p>article pour maison<br /><Link to="/toustypeproduit/?categorie=maison" style={{color : "black" , fontSize:"18px"}}>voir plus</Link> </p></div></div>
         </div>
       </div>
+
+     {
+      profileProduct.map(product => (
+        <div key={product.user._id} className="profile" style={{justifyItems : "center"}}>
+          <div className="profile-st">
+          <Link to={`/profileuser/`+product.user._id} className="link">
+          <img src={product.user.photoP.url} alt="" style={{width : "70px" , borderRadius :"50%"}}/>
+        <p>{product.user.name}</p>
+        
+        </Link>
+        <Rating
+      name="read-only"
+      value={value}
+      precision={0.5}
+      readOnly
+      onChange={(event, newValue) => {
+        setValue(newValue);
+      }}
+      classes={{
+        iconFilled: classes.iconFilled,
+      }}
+      
+    />
+        </div>
+     
+        
+        {
+          product.products.map(pro => (
+            <div className="product" style={{width : "270px"}}>
+            <img style={{width:"250px" , height : "200px"}} src={pro.photoProduit.url} alt="" />
+            <p>{pro.title}</p>
+            <p>Marque : {pro.marque}</p>
+            { 
+            pro.vende ? <p style={{color : "#1abc9c"}}>produit vendu</p> :
+           
+           <p><b style={{color : "#1abc9c"}}>Prix : {pro.price} DT</b></p>
+            
+            }
+            
+          </div>
+          
+        
+          ))
+         
+        }
+
+        
+        </div>
+      ))
+     }
       
     <div className="description">
     <video controls autoPlay loop>
