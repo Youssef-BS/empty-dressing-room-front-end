@@ -1,125 +1,167 @@
 import React, { useEffect, useState, useContext } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
-import "./conversation.css"
+import "./conversation.css";
 import Form from "react-bootstrap/Form";
 import { AuthContext } from "../../context/authContext";
-import { BiBorderRadius } from "react-icons/bi";
 import { Spinner } from "react-bootstrap";
-
+import io from "socket.io-client";
 
 const Conversation = () => {
-    const params = useParams();
-    const [myconversation , setMyConversation] = useState([])
-    const { currentUser } = useContext(AuthContext);
-    const [conversation, setConversation] = useState([]);
-    const [msg, setMsg] = useState("");
-    const [loading , setLoading] = useState(true);
+  const params = useParams();
+  const [conversation, setConversation] = useState([]);
+  const { currentUser } = useContext(AuthContext);
+  const [msg, setMsg] = useState("");
+  const [loading, setLoading] = useState(true);
+  const [socket, setSocket] = useState(null);
 
+  const fetchConversation = async () => {
+    try {
+      const res = await axios.get(
+        `http://localhost:4000/api/msg/msgSend/${currentUser.user._id}/${params.id}`
+      );
+      setConversation(res.data);
+      setLoading(false);
+    } catch (error) {
+      console.error(error);
+      if (error.response && error.response.status === 500) {
+        alert("Server Error. Please try again later.");
+      }
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    const newSocket = io("http://localhost:4000");
+    setSocket(newSocket);
+
+    return () => newSocket.close();
+  }, []);
+
+  useEffect(() => {
+    fetchConversation();
+  }, [currentUser.user._id, params.id]);
+
+  useEffect(() => {
+    if (socket) {
+      socket.on("connect", () => {
+        console.log("Connected to server");
+      });
+
+      socket.on("disconnect", () => {
+        console.log("Disconnected from server");
+      });
+
+      socket.on("receiveMessage", (message) => {
+        console.log("Received message:", message);
+        setConversation((prevConversation) => [...prevConversation, message]);
+      });
+    }
+  }, [socket]);
+
+  const sendMessage = async (e) => {
+    e.preventDefault();
+    if (msg.trim() === "") return;
   
-    // pour afficher la conversation
-    const fetchMsg = async (e) => {
+    if (socket) {
+      const newMessage = {
+        conversation: {
+          _id: "temp_id", // Temporary ID for the new message
+          content: msg,
+        },
+        Me: true, // Assuming the new message is sent by the current user
+      };
+      setMsg("");
+      // Update conversation state immediately with the new message
+      setConversation((prevConversation) => [...prevConversation, newMessage]);
+  
+      // Emit the message through the socket
+      socket.emit("sendMessage", {
+        content: msg,
+        user: currentUser.user._id,
+        to: params.id,
+      });
   
       try {
-        const res = await axios.get(
-          `http://localhost:4000/api/msg/msgSend/${currentUser.user._id}/${params.id}`
-        );
-        setConversation(res.data);
-        setTimeout(fetchMsg, 500);
+        await axios.post("http://localhost:4000/api/msg", {
+          content: msg,
+          user: currentUser.user._id,
+          to: params.id,
+        });
+      
+        
       } catch (error) {
         console.error(error);
-        if (error.response.status === 500) {
+        if (error.response && error.response.status === 500) {
           alert("Server Error. Please try again later.");
         }
-        setTimeout(fetchMsg, 500);
       }
-    };
-    useEffect(() => {
-      fetchMsg();
-      // setLoading(false);
-    }, []);
-    
-console.log(conversation)
+    }
+  };
 
-    // myconv
-    useEffect(()=>{
-      const MyConversation = async ()=>{
-      
-      const res = await axios.get(`http://localhost:4000/api/msg/msgSend/${currentUser.user._id}`)
-      setMyConversation(res.data.myProduct)
-      setLoading(false)
-      }
-      MyConversation()
-      },[])
-      
-      
+
   
-    //fonction pour envoyer un message
-    const sendMessage = async (e) => {
-      e.preventDefault()
-      try {
-        const formData = new FormData();
-        formData.append("content", msg);
-        await axios.post(
-          `http://localhost:4000/api/msg/msgSend/${currentUser.user._id}/${params.id}/`,
-          formData,
-          {
-            headers: {
-              "Content-Type": "multipart/form-data",
-            },
-          }
-        );
-        setMsg("");
-      } catch (error) {
-        console.log(error);
-      }
-  
-    };
-    console.log(myconversation)
-  
-    return (
-      <>
+  useEffect(() => {
+    const interval = setInterval(() => {
+      fetchConversation();
+    }, 0);
+
+    return () => clearInterval(interval);
+  }, [conversation]);
+
+  return (
+    <>
       {loading ? (
-        <Spinner style={{margin : "10% 48%" , color : "blue"}}></Spinner> 
-      ):(
-      <Form className="conversation">
-              
-            {conversation.map((message) => (
-           
-  <p style={{ color: "black" ,
-  borderRadius:"25px",
+        <Spinner style={{ margin: "10% 48%", color: "blue" }}></Spinner>
+      ) : (
+        <Form className="conversation">
+          {conversation.slice(-7).map((message) => (
+            <p
+              style={{
+                color: "black",
+                borderRadius: "25px",
+              }}
+              className="msgSendd"
+              key={message.conversation._id}
+            >
+              <p
+                style={{
+                  width: "100%",
+                  marginTop: "3px",
+                  textAlign: message.Me ? "right" : "left",
+                  paddingTop: "5px",
+                }}
+              >
+                <span
+                  style={{
+                    color: message.Me ? "white" : "black",
+                    backgroundColor: message.Me ? "gray" : "none",
+                    borderRadius: "12px",
+                    padding: "12px",
+                    margin: "8px",
+                    textAlign: "left",
+                  }}
+                >
+                  {message.conversation.content}
+                </span>
+              </p>
+            </p>
+          ))}
+          <div style={{ display: "flex", alignItems: "center" }}>
+            <input
+              type="text"
+              value={msg}
+              onChange={(e) => setMsg(e.target.value)}
+              className="msgSend"
+            />
+            <button className="send" onClick={sendMessage}>
+              Send
+            </button>
+          </div>
+        </Form>
+      )}
+    </>
+  );
+};
 
-  }}
- className = "msgSendd" 
-  >
-    
-    <p style={{width : "100%" , marginTop :"3px" , textAlign : message.Me ? "right" : "left" , paddingTop :"5px"}}><span style={{color: message.Me ? 'white' : 'black' ,
-     backgroundColor : message.Me ? "gray" : "none" , borderRadius : "12px" , 
-     padding :"12px" , margin:"8px" , textAlign :"left"}}>
-      {message.conversation.content}
-      </span>
-    </p>
-    </p>
-    
-  ))}
-              <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
-                <Form.Label>Ecrire message ici</Form.Label>
-                <Form.Control as="textarea" rows={1} onChange={(e)=> setMsg(e.target.value)} />
-              </Form.Group>
-    
-            <input type='button' variant="primary" className="BtnForm"  value="envoyer" onClick={sendMessage} style={{width : "25%" }} />
-               
-            </Form>
-   
-    
-)}
-        
-           
-          </>
-      )
-  
-}
-
-
-
-export default Conversation
+export default Conversation;

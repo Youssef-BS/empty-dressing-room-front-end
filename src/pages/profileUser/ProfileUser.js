@@ -1,8 +1,9 @@
-import React , {useState , useEffect} from 'react'
+import React , {useState , useEffect , useContext} from 'react'
 import axios from "axios";
 import { useParams , Link} from 'react-router-dom';
 import { Spinner  } from 'react-bootstrap';
 import { Rating } from '@material-ui/lab';
+import { AuthContext } from "../../context/authContext";
 
 import { makeStyles } from '@material-ui/core/styles';
 
@@ -14,10 +15,12 @@ const useStyles = makeStyles({
 
 
 const ProfileUser = () => {
+    const { currentUser } = useContext(AuthContext);
     const params = useParams();
     const [profile , setProfile] = useState([]);
     const [loading , setLoading] = useState(true);
-    const [value, setValue] = useState(0);
+    const [star, setStar] = useState(0);
+    // const [rateUser , setRateUser] = useState("");
     const classes = useStyles(); 
 
   useEffect(() => {
@@ -30,8 +33,20 @@ const ProfileUser = () => {
   },[params.id]);
 
   console.log(profile)
+  console.log(currentUser.user._id);
 
-
+  const rate = async () => {
+    try {
+      await axios.post(
+        `http://localhost:4000/api/users/rateuser/s/${currentUser.user._id}/${params.id}`,
+        {star :star}
+      );
+      console.log('Rating submitted successfully');
+    } catch (error) {
+      console.error('Error submitting rating:', error);
+    }
+  };
+console.log(star)
   return (
     <>
     { loading ?(
@@ -40,32 +55,39 @@ const ProfileUser = () => {
         </Spinner>
       </div>
     ):(<>
-    <div className='container-user'>
-        <img src={profile.photo.url} alt='profilephoto' style={{width : "80px" , borderRadius:"50%"}}/>
-        <h1>Profile de {profile.name}</h1>
-        <p>adresse email : {profile.email}</p>
+ <div className='container-user'>
+  <img src={profile.photo.url} alt='profilephoto' style={{ width: "80px", height : "80px" , borderRadius: "50%" }} />
+  <h1>Profile de {profile.name}</h1>
+  <p>adresse email : {profile.email}</p>
+  {currentUser.user._id === params.id
+  
+  ?
+    (
+      <p>c'est ton profile</p>
+    ) :
+    (
+      <>
         <p>évaluation</p>
         <Rating
-      name="star-rating"
-      value={value}
-      precision={0.5}
-      onChange={(event, newValue) => {
-        setValue(newValue);
-      }}
-      classes={{
-        iconFilled: classes.iconFilled,
-      }}
-      
-    />
-    <p></p>
-    {
-      value !== 0 ? (
-      <>
-      <button className='Btn'>envoyer</button>
+          name="star-rating"
+          value={star}
+          precision={0.5}
+          onChange={(event, newValue) => {
+            setStar(newValue.toString());
+          }}
+          classes={{
+            iconFilled: classes.iconFilled,
+          }}
+        />
+        <p></p>
+        {star !== 0 && (
+          <>
+            <button className='Btn' onClick={rate}>envoyer</button>
+          </>
+        )}
       </>
-      ) :""
-    }
-      
+    )
+  }
 
     </div>
     { profile.product.map(product=> (

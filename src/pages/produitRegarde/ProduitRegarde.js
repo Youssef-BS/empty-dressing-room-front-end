@@ -220,7 +220,7 @@ const showMap = ()=>{
         Acheter
       </button>
       <button className="contact-button"  style={{ display: moi ? "none" : "inline-block" }}>
-        <Link to={'/getconv/'+ productSlect.data._id }>Contacter le vendeur</Link>
+        <Link to={'/getconv/'+ productSlect.data._id } style={{color : "white" , textDecoration : "none"}}>Contacter le vendeur</Link>
       </button>
       {moi ? <p className="product-status" style={{ color: "green" }}>C'est ton article</p> : ""}
     </>

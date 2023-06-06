@@ -85,7 +85,7 @@ const Home = () =>{
       <SwiperSlide key={product.produit._id}>
         <Link to={`/productWatch/${product.produit._id}`} style={{color : "black"}}>
           <div className="product">
-            <img style={{width : "50px" , borderRadius:"50%"}} src={product.photoP.url} alt="" />
+            <img style={{width : "50px" , height : "50px" ,borderRadius:"50%"}} src={product.photoP.url} alt="" />
             <p>{product.name}</p>
             <img style={{width:"250px" , height : "200px"}} src={product.produit.photoProduit.url} alt="" />
             <p>{product.produit.title}</p>
@@ -128,7 +128,7 @@ const Home = () =>{
         <div key={product.user._id} className="profile" style={{justifyItems : "center"}}>
           <div className="profile-st">
           <Link to={`/profileuser/`+product.user._id} className="link">
-          <img src={product.user.photoP.url} alt="" style={{width : "70px" , borderRadius :"50%"}}/>
+          <img src={product.user.photoP.url} alt="" style={{width : "70px" , height : "70px" , borderRadius :"50%"}}/>
         <p>{product.user.name}</p>
         
         </Link>
