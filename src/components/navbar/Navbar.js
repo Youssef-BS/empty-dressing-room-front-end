@@ -5,19 +5,14 @@ import Form from 'react-bootstrap/Form';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import Modal from 'react-bootstrap/Modal';
-import { AiOutlineShoppingCart  } from 'react-icons/ai';
 import { BiNotification  } from 'react-icons/bi';
 import axios from 'axios';
 import { AuthContext } from "../../context/authContext";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { Link, useParams , useNavigate } from 'react-router-dom';
-import Button from 'react-bootstrap/Button';
+import { Link, useNavigate } from 'react-router-dom';
 import Offcanvas from 'react-bootstrap/Offcanvas';
-
-// import { Button, Form } from 'react-bootstrap';
-
-
+import {CiDeliveryTruck} from 'react-icons/ci';
 
 
 
@@ -55,10 +50,7 @@ function NavbarSet() {
   const {logout} = useContext(AuthContext);
   const { currentUser } = useContext(AuthContext);
   const [conversation , setConversation] = useState([])
-  const [query , setQuery] = useState("")
-
   const [searchQuery, setSearchQuery] = useState("");
-  const [searchResults, setSearchResults] = useState([]);
 
   const handleLogin = async (event)=>{
     event.preventDefault();
@@ -177,7 +169,7 @@ function NotificationIcon() {
 function Panier() {
   return (
     <span style={{ position: 'relative', display: 'inline-block' , cursor : 'pointer' , marginLeft:"8px" }}>
-      <AiOutlineShoppingCart onClick={handleShowSB}/>
+      <CiDeliveryTruck onClick={handleShowSB}/>
       <span
         style={{
           position: 'absolute',
@@ -234,12 +226,12 @@ return (
       placeholder="Recherche"
       className="me-2"
       aria-label="Search"
-      style={{ width: "350px" }}
+      style={{ width: "400px" }}
       value={searchQuery}
       onChange={(e) => setSearchQuery(e.target.value)}
     />
-    <input type="button" className="btnForm"  value="recherche" onClick={changePage}/>
-  </Form>
+    <input type="button" className="btnForm"  value="recherche" onClick={changePage}/> 
+    </Form>
 
 
 </div>
@@ -290,7 +282,7 @@ return (
 
   <Modal show={show} onHide={handleClose}>
         
-        <h2 closeButton>s'authentifier</h2><hr />
+        <h2 className='insc'>s'authentifier</h2><hr />
         
         
         <Modal.Body>
@@ -307,7 +299,7 @@ return (
       <button  className="btnForm" onClick={handleLogin}>s'authentifier</button>
   <br />
       
-      <p onClick={FormRegister} >{msg}</p>
+      <p onClick={FormRegister} className='msg'>{msg}</p>
        
       
     </Form>
@@ -316,7 +308,7 @@ return (
 
 registerForm && 
 <Form>
-  <h2>s'inscrire ici</h2><hr/>
+  <h2 className='insc'>s'inscrire ici</h2><hr/>
   <Form.Group className='mb-3' controlId='formBasicFile1'>
       <Form.Label>Ajouter votre photo</Form.Label>
       <Form.Control type='file'id="img" name="img" onChange={(e) => setPhotoP(e.target.files[0])}></Form.Control> 

@@ -132,6 +132,8 @@ const Conversation = () => {
                   paddingTop: "5px",
                 }}
               >
+                <div>
+                
                 <span
                   style={{
                     color: message.Me ? "white" : "black",
@@ -143,7 +145,10 @@ const Conversation = () => {
                   }}
                 >
                   {message.conversation.content}
-                </span>
+                  
+                </span><br /><br />
+                 <span>{message.conversation.createdAt}</span>
+                </div>
               </p>
             </p>
           ))}
@@ -153,6 +158,9 @@ const Conversation = () => {
               value={msg}
               onChange={(e) => setMsg(e.target.value)}
               className="msgSend"
+              style={{width : "70%" , border:"1px solid gray" , borderRadius : "20px" , padding :"12px"}}
+              placeholder="ecrire un message...."
+              
             />
             <button className="send" onClick={sendMessage}>
               Send

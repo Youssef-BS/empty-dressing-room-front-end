@@ -56,12 +56,13 @@ const Home = () =>{
   
       fetchDataProfile();
     }, []); 
+
  
 
     return(
         <>
   <Container />
-      <h3>Produits populaires</h3>
+      <h3>Les Produits Publier</h3>
       <div className="Container-lastPage">
        <button className="voir"><a href="/toustypeproduit">Voir plus</a></button> 
    { loading ? (
@@ -72,7 +73,7 @@ const Home = () =>{
    ) : (
     <>
       <Swiper
-    spaceBetween={50}
+    spaceBetween={40}
     slidesPerView={5}
     navigation
     scrollbar={true}
@@ -125,27 +126,28 @@ const Home = () =>{
 
      {
       profileProduct.map(product => (
-        <div key={product.user._id} className="profile" style={{justifyItems : "center"}}>
-          <div className="profile-st">
-          <Link to={`/profileuser/`+product.user._id} className="link">
-          <img src={product.user.photoP.url} alt="" style={{width : "70px" , height : "70px" , borderRadius :"50%"}}/>
-        <p>{product.user.name}</p>
-        
-        </Link>
-        <Rating
+   <div key={product.user._id} className="profile" style={{ justifyItems: "center" }}>
+  <div className="profile-st">
+    <Link to={`/profileuser/${product.user._id}`} className="link">
+      <img src={product.user.photoP.url} alt="" style={{ width: "70px", height: "70px", borderRadius: "50%" }} />
+      <p>{product.user.name}</p>
+    </Link>
+    <Rating
       name="read-only"
-      value={value}
-      precision={0.5}
+      value={
+        product.user.stars && product.user.stars.length > 0
+          ? product.user.stars.reduce((sum, rate) => sum + parseFloat(rate.split(" ")[1]), 0) / product.user.stars.length
+          : 0
+      }
+      precision={0.01}
       readOnly
-      onChange={(event, newValue) => {
-        setValue(newValue);
-      }}
       classes={{
         iconFilled: classes.iconFilled,
       }}
-      
     />
-        </div>
+
+  </div>
+
      
         
         {

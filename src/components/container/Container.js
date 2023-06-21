@@ -82,7 +82,7 @@ function Container() {
         <>
          <Modal show={show} onHide={handleClose}>
         
-        <h2 closeButton>login</h2><hr />
+        <h2 className='insc'>login</h2><hr />
         
         
         <Modal.Body>
@@ -99,7 +99,7 @@ function Container() {
       <button  className="btnForm" onClick={handleLogin}>s'authentifier</button>
   <br />
       
-      <p onClick={FormRegister}>{msg}</p>
+      <p onClick={FormRegister} className='msg'>{msg}</p>
        
       
     </Form>
@@ -108,7 +108,7 @@ function Container() {
 
 registerForm && 
 <Form>
-  <h2>s'inscrire ici</h2><hr/>
+  <h2 className='insc' >s'inscrire ici</h2><hr/>
   <Form.Group className='mb-3' controlId='formBasicFile'>
       <Form.Label>Ajouter votre photo</Form.Label>
       <Form.Control type='file' onChange={(e) => setPhotoP(e.target.files[0])}></Form.Control> 
@@ -141,45 +141,45 @@ registerForm &&
      
     <Carousel className='containerSet'>
       <Carousel.Item>
-        <img style={{"height":"700px"}}
+        <img style={{"height":"900px"}}
           className="d-block w-100"
-          src="https://img.freepik.com/photos-gratuite/coup-moyen-personnes-regardant-vetements-dans-friperie_23-2150082910.jpg?w=2000"
+          src="https://images.hdqwalls.com/wallpapers/girl-in-glasses-looking-back-4k-un.jpg"
           alt="First slide"
         />
           </Carousel.Item>
       <Carousel.Item>
-        <img style={{"height":"700px"}}
+        <img style={{"height":"900px"}}
           className="d-block w-100"
-          src="https://img.freepik.com/photos-gratuite/jeune-homme-chemise-choisir-vetements-dans-centre-commercial-magasin-vetements_23-2148175648.jpg?w=996&t=st=1684162674~exp=1684163274~hmac=c19580ca25f62fb53c9b6d032e16c0e43488b3af54c11c6225b04a73a189ef33"
+          src="https://img.freepik.com/photos-gratuite/beau-modele-hipster-confiantsexy-homme-mal-rase-vetu-vetements-capuche-jeans-verts-elegants-ete-mode-homme-coiffure-bouclee-posant-studio-isole-bleu_158538-26582.jpg?w=2000"
           alt="Second slide"
         />
-  </Carousel.Item>
+  {/* </Carousel.Item>
       <Carousel.Item>
-        <img style={{"height":"700px"}}
+        <img style={{"height":"900px"}}
           className="d-block w-100"
-          src="https://img.freepik.com/photos-gratuite/portrait-haute-couture-jeune-femme-blonde-elegante-au-chapeau-laine-noire-portant-poncho-franges-blanches-surdimensionne-longue-robe-grise_273443-3799.jpg?w=996&t=st=1684162623~exp=1684163223~hmac=135acd3edb12961fa529f9682c397ae06c6d69949b3dd9068e716315daa8b1df"
+          src="https://wallpaperswide.com/download/hot_girl_beside_the_beach-wallpaper-5120x2880.jpg"
+          alt="Third slide"
+        /> */}
+      </Carousel.Item>
+      <Carousel.Item>
+        <img style={{"height":"900px"}}
+          className="d-block w-100"
+          src="https://c1.wallpaperflare.com/preview/924/432/853/store-clothing-shop-bouique.jpg"
           alt="Third slide"
         />
       </Carousel.Item>
       <Carousel.Item>
-        <img style={{"height":"700px"}}
+        <img style={{"height":"900px"}}
           className="d-block w-100"
-          src="https://img.freepik.com/photos-gratuite/enfants-elegants-mignons_155003-8330.jpg?w=996&t=st=1684162719~exp=1684163319~hmac=15f435db10626ba5ead2fcf837e9fed5d51bc3643eacf31d8502803ba3c3ea51"
-          alt="Third slide"
-        />
-      </Carousel.Item>
-      <Carousel.Item>
-        <img style={{"height":"700px"}}
-          className="d-block w-100"
-          src="https://img.freepik.com/photos-gratuite/jeune-jolie-femme-choisissant-essayant-chaussures-modele-au-magasin_155003-2198.jpg?w=996&t=st=1684162855~exp=1684163455~hmac=3cbb87db63477ceae01d332ab9793662d0d5cb9eef60d629ffbe1234f8056f25"
+          src="https://img.freepik.com/photos-premium/garcon-blond-bandana-tete-dans-sweat-capuche-rouge-lunettes-posant-fond-orange_88135-18715.jpg?w=2000"
           alt="Third slide"
         />
       </Carousel.Item>
      
     </Carousel>
      <div className='Vente'>
-     <h3><span> prét à faire </span><br /><span>du tri de votre </span> <br /> <span>placard ?</span> </h3>
-     <span className='btnVente' onClick={currentUser ? handleClick : handleShow}>vends maintenant</span>
+     <h3><span><b>prét à faire</b></span><br /><span><b>du tri de votre</b></span> <br /> <span><b>placard ?</b></span> </h3>
+     <span className='btnVente' onClick={currentUser ? handleClick : handleShow}><b>Vends Maintenant</b></span>
    </div>
    
    </>

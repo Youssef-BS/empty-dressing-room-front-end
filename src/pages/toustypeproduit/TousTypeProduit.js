@@ -122,7 +122,7 @@ const TousTypeProduit = () => {
           {products.map((item) => (
             <Link to={`/productWatch/${item.produit._id}`} style={{ color: 'black' }} key={item.produit._id}>
               <div className="product">
-                <img style={{ width: '50px', borderRadius: '50%' }} src={item.user.photoP.url} alt="" />
+                <img style={{ width: '50px', height :"50px",borderRadius: '50%' }} src={item.user.photoP.url} alt="" />
                 <p>{item.user.name}</p>
                 <img style={{ width: '250px', height: '200px' }} src={item.produit.photoProduit.url} alt="" />
                 <p>{item.produit.title}</p>

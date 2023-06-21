@@ -9,6 +9,7 @@ import { AuthContext } from "../../context/authContext";
 import GoogleMapReact from 'google-map-react';
 import { TbMapSearch } from "react-icons/tb";
 import { AiOutlineCloseCircle } from "react-icons/ai";
+import { Spinner } from "react-bootstrap";
 
 
 const ProduitRegarde = () => {
@@ -29,6 +30,7 @@ const ProduitRegarde = () => {
   const [numRue , setNumRue] = useState("");
   const [adresseLigne2,setAdresseLigne2] = useState("");
   const [codePoastal , setCodePoastal] = useState("");
+  const [loading , setLoading] = useState(true);
   
 const defaultProps = {
   center: {
@@ -57,54 +59,9 @@ if(payment === false) {
     };
 
     fetchData();
+    setLoading(false);
   }, [params.id]);
-  //
 
-  // pour afficher la conversation
-  // const fetchMsg = async (e) => {
-
-  //   try {
-  //     const res = await axios.get(
-  //       `http://localhost:4000/api/msg/msgSend/${currentUser.user._id}/${productSlect.data._id}`
-  //     );
-  //     setConversation(res.data);
-  //     setTimeout(fetchMsg, 1000);
-  //   } catch (error) {
-  //     console.error(error);
-  //     // if (error.response.status === 500) {
-  //     //   alert("Server Error. Please try again later.");
-  //     // }
-  //     setTimeout(fetchMsg, 1000);
-  //   }
-  // };
-  // useEffect(() => {
-  //   fetchMsg();
-  // }, []);
-  // console.log(conversation)
-  
-
-  //fonction pour envoyer un message
-  // const sendMessage = async (e) => {
-  //   e.preventDefault()
-  //   try {
-  //     const formData = new FormData();
-  //     formData.append("content", msg);
-  //     await axios.post(
-  //       `http://localhost:4000/api/msg/msgSend/${currentUser.user._id}/${productSlect.data._id}`,
-  //       formData,
-  //       {
-  //         headers: {
-  //           "Content-Type": "multipart/form-data",
-  //         },
-  //       }
-  //     );
-  //     setMsg("");
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-
-  // };
-  //
 const Me = async()=>{
     if (currentUser && currentUser.user) {
       const res = await axios.get(`http://localhost:4000/api/produits/myproduit/test/${currentUser.user._id}/${params.id}`)
@@ -133,9 +90,7 @@ toast.success('Vous avez payer ce produit')
 
 }
 
-
 //show map 
-
 
 const showMap = ()=>{
   if(mapShowed === false){
@@ -147,12 +102,13 @@ const showMap = ()=>{
   
 } 
 
-
-
-
-    return (
+ return (
        <>
-   
+{loading ?(
+<Spinner></Spinner>
+) : (
+  <div>
+
       {productSlect.product && (
         <div className="co" key={productSlect.product?._id}>
           <div className="foto">
@@ -238,31 +194,9 @@ const showMap = ()=>{
         <Modal.Header closeButton>
           <Modal.Title>Messagerie</Modal.Title>
         </Modal.Header>
-        <Modal.Body>
-          {/* <Form>
-            
-          {conversation.map((message) => (
-            
-<p style={{ color: currentUser ? "black" : "black" , textAlign : currentUser ? "right" : "left"}}>{message.content}</p>
-  
-))}
-            <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
-              <Form.Label>Ecrire message ici</Form.Label>
-              <Form.Control as="textarea" rows={1} onChange={(e)=> setMsg(e.target.value)} />
-            </Form.Group>
-            <button variant="secondary" onClick={handleClose}>
-          Fermer
-          </button>
-          <input type='button' variant="primary" className="BtnForm"  value="envoyer" onClick={sendMessage} />
-             
-          </Form> */}
- 
-        </Modal.Body>
       
       </Modal>
-    {/* show map in payment mode */}
-      { mapShowed && (
-
+  { mapShowed && (
 <div className="mapshow">
   <AiOutlineCloseCircle onClick={showMap}  style={{cursor : "pointer" , width :"35px" , height :"35px"}}/>
 <GoogleMapReact
@@ -274,6 +208,7 @@ const showMap = ()=>{
 </div>
 )
 }
+</div>)}
    </>
     )
 

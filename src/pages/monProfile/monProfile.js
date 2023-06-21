@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../context/authContext";
 import axios from "axios";
 import { Spinner } from "react-bootstrap";
-import { useParams } from "react-router-dom";
+import { useParams , useNavigate } from "react-router-dom";
 
 const Getprofile = () => {
   const { currentUser } = useContext(AuthContext);
@@ -17,8 +17,12 @@ const Getprofile = () => {
   const [taille, setSize] = useState("");
   const [marque, setBrand] = useState("");
   const [desc , setDesc]=useState("");
-  const [showFormUpdateProfile , setShowFormUpdateProfile] = useState(false)
+  const [showFormUpdateProfile , setShowFormUpdateProfile] = useState(false);
   const [profile, setProfile] = useState([]);
+  const [nom , setNom] = useState("");
+  const [email,setEmail] = useState("");
+  const [motpasse,setMotPasse] = useState("");
+  const navigate = useNavigate();
 
 const params = useParams();
 
@@ -65,7 +69,7 @@ const showupdate = ()=>{
 }
 
 
-  function updateInformation() {
+  const  updateInformation=()=> {
     if (showFormUpdateProfile === false) {
       setShowFormUpdateProfile(true);
     } else {
@@ -84,14 +88,45 @@ useEffect(()=>{
 },[params.iduser])
 
 
+// update profile
+
+const updateProfile = async () => {
+await axios.put(`http://localhost:4000/api/users/${params.iduser}`,{
+  nom , email , motpasse
+});
+window.location.reload(false);
+}
+
+//switch page function
+const switchPage = async () => {
+  await navigate("/AddProduits");
+}
+
   return (
     <>
     <div className="mini-nav">
-    <p className="points"><b>{profile.points}</b> points</p>
     <p className="name">{profile.name}</p>
     <p className="email">{profile.email}</p>
+    <p className="points"><b>{profile.points}</b> points</p>
     <p onClick={updateInformation} className="edit">modifier les information personelle</p>
-    <div style={updateInformation ? {display : "block"} : {display : "none"}}>testtt</div>
+    <p className="addProduct" onClick={switchPage}>Ajouter article</p>
+   
+  {showFormUpdateProfile ? 
+  (<div className="formupdate">
+  <h2>Modifier Mes informations</h2>
+  <input type="text" placeholder="modifier nom" value={nom} onChange={(e) =>  setNom(e.target.value)} />
+  <input type="email" placeholder="modifier email" value={email} onChange={(e) => setEmail(e.target.value)} />
+  <input type="password" placeholder="modifier mot de passe" value={motpasse} onChange={(e) => setMotPasse(e.target.value)} />
+  <div className="update-no">
+    <button className="oui" onClick={updateProfile}>modifier</button>
+    <button onClick={updateInformation} className="nonc">annuler</button>
+  </div>
+</div>
+)
+ :
+"" 
+  
+  }
     </div>
     { showFormUpdate ? 
     (
